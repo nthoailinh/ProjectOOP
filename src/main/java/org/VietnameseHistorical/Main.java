@@ -1,5 +1,6 @@
 package org.VietnameseHistorical;
 
+
 public class Main {
     public static void main(String[] args) {
         // Create some instances of the Dynasty class
