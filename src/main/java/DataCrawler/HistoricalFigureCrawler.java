@@ -25,7 +25,7 @@ public class HistoricalFigureCrawler {
 
         List <WebElement> list_element = driver.findElements(By.className("click"));
 
-        List <String> list_url_figure = new ArrayList < String > ();
+        List <String> list_url_figure = new ArrayList <String> ();
 
         for (WebElement element: list_element) {
             list_url_figure.add(element.getAttribute("href"));
@@ -38,7 +38,7 @@ public class HistoricalFigureCrawler {
             driver.get(url);
             // Locate the element containing the desired data, e1 for the name and dates, e2 for the description
             WebElement e1 = driver.findElement(By.className("header-edge"));
-            List < WebElement > e2 = driver.findElements(By.xpath("//div[contains(@class,'mb-3')]//div[contains(@class,'card-body')]//p[contains(@class,'card-text')]"));
+            List <WebElement> e2 = driver.findElements(By.xpath("//div[contains(@class,'mb-3')]//div[contains(@class,'card-body')]//p[contains(@class,'card-text')]"));
 
             // Get text from the element e1
             String data = e1.getText();
