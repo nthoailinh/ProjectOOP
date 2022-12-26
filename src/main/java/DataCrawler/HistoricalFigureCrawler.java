@@ -1,13 +1,13 @@
 package DataCrawler;
 
+import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.json.JSONObject;
 
-import java.io.IOException;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 
 public class HistoricalFigureCrawler {
@@ -22,13 +22,13 @@ public class HistoricalFigureCrawler {
         driver.get("https://thuvienlichsu.com/nhan-vat/tran-hung-dao-2");
 
         // Locate the element containing the desired data
-        WebElement element = driver.findElement(By.className("header-edge"));
+        WebElement e1 = driver.findElement(By.className("header-edge"));
+        WebElement e2 = driver.findElement(By.className("mb-3"));
+        WebElement e3 = e2.findElement(By.className("card-body"));
+        List<WebElement> e4 = e3.findElements(By.className("card-text"));
 
-        // Get text from the element
-        String data = element.getText();
-
-        // Close the browser
-        driver.quit();
+        // Get text from the element e1
+        String data = e1.getText();
 
         // Save data in json file
         JSONObject dataJson = new JSONObject();
@@ -39,6 +39,17 @@ public class HistoricalFigureCrawler {
         String dates = parts[1].trim().replace(")", "");
         dataJson.put("name", name);
         dataJson.put("dates", dates);
+
+        // Get text from the element e4
+        StringBuilder description = new StringBuilder();
+        for (WebElement e : e4) {
+            description.append(e.getText());
+        }
+
+        dataJson.put("description", description.toString());
+
+        // Close the browser
+        driver.quit();
 
         // Save dataJson to file
         try (FileWriter file = new FileWriter("data/HistoricalFigure.json")) {
