@@ -23,9 +23,7 @@ public class HistoricalFigureCrawler {
 
         // Locate the element containing the desired data
         WebElement e1 = driver.findElement(By.className("header-edge"));
-        WebElement e2 = driver.findElement(By.className("mb-3"));
-        WebElement e3 = e2.findElement(By.className("card-body"));
-        List<WebElement> e4 = e3.findElements(By.className("card-text"));
+        List<WebElement> e2 = driver.findElements(By.xpath("//div[contains(@class,'mb-3')]//div[contains(@class,'card-body')]//p[contains(@class,'card-text')]"));
 
         // Get text from the element e1
         String data = e1.getText();
@@ -37,12 +35,13 @@ public class HistoricalFigureCrawler {
         String[] parts = data.split("\\(", 2);
         String name = parts[0].trim();
         String dates = parts[1].trim().replace(")", "");
+
         dataJson.put("name", name);
         dataJson.put("dates", dates);
 
         // Get text from the element e4
         StringBuilder description = new StringBuilder();
-        for (WebElement e : e4) {
+        for (WebElement e : e2) {
             description.append(e.getText());
         }
 
