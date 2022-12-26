@@ -1,10 +1,10 @@
-package org.VietnameseHistorical;
+package VietnameseHistorical;
 
-import org.json.JSONObject;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+//import org.json.JSONObject;
+//import org.openqa.selenium.WebDriver;
+//import org.openqa.selenium.chrome.ChromeDriver;
+//import org.openqa.selenium.By;
+//import org.openqa.selenium.WebElement;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;

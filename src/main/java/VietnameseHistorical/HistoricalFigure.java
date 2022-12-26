@@ -1,4 +1,4 @@
-package org.VietnameseHistorical;
+package VietnameseHistorical;
 
 import java.util.ArrayList;
 import java.util.List;

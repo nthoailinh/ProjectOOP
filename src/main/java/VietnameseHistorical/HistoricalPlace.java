@@ -1,20 +1,20 @@
-package org.VietnameseHistorical;
+package VietnameseHistorical;
 
 import java.util.ArrayList;
 import java.util.List;
 
-// Class to represent a Vietnamese cultural festival
-public class CulturalFestival {
+// Class to represent a Vietnamese historical place or relic
+public class HistoricalPlace {
     private String name;
-    private String dates;
+    private String location;
     private String description;
     private List<Dynasty> dynasties;
     private List<HistoricalEvent> events;
 
     // Constructor
-    public CulturalFestival(String name, String dates, String description) {
+    public HistoricalPlace(String name, String location, String description) {
         this.name = name;
-        this.dates = dates;
+        this.location = location;
         this.description = description;
         this.dynasties = new ArrayList<>();
         this.events = new ArrayList<>();
@@ -29,12 +29,12 @@ public class CulturalFestival {
         this.name = name;
     }
 
-    public String getDates() {
-        return this.dates;
+    public String getLocation() {
+        return this.location;
     }
 
-    public void setDates(String dates) {
-        this.dates = dates;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public String getDescription() {

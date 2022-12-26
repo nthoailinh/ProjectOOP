@@ -1,23 +1,23 @@
-package org.VietnameseHistorical;
+package VietnameseHistorical;
 
 import java.util.ArrayList;
 import java.util.List;
 
-// Class to represent a Vietnamese historical place or relic
-public class HistoricalPlace {
+// Class to represent a Vietnamese historical event
+public class HistoricalEvent {
     private String name;
-    private String location;
+    private String dates;
     private String description;
     private List<Dynasty> dynasties;
-    private List<HistoricalEvent> events;
+    private List<HistoricalFigure> figures;
 
     // Constructor
-    public HistoricalPlace(String name, String location, String description) {
+    public HistoricalEvent(String name, String dates, String description) {
         this.name = name;
-        this.location = location;
+        this.dates = dates;
         this.description = description;
         this.dynasties = new ArrayList<>();
-        this.events = new ArrayList<>();
+        this.figures = new ArrayList<>();
     }
 
     // Getters and setters for the fields
@@ -29,12 +29,12 @@ public class HistoricalPlace {
         this.name = name;
     }
 
-    public String getLocation() {
-        return this.location;
+    public String getDates() {
+        return this.dates;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setDates(String dates) {
+        this.dates = dates;
     }
 
     public String getDescription() {
@@ -45,7 +45,7 @@ public class HistoricalPlace {
         this.description = description;
     }
 
-    // Methods to add and remove dynasties and events from the lists
+    // Methods to add and remove dynasties and figures from the lists
     public void addDynasty(Dynasty dynasty) {
         this.dynasties.add(dynasty);
     }
@@ -54,11 +54,11 @@ public class HistoricalPlace {
         this.dynasties.remove(dynasty);
     }
 
-    public void addHistoricalEvent(HistoricalEvent event) {
-        this.events.add(event);
+    public void addHistoricalFigure(HistoricalFigure figure) {
+        this.figures.add(figure);
     }
 
-    public void removeHistoricalEvent(HistoricalEvent event) {
-        this.events.remove(event);
+    public void removeHistoricalFigure(HistoricalFigure figure) {
+        this.figures.remove(figure);
     }
 }
