@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -14,18 +15,21 @@ import java.util.List;
 
 public class HistoricalFigureCrawler {
     public static void main(String[] args) throws IOException {
+        long start = System.currentTimeMillis();
         // Set the path to the ChromeDriver executable
         System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
 
         List<String> urls = new ArrayList<String>();
 
         // List url sub page
-        for (int i = 1; i <= 41; i++) {
+        for (int i = 1; i <= 2; i++) {
             urls.add("https://thuvienlichsu.com/nhan-vat?page=" + i);
         }
 
         // Create a new ChromeDriver instance
-        WebDriver driver = new ChromeDriver();
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--headless");
+        WebDriver driver = new ChromeDriver(chromeOptions);
 
         JSONArray jsonArray = new JSONArray();
 
@@ -40,7 +44,6 @@ public class HistoricalFigureCrawler {
             for (WebElement element : list_element) {
                 list_url_figure.add(element.getAttribute("href"));
             }
-
 
             for (String url : list_url_figure) {
                 // Navigate to the target URL in list_url_figure
@@ -77,6 +80,7 @@ public class HistoricalFigureCrawler {
                 jsonObject.put("description", description.toString());
                 // put json object into jsonArray
                 jsonArray.put(jsonObject);
+                System.out.println("Website: " + url + " crawl successful");
             }
         }
         // Save jsonArray to file
@@ -88,5 +92,6 @@ public class HistoricalFigureCrawler {
         }
         // Close the browser
         driver.quit();
+        System.out.println("Time: " + ((System.currentTimeMillis() - start)) / 1000);
     }
 }
