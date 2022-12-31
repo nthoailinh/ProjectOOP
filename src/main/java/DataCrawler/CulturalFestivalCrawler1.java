@@ -48,7 +48,6 @@ public class CulturalFestivalCrawler1 {
         // jsonArray to save jsonObject
         JSONArray jsonArray = new JSONArray();
 
-//        do {
         for (String page_url : page_urls) {
             driver.get(page_url);
             JSONObject jsonObject = new JSONObject();
