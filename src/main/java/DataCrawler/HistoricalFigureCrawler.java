@@ -28,12 +28,12 @@ public class HistoricalFigureCrawler {
         chromeOptions.addArguments("--headless");
         WebDriver driver = new ChromeDriver(chromeOptions);
         WebDriver page_driver = new ChromeDriver(chromeOptions);
-        
+
         // jsonArray to save jsonObject
         JSONArray jsonArray = new JSONArray();
 
         do {
-            // Navigate to the target URL in page 1, 2, ... 
+            // Navigate to the target URL in page 1, 2, ...
             page_driver.get(page_url);
 
             // Get list_figure_url from tag "click"
@@ -102,7 +102,7 @@ public class HistoricalFigureCrawler {
 
         // Close the browser
         driver.quit();
-        
+
         System.out.println("Time: " + ((System.currentTimeMillis() - start)) / 1000);
     }
 }
