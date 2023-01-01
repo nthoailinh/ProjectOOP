@@ -65,7 +65,10 @@ public class HistoricalEventCrawler {
                 try {
                     dates = parts[1].trim().replace(")", "");
                 } catch (Exception ignored) {}
-
+                
+            	if(parts[1].trim().charAt(0) == '-') {
+            		dates = "? " + dates;
+            	}
                 // put name, dates and description into json object
                 jsonObject.put("name", name);
                 jsonObject.put("dates", dates);
