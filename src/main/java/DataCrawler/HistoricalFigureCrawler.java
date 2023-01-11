@@ -18,7 +18,7 @@ public class HistoricalFigureCrawler {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         // Set the path to the ChromeDriver executable
-        System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
 
         String page_url = "https://thuvienlichsu.com/nhan-vat";
         String previous_page_url = "";

@@ -18,7 +18,7 @@ public class CulturalFestivalCrawler1 {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         // Set the path to the ChromeDriver executable
-        System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
 
         List<String> page_urls = new ArrayList<>();
         page_urls.add("https://vietnamtravellog.com/le_hoi/le-hoi-dien-truong-ba/");

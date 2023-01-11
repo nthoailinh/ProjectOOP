@@ -18,7 +18,7 @@ public class HistoricalEventCrawler {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         // Set the path to the ChromeDriver executable
-        System.setProperty("webdriver.chrome.driver", "C:/Users/DELL/Downloads/chromedriver_win32/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
 
         String page_url = "https://thuvienlichsu.com/su-kien";
         String previous_page_url = "";
