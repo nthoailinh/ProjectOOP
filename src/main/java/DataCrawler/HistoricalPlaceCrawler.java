@@ -19,7 +19,7 @@ public class HistoricalPlaceCrawler {
         long start = System.currentTimeMillis();
         // Set the path to the ChromeDriver executable
         // Diff: link to path chromedriver
-        System.setProperty("webdriver.chrome.driver", "/opt/homebrew/bin/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
         String page_url = "https://thuvienlichsu.com/dia-diem";
         String previous_page_url = "";
 
