@@ -1,7 +1,7 @@
 package DataCrawler;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
+import VietnameseHistorical.Event;
+import com.google.gson.Gson;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,12 +28,12 @@ public class EventCrawler {
         chromeOptions.addArguments("--headless");
         WebDriver driver = new ChromeDriver(chromeOptions);
         WebDriver page_driver = new ChromeDriver(chromeOptions);
-        
-        // jsonArray to save jsonObject
-        JSONArray jsonArray = new JSONArray();
+
+        Gson gson = new Gson();
+        List<Event> events = new ArrayList<>();
 
         do {
-            // Navigate to the target URL in page 1, 2, ... 
+            // Navigate to the target URL in page 1, 2, ...
             page_driver.get(page_url);
 
             // Get list_figure_url from tag "click"
@@ -55,8 +55,6 @@ public class EventCrawler {
                 // Get text from the element e1
                 String data = e1.getText();
                 String description = e2.getText();
-                // Save data in jsonObject
-                JSONObject jsonObject = new JSONObject();
 
                 // Split data. For example "Trần Hưng Đạo (1228 - 1300)" -> "Trần Hưng Đạo" and "(1228 - 1300)"
                 String[] parts = data.split("\\(", 2);
@@ -65,20 +63,15 @@ public class EventCrawler {
                 // If the dates is empty in data. Set dates = ""
                 try {
                     dates = parts[1].trim().replace(")", "");
-                } catch (Exception ignored) {}
-                
-            	if(parts[1].trim().charAt(0) == '-') {
-            		dates = "? " + dates;
-            	}
-                // put name, dates and description into json object
-                jsonObject.put("name", name);
-                jsonObject.put("dates", dates);
+                } catch (Exception ignored) {
+                }
 
-                // Get text from the element e2
-                jsonObject.put("description", description);
+                if (parts[1].trim().charAt(0) == '-') {
+                    dates = "? " + dates;
+                }
 
-                // put jsonObject into jsonArray
-                jsonArray.put(jsonObject);
+                events.add(new Event(name, dates, description));
+
                 System.out.println("Website: " + url + " crawl successful");
             }
             previous_page_url = page_url;
@@ -92,17 +85,17 @@ public class EventCrawler {
         } while (!page_url.equals(previous_page_url));
 
 
-        // Save jsonArray to file
-        try (FileWriter file = new FileWriter("data/Event.json", true)) {
-            file.write(jsonArray.toString());
-            System.out.println("Successfully wrote to the file.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        // convert the list to a JSON array
+        String json = gson.toJson(events);
+
+        // write the JSON array to a file
+        FileWriter writer = new FileWriter("data/Event.json");
+        writer.write(json);
+        writer.close();
 
         // Close the browser
         driver.quit();
-        
+
         System.out.println("Time: " + ((System.currentTimeMillis() - start)) / 1000);
     }
 }

@@ -1,7 +1,7 @@
 package DataCrawler;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
+import VietnameseHistorical.Festival;
+import com.google.gson.Gson;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -41,13 +41,11 @@ public class FestivalCrawler1 {
         chromeOptions.addArguments("--headless");
         WebDriver driver = new ChromeDriver(chromeOptions);
 
-        // jsonArray to save jsonObject
-        JSONArray jsonArray = new JSONArray();
+        Gson gson = new Gson();
+        List<Festival> festivals = new ArrayList<>();
 
         for (String page_url : page_urls) {
             driver.get(page_url);
-            JSONObject jsonObject = new JSONObject();
-
             String festival_name = driver.findElement(By.xpath("//*[@id=\"main\"]/div[1]/div/div/h2")).getText();
             System.out.println(festival_name);
 
@@ -57,21 +55,18 @@ public class FestivalCrawler1 {
             String festival_description = driver.findElement(By.xpath("//*[@id=\"main\"]/div[3]/div/div/div/div[2]/div/div[2]/div")).getText();
             System.out.println(festival_description);
 
-            jsonObject.put("name", festival_name);
-            jsonObject.put("dates", festival_date);
-            jsonObject.put("description", festival_description);
-
-            jsonArray.put(jsonObject);
+            festivals.add(new Festival(festival_name, festival_date, festival_description));
             System.out.println("Website: " + page_url + " crawl successful");
         }
 
-        // Save jsonArray to file
-        try (FileWriter file = new FileWriter("data/Festival1.json", true)) {
-            file.write(jsonArray.toString());
-            System.out.println("Successfully wrote to the file.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+        // convert the list to a JSON array
+        String json = gson.toJson(festivals);
+
+        // write the JSON array to a file
+        FileWriter writer = new FileWriter("data/Festival1.json");
+        writer.write(json);
+        writer.close();
 
         // Close the browser
         driver.quit();
