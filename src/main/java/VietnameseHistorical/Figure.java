@@ -3,34 +3,27 @@ package VietnameseHistorical;
 import java.util.ArrayList;
 import java.util.List;
 
-// Class to represent a historical figure of Vietnam
 public class Figure {
+    private int ID;
     private String name;
     private String dates;
     private String description;
-    private List<Dynasty> dynasties;
-    private List<Event> events;
+    private List<Integer> dynastiesID;
+    private List<Integer> eventsID;
 
-    // Constructor to initialize a new historical figure
-    public Figure(String name, String dates, String description) {
+    public Figure(int ID, String name, String dates, String description) {
+        this.ID = ID;
         this.name = name;
         this.dates = dates;
         this.description = description;
-        this.dynasties = new ArrayList<>();
-        this.events = new ArrayList<>();
+        this.dynastiesID = new ArrayList<>();
+        this.eventsID = new ArrayList<>();
     }
 
-    // Method to add a dynasty to the historical figure
-    public void addDynasty(Dynasty dynasty) {
-        this.dynasties.add(dynasty);
+    public int getID() {
+        return ID;
     }
 
-    // Method to add a historical event to the historical figure
-    public void addEvent(Event event) {
-        this.events.add(event);
-    }
-
-    // Getters for the fields of the historical figure class
     public String getName() {
         return this.name;
     }
@@ -43,11 +36,19 @@ public class Figure {
         return this.description;
     }
 
-    public List<Dynasty> getDynasties() {
-        return this.dynasties;
+    public List<Integer> getDynasties() {
+        return this.dynastiesID;
     }
 
-    public List<Event> getEvents() {
-        return this.events;
+    public List<Integer> getEvents() {
+        return this.eventsID;
+    }
+
+    public void addDynasty(Dynasty dynasty) {
+        this.dynastiesID.add(dynasty.getID());
+    }
+
+    public void addEvent(Event event) {
+        this.eventsID.add(event.getID());
     }
 }

@@ -3,16 +3,16 @@ package VietnameseHistorical;
 import java.util.ArrayList;
 import java.util.List;
 
-// Class to represent a Vietnamese historical place or relic
 public class Place {
+    private int ID;
     private String name;
     private String location;
     private String description;
-    private List<Dynasty> dynasties;
-    private List<Event> events;
+    private List<Integer> dynasties;
+    private List<Integer> events;
 
-    // Constructor
-    public Place(String name, String location, String description) {
+    public Place(int ID, String name, String location, String description) {
+        this.ID = ID;
         this.name = name;
         this.location = location;
         this.description = description;
@@ -20,7 +20,9 @@ public class Place {
         this.events = new ArrayList<>();
     }
 
-    // Getters and setters for the fields
+    public int getID() {
+        return ID;
+    }
     public String getName() {
         return this.name;
     }
@@ -45,20 +47,17 @@ public class Place {
         this.description = description;
     }
 
-    // Methods to add and remove dynasties and events from the lists
+    public List<Integer> getDynasties() {
+        return this.dynasties;
+    }
+
+    public List<Integer> getEvents() { return this.events; }
+
     public void addDynasty(Dynasty dynasty) {
-        this.dynasties.add(dynasty);
+        this.dynasties.add(dynasty.getID());
     }
 
-    public void removeDynasty(Dynasty dynasty) {
-        this.dynasties.remove(dynasty);
-    }
-
-    public void addHistoricalEvent(Event event) {
-        this.events.add(event);
-    }
-
-    public void removeHistoricalEvent(Event event) {
-        this.events.remove(event);
+    public void addEvent(Event event) {
+        this.events.add(event.getID());
     }
 }

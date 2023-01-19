@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FestivalCrawler1 {
+    public static int ID = 1;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         // Set the path to the ChromeDriver executable
@@ -55,7 +56,8 @@ public class FestivalCrawler1 {
             String festival_description = driver.findElement(By.xpath("//*[@id=\"main\"]/div[3]/div/div/div/div[2]/div/div[2]/div")).getText();
             System.out.println(festival_description);
 
-            festivals.add(new Festival(festival_name, festival_date, festival_description));
+            festivals.add(new Festival(ID, festival_name, festival_date, festival_description));
+            ID++;
             System.out.println("Website: " + page_url + " crawl successful");
         }
 

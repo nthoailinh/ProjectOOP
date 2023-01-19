@@ -3,24 +3,27 @@ package VietnameseHistorical;
 import java.util.ArrayList;
 import java.util.List;
 
-// Class to represent a Vietnamese cultural festival
 public class Festival {
+    private int ID;
     private String name;
     private String dates;
     private String description;
-    private List<Dynasty> dynasties;
-    private List<Event> events;
+    private List<Integer> dynastiesID;
+    private List<Integer> eventsID;
 
-    // Constructor
-    public Festival(String name, String dates, String description) {
+    public Festival(int ID, String name, String dates, String description) {
+        this.ID = ID;
         this.name = name;
         this.dates = dates;
         this.description = description;
-        this.dynasties = new ArrayList<>();
-        this.events = new ArrayList<>();
+        this.dynastiesID = new ArrayList<>();
+        this.eventsID = new ArrayList<>();
     }
 
-    // Getters and setters for the fields
+    public int getID() {
+        return ID;
+    }
+
     public String getName() {
         return this.name;
     }
@@ -45,20 +48,19 @@ public class Festival {
         this.description = description;
     }
 
-    // Methods to add and remove dynasties and events from the lists
+    public List<Integer> getDynasties() {
+        return this.dynastiesID;
+    }
+
+    public List<Integer> getEvents() {
+        return this.eventsID;
+    }
+
     public void addDynasty(Dynasty dynasty) {
-        this.dynasties.add(dynasty);
+        this.dynastiesID.add(dynasty.getID());
     }
 
-    public void removeDynasty(Dynasty dynasty) {
-        this.dynasties.remove(dynasty);
-    }
-
-    public void addHistoricalEvent(Event event) {
-        this.events.add(event);
-    }
-
-    public void removeHistoricalEvent(Event event) {
-        this.events.remove(event);
+    public void addEvent(Event event) {
+        this.eventsID.add(event.getID());
     }
 }
