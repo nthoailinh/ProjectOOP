@@ -14,11 +14,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HistoricalEventCrawler {
+public class EventCrawler {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         // Set the path to the ChromeDriver executable
-        System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
 
         String page_url = "https://thuvienlichsu.com/su-kien";
         String previous_page_url = "";
@@ -93,7 +93,7 @@ public class HistoricalEventCrawler {
 
 
         // Save jsonArray to file
-        try (FileWriter file = new FileWriter("C:/Users/DELL/Desktop/ProjectOOP/data/HistoricalEvent.json", true)) {
+        try (FileWriter file = new FileWriter("data/Event.json", true)) {
             file.write(jsonArray.toString());
             System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {

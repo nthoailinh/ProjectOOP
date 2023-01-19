@@ -8,9 +8,9 @@ public class Dynasty {
     private String name;
     private String dates;
     private String description;
-    private List<HistoricalFigure> figures;
-    private List<HistoricalPlace> places;
-    private List<CulturalFestival> festivals;
+    private List<Figure> figures;
+    private List<Place> places;
+    private List<Festival> festivals;
 
     // Constructor to initialize a new dynasty
     public Dynasty(String name, String dates, String description) {
@@ -23,17 +23,17 @@ public class Dynasty {
     }
 
     // Method to add a historical figure to the dynasty
-    public void addFigure(HistoricalFigure figure) {
+    public void addFigure(Figure figure) {
         this.figures.add(figure);
     }
 
     // Method to add a historical place to the dynasty
-    public void addPlace(HistoricalPlace place) {
+    public void addPlace(Place place) {
         this.places.add(place);
     }
 
     // Method to add a cultural festival to the dynasty
-    public void addFestival(CulturalFestival festival) {
+    public void addFestival(Festival festival) {
         this.festivals.add(festival);
     }
 
@@ -50,15 +50,15 @@ public class Dynasty {
         return this.description;
     }
 
-    public List<HistoricalFigure> getFigures() {
+    public List<Figure> getFigures() {
         return this.figures;
     }
 
-    public List<HistoricalPlace> getPlaces() {
+    public List<Place> getPlaces() {
         return this.places;
     }
 
-    public List<CulturalFestival> getFestivals() {
+    public List<Festival> getFestivals() {
         return this.festivals;
     }
 }

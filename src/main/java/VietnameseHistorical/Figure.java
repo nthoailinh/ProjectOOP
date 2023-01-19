@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 // Class to represent a historical figure of Vietnam
-public class HistoricalFigure {
+public class Figure {
     private String name;
     private String dates;
     private String description;
     private List<Dynasty> dynasties;
-    private List<HistoricalEvent> events;
+    private List<Event> events;
 
     // Constructor to initialize a new historical figure
-    public HistoricalFigure(String name, String dates, String description) {
+    public Figure(String name, String dates, String description) {
         this.name = name;
         this.dates = dates;
         this.description = description;
@@ -26,7 +26,7 @@ public class HistoricalFigure {
     }
 
     // Method to add a historical event to the historical figure
-    public void addEvent(HistoricalEvent event) {
+    public void addEvent(Event event) {
         this.events.add(event);
     }
 
@@ -47,7 +47,7 @@ public class HistoricalFigure {
         return this.dynasties;
     }
 
-    public List<HistoricalEvent> getEvents() {
+    public List<Event> getEvents() {
         return this.events;
     }
 }

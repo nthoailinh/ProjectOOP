@@ -14,12 +14,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HistoricalPlaceCrawler {
+public class PlaceCrawler {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         // Set the path to the ChromeDriver executable
         // Diff: link to path chromedriver
-        System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
         String page_url = "https://thuvienlichsu.com/dia-diem";
         String previous_page_url = "";
 
@@ -104,7 +104,7 @@ public class HistoricalPlaceCrawler {
         } while (!page_url.equals(previous_page_url));
 
         // Save jsonArray to file
-        try (FileWriter file = new FileWriter("data/HistoricalPlace.json", true)) {
+        try (FileWriter file = new FileWriter("data/Place.json", true)) {
             file.write(jsonArray.toString());
             System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {

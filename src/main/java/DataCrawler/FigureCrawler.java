@@ -14,11 +14,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HistoricalFigureCrawler {
+public class FigureCrawler {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         // Set the path to the ChromeDriver executable
-        System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
 
         String page_url = "https://thuvienlichsu.com/nhan-vat";
         String previous_page_url = "";
@@ -93,7 +93,7 @@ public class HistoricalFigureCrawler {
         } while (!page_url.equals(previous_page_url));
 
         // Save jsonArray to file
-        try (FileWriter file = new FileWriter("data/HistoricalFigure.json", true)) {
+        try (FileWriter file = new FileWriter("data/Figure.json", true)) {
             file.write(jsonArray.toString());
             System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
