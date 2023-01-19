@@ -1,7 +1,7 @@
 package DataCrawler;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
+import VietnameseHistorical.Figure;
+import com.google.gson.Gson;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -29,8 +29,8 @@ public class FigureCrawler {
         WebDriver driver = new ChromeDriver(chromeOptions);
         WebDriver page_driver = new ChromeDriver(chromeOptions);
 
-        // jsonArray to save jsonObject
-        JSONArray jsonArray = new JSONArray();
+        Gson gson = new Gson();
+        List<Figure> figures = new ArrayList<>();
 
         do {
             // Navigate to the target URL in page 1, 2, ...
@@ -55,9 +55,6 @@ public class FigureCrawler {
                 // Get text from the element e1
                 String data = e1.getText();
 
-                // Save data in jsonObject
-                JSONObject jsonObject = new JSONObject();
-
                 // Split data. For example "Trần Hưng Đạo (1228 - 1300)" -> "Trần Hưng Đạo" and "(1228 - 1300)"
                 String[] parts = data.split("\\(", 2);
                 String name = parts[0].trim();
@@ -65,21 +62,13 @@ public class FigureCrawler {
                 // If the dates is empty in data. Set dates = ""
                 try {
                     dates = parts[1].trim().replace(")", "");
-                } catch (Exception ignored) {}
-
-                // put name, dates and description into json object
-                jsonObject.put("name", name);
-                jsonObject.put("dates", dates);
-
-                // Get text from the element e2
+                } catch (Exception ignored) {
+                }
                 StringBuilder description = new StringBuilder();
                 for (WebElement e : e2) {
                     description.append(e.getText());
                 }
-                jsonObject.put("description", description.toString());
-
-                // put jsonObject into jsonArray
-                jsonArray.put(jsonObject);
+                figures.add(new Figure(name, dates, description.toString()));
                 System.out.println("Website: " + url + " crawl successful");
             }
             previous_page_url = page_url;
@@ -92,13 +81,11 @@ public class FigureCrawler {
             }
         } while (!page_url.equals(previous_page_url));
 
-        // Save jsonArray to file
-        try (FileWriter file = new FileWriter("data/Figure.json", true)) {
-            file.write(jsonArray.toString());
-            System.out.println("Successfully wrote to the file.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String json = gson.toJson(figures);
+        // write the JSON array to a file
+        FileWriter writer = new FileWriter("data/Figure.json");
+        writer.write(json);
+        writer.close();
 
         // Close the browser
         driver.quit();
