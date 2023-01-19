@@ -11,15 +11,14 @@ import org.openqa.selenium.NoSuchElementException;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
-public class CulturalFestivalCrawler2 {
+public class FestivalCrawler2 {
 
     public static void main(String[] args) throws NoSuchElementException {
         long start = System.currentTimeMillis();
         // Set the path to the ChromeDriver executable
-        System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
 
         String main_page_url = "https://vi.wikipedia.org/wiki/C%C3%A1c_ng%C3%A0y_l%E1%BB%85_%E1%BB%9F_Vi%E1%BB%87t_Nam";
         String festival_description_link = "";
@@ -70,7 +69,7 @@ public class CulturalFestivalCrawler2 {
         }
 
         // Save jsonArray to file
-        try (FileWriter file = new FileWriter("data/CulturalFestival2.json", false)) {
+        try (FileWriter file = new FileWriter("data/Festival2.json", false)) {
             file.write(jsonArray.toString());
             System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {

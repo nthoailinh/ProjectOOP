@@ -3,18 +3,18 @@ package VietnameseHistorical;
 import java.util.ArrayList;
 import java.util.List;
 
-// Class to represent a Vietnamese historical place or relic
-public class HistoricalPlace {
+// Class to represent a Vietnamese cultural festival
+public class Festival {
     private String name;
-    private String location;
+    private String dates;
     private String description;
     private List<Dynasty> dynasties;
-    private List<HistoricalEvent> events;
+    private List<Event> events;
 
     // Constructor
-    public HistoricalPlace(String name, String location, String description) {
+    public Festival(String name, String dates, String description) {
         this.name = name;
-        this.location = location;
+        this.dates = dates;
         this.description = description;
         this.dynasties = new ArrayList<>();
         this.events = new ArrayList<>();
@@ -29,12 +29,12 @@ public class HistoricalPlace {
         this.name = name;
     }
 
-    public String getLocation() {
-        return this.location;
+    public String getDates() {
+        return this.dates;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setDates(String dates) {
+        this.dates = dates;
     }
 
     public String getDescription() {
@@ -54,11 +54,11 @@ public class HistoricalPlace {
         this.dynasties.remove(dynasty);
     }
 
-    public void addHistoricalEvent(HistoricalEvent event) {
+    public void addHistoricalEvent(Event event) {
         this.events.add(event);
     }
 
-    public void removeHistoricalEvent(HistoricalEvent event) {
+    public void removeHistoricalEvent(Event event) {
         this.events.remove(event);
     }
 }

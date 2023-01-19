@@ -3,9 +3,7 @@ package DataCrawler;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
@@ -14,11 +12,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CulturalFestivalCrawler1 {
+public class FestivalCrawler1 {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         // Set the path to the ChromeDriver executable
-        System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
 
         List<String> page_urls = new ArrayList<>();
         page_urls.add("https://vietnamtravellog.com/le_hoi/le-hoi-dien-truong-ba/");
@@ -68,7 +66,7 @@ public class CulturalFestivalCrawler1 {
         }
 
         // Save jsonArray to file
-        try (FileWriter file = new FileWriter("data/CulturalFestival1.json", true)) {
+        try (FileWriter file = new FileWriter("data/Festival1.json", true)) {
             file.write(jsonArray.toString());
             System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {

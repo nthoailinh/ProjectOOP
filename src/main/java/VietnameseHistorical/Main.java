@@ -5,15 +5,6 @@ package VietnameseHistorical;
 //import org.openqa.selenium.chrome.ChromeDriver;
 //import org.openqa.selenium.By;
 //import org.openqa.selenium.WebElement;
-import javafx.application.Application;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.shape.Circle;
-import javafx.stage.Stage;
 
 
 public class Main {
@@ -25,19 +16,19 @@ public class Main {
 
         // Create some instances of the HistoricalFigure class
 //    HistoricalFigure anDuongVuong = new HistoricalFigure("An Duong Vuong", "257 BC - 207 BC", "Founder of the An Duong Vuong dynasty");
-        HistoricalFigure trieuDa = new HistoricalFigure("Trieu Da", "230 BC - 207 BC", "Son of An Duong Vuong and ruler of the An Duong Vuong dynasty");
+        Figure trieuDa = new Figure("Trieu Da", "230 BC - 207 BC", "Son of An Duong Vuong and ruler of the An Duong Vuong dynasty");
 
         // Create some instances of the HistoricalPlace class
-        HistoricalPlace coLoaCitadel = new HistoricalPlace("Co Loa Citadel", "Hanoi, Vietnam", "An ancient citadel that served as the capital of the An Duong Vuong dynasty");
-        HistoricalPlace ngocLangTemple = new HistoricalPlace("Ngoc Lang Temple", "Hanoi, Vietnam", "A temple dedicated to An Duong Vuong, the founder of the An Duong Vuong dynasty");
+        Place coLoaCitadel = new Place("Co Loa Citadel", "Hanoi, Vietnam", "An ancient citadel that served as the capital of the An Duong Vuong dynasty");
+        Place ngocLangTemple = new Place("Ngoc Lang Temple", "Hanoi, Vietnam", "A temple dedicated to An Duong Vuong, the founder of the An Duong Vuong dynasty");
 
         // Create some instances of the CulturalFestival class
-        CulturalFestival tetHoliday = new CulturalFestival("Tet Holiday", "January/February", "A traditional Vietnamese holiday that celebrates the start of the lunar new year");
-        CulturalFestival midAutumnFestival = new CulturalFestival("Mid-Autumn Festival", "September/October", "A traditional Vietnamese holiday that celebrates the autumn harvest");
+        Festival tetHoliday = new Festival("Tet Holiday", "January/February", "A traditional Vietnamese holiday that celebrates the start of the lunar new year");
+        Festival midAutumnFestival = new Festival("Mid-Autumn Festival", "September/October", "A traditional Vietnamese holiday that celebrates the autumn harvest");
 
         // Create some instances of the HistoricalEvent class
-        HistoricalEvent establishmentOfAnDuongVuongDynasty = new HistoricalEvent("Establishment of the An Duong Vuong Dynasty", "257 BC", "The establishment of the An Duong Vuong dynasty, marking the beginning of a new era in Vietnamese history");
-        HistoricalEvent fallOfAnDuongVuongDynasty = new HistoricalEvent("Fall of the An Duong Vuong Dynasty", "207 BC", "The fall of the An Duong Vuong dynasty, marking the end of this era in Vietnamese history");
+        Event establishmentOfAnDuongVuongDynasty = new Event("Establishment of the An Duong Vuong Dynasty", "257 BC", "The establishment of the An Duong Vuong dynasty, marking the beginning of a new era in Vietnamese history");
+        Event fallOfAnDuongVuongDynasty = new Event("Fall of the An Duong Vuong Dynasty", "207 BC", "The fall of the An Duong Vuong dynasty, marking the end of this era in Vietnamese history");
 
         // Link the instances together using the methods defined in the classes
 //    hongBang.addFigure(anDuongVuong);

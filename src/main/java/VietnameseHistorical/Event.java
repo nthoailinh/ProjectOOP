@@ -3,21 +3,21 @@ package VietnameseHistorical;
 import java.util.ArrayList;
 import java.util.List;
 
-// Class to represent a Vietnamese cultural festival
-public class CulturalFestival {
+// Class to represent a Vietnamese historical event
+public class Event {
     private String name;
     private String dates;
     private String description;
     private List<Dynasty> dynasties;
-    private List<HistoricalEvent> events;
+    private List<Figure> figures;
 
     // Constructor
-    public CulturalFestival(String name, String dates, String description) {
+    public Event(String name, String dates, String description) {
         this.name = name;
         this.dates = dates;
         this.description = description;
         this.dynasties = new ArrayList<>();
-        this.events = new ArrayList<>();
+        this.figures = new ArrayList<>();
     }
 
     // Getters and setters for the fields
@@ -45,7 +45,7 @@ public class CulturalFestival {
         this.description = description;
     }
 
-    // Methods to add and remove dynasties and events from the lists
+    // Methods to add and remove dynasties and figures from the lists
     public void addDynasty(Dynasty dynasty) {
         this.dynasties.add(dynasty);
     }
@@ -54,11 +54,11 @@ public class CulturalFestival {
         this.dynasties.remove(dynasty);
     }
 
-    public void addHistoricalEvent(HistoricalEvent event) {
-        this.events.add(event);
+    public void addHistoricalFigure(Figure figure) {
+        this.figures.add(figure);
     }
 
-    public void removeHistoricalEvent(HistoricalEvent event) {
-        this.events.remove(event);
+    public void removeHistoricalFigure(Figure figure) {
+        this.figures.remove(figure);
     }
 }
