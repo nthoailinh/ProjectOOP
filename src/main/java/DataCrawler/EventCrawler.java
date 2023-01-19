@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EventCrawler {
+    public static int ID = 1;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         // Set the path to the ChromeDriver executable
@@ -70,7 +71,8 @@ public class EventCrawler {
                     dates = "? " + dates;
                 }
 
-                events.add(new Event(name, dates, description));
+                events.add(new Event(ID, name, dates, description));
+                ID++;
 
                 System.out.println("Website: " + url + " crawl successful");
             }

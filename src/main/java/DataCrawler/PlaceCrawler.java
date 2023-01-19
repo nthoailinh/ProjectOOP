@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlaceCrawler {
+    public static int ID = 1;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         // Set the path to the ChromeDriver executable
@@ -74,8 +75,8 @@ public class PlaceCrawler {
                         break;
                     }
                 }
-                places.add(new Place(name, location, description.toString()));
-
+                places.add(new Place(ID, name, location, description.toString()));
+                ID++;
                 System.out.println("The crawl of the website: " + url + " was successful.");
             }
             previous_page_url = page_url;

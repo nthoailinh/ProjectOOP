@@ -3,41 +3,30 @@ package VietnameseHistorical;
 import java.util.ArrayList;
 import java.util.List;
 
-// Class to represent a Vietnamese historical dynasty
 public class Dynasty {
+    
+    private int ID;
     private String name;
     private String dates;
     private String description;
-    private List<Figure> figures;
-    private List<Place> places;
-    private List<Festival> festivals;
+    private List<Integer> figuresID;
+    private List<Integer> placesID;
+    private List<Integer> festivalsID;
 
-    // Constructor to initialize a new dynasty
-    public Dynasty(String name, String dates, String description) {
+    public Dynasty(int ID, String name, String dates, String description) {
+        this.ID = ID;
         this.name = name;
         this.dates = dates;
         this.description = description;
-        this.figures = new ArrayList<>();
-        this.places = new ArrayList<>();
-        this.festivals = new ArrayList<>();
+        this.figuresID = new ArrayList<>();
+        this.placesID = new ArrayList<>();
+        this.festivalsID = new ArrayList<>();
     }
 
-    // Method to add a historical figure to the dynasty
-    public void addFigure(Figure figure) {
-        this.figures.add(figure);
+    public int getID() {
+        return ID;
     }
 
-    // Method to add a historical place to the dynasty
-    public void addPlace(Place place) {
-        this.places.add(place);
-    }
-
-    // Method to add a cultural festival to the dynasty
-    public void addFestival(Festival festival) {
-        this.festivals.add(festival);
-    }
-
-    // Getters for the fields of the dynasty class
     public String getName() {
         return this.name;
     }
@@ -50,15 +39,27 @@ public class Dynasty {
         return this.description;
     }
 
-    public List<Figure> getFigures() {
-        return this.figures;
+    public List<Integer> getFigures() {
+        return this.figuresID;
     }
 
-    public List<Place> getPlaces() {
-        return this.places;
+    public List<Integer> getPlaces() {
+        return this.placesID;
     }
 
-    public List<Festival> getFestivals() {
-        return this.festivals;
+    public List<Integer> getFestivals() {
+        return this.festivalsID;
+    }
+
+    public void addFigure(Figure figure) {
+        this.figuresID.add(figure.getID());
+    }
+
+    public void addPlace(Place place) {
+        this.placesID.add(place.getID());
+    }
+
+    public void addFestival(Festival festival) {
+        this.festivalsID.add(festival.getID());
     }
 }

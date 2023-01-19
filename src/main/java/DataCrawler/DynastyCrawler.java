@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DynastyCrawler {
+    public static int ID = 1;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         // Set the path to the ChromeDriver executable
@@ -58,7 +59,8 @@ public class DynastyCrawler {
                 }
                 pElement = pElement.findElement(By.xpath("following-sibling::*"));
             }
-            dynasties.add(new Dynasty(name, dates, description.toString()));
+            dynasties.add(new Dynasty(ID, name, dates, description.toString()));
+            ID++;
         }
 
         // convert the list to a JSON array

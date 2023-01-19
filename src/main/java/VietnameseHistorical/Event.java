@@ -3,24 +3,26 @@ package VietnameseHistorical;
 import java.util.ArrayList;
 import java.util.List;
 
-// Class to represent a Vietnamese historical event
 public class Event {
+    private int ID;
     private String name;
     private String dates;
     private String description;
-    private List<Dynasty> dynasties;
-    private List<Figure> figures;
+    private List<Integer> dynastiesID;
+    private List<Integer> figuresID;
 
-    // Constructor
-    public Event(String name, String dates, String description) {
+    public Event(int ID, String name, String dates, String description) {
+        this.ID = ID;
         this.name = name;
         this.dates = dates;
         this.description = description;
-        this.dynasties = new ArrayList<>();
-        this.figures = new ArrayList<>();
+        this.dynastiesID = new ArrayList<>();
+        this.figuresID = new ArrayList<>();
     }
 
-    // Getters and setters for the fields
+    public int getID() {
+        return ID;
+    }
     public String getName() {
         return this.name;
     }
@@ -45,20 +47,19 @@ public class Event {
         this.description = description;
     }
 
-    // Methods to add and remove dynasties and figures from the lists
+    public List<Integer> getDynasties() {
+        return this.dynastiesID;
+    }
+
+    public List<Integer> getFigures() {
+        return this.figuresID;
+    }
+
     public void addDynasty(Dynasty dynasty) {
-        this.dynasties.add(dynasty);
+        this.dynastiesID.add(dynasty.getID());
     }
 
-    public void removeDynasty(Dynasty dynasty) {
-        this.dynasties.remove(dynasty);
-    }
-
-    public void addHistoricalFigure(Figure figure) {
-        this.figures.add(figure);
-    }
-
-    public void removeHistoricalFigure(Figure figure) {
-        this.figures.remove(figure);
+    public void addFigure(Figure figure) {
+        this.figuresID.add(figure.getID());
     }
 }

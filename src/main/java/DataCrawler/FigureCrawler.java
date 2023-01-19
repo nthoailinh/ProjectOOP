@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FigureCrawler {
+    public static int ID = 1;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         // Set the path to the ChromeDriver executable
@@ -68,7 +69,8 @@ public class FigureCrawler {
                 for (WebElement e : e2) {
                     description.append(e.getText());
                 }
-                figures.add(new Figure(name, dates, description.toString()));
+                figures.add(new Figure(ID, name, dates, description.toString()));
+                ID++;
                 System.out.println("Website: " + url + " crawl successful");
             }
             previous_page_url = page_url;

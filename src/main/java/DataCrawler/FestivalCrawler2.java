@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FestivalCrawler2 {
-
+    public static int ID = 1;
     public static void main(String[] args) throws NoSuchElementException, IOException {
         long start = System.currentTimeMillis();
         // Set the path to the ChromeDriver executable
@@ -53,7 +53,8 @@ public class FestivalCrawler2 {
             } catch (NoSuchElementException e) {
                 // Handle the exception
             }
-            festivals.add(new Festival(festival_name, festival_date, festival_description));
+            festivals.add(new Festival(ID, festival_name, festival_date, festival_description));
+            ID++;
         }
 
         // convert the list to a JSON array
