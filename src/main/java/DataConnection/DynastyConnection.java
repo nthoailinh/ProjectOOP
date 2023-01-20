@@ -80,7 +80,72 @@ public class DynastyConnection {
     }
 
     public static boolean eventTookPlaceInDynasty(String eventTime, String dynastyTime) {
-    
+        if (!checkValidTime(eventTime, dynastyTime)){
+            return false;
+        }
+        // Split the strings by "-" to separate the start and end years
+        String[] dynastyRange = dynastyTime.split("-");
+        String[] eventRange = eventTime.split("-"); // eventTime may not be contains dash
+
+        int dynastyStart, eventStart, dynastyEnd, eventEnd;
+
+        dynastyRange[0] = dynastyRange[0].contains("?") ? dynastyRange[1] : dynastyRange[0];
+        dynastyRange[1] = dynastyRange[1].contains("?") ? dynastyRange[0] : dynastyRange[1];
+
+        eventRange[0] = eventRange[0].contains("?") ? eventRange[1] : eventRange[0];
+        eventRange[1] = eventRange[1].contains("?") ? eventRange[0] : eventRange[1];
+
+        // Parse the start and end years for both the dynasty and the figure
+        if (dynastyRange[0].contains("TCN")) {
+            dynastyRange[0] = dynastyRange[0].split(" ")[0];
+            dynastyStart = -Integer.parseInt(dynastyRange[0].trim());
+        } else {
+            try {
+                dynastyStart = Integer.parseInt(dynastyRange[0].trim());
+            } catch (NumberFormatException e) {
+                return false;
+            }
+        }
+
+        if (dynastyRange[1].contains("nay")) {
+            dynastyEnd = Integer.MAX_VALUE;
+        } else if (dynastyRange[1].contains("TCN") || dynastyRange[1].contains("SCN")) {
+            dynastyRange[1] = dynastyRange[1].split(" ")[0];
+            dynastyEnd = -Integer.parseInt(dynastyRange[1].trim());
+        } else {
+            dynastyEnd = Integer.MIN_VALUE;
+            try {
+                dynastyEnd = Integer.parseInt(dynastyRange[1].trim());
+            } catch (NumberFormatException e) {
+                if (dynastyRange[1].contains("hoặc")) {
+                    dynastyEnd = Integer.parseInt(dynastyRange[1].split(" ")[0]);
+                }
+            }
+        }
+
+        if (eventRange[0].contains("TCN")) {
+            eventRange[0] = eventRange[0].split(" ")[0];
+            eventStart = -Integer.parseInt(eventRange[0].trim());
+        } else {
+            try {
+                eventStart = Integer.parseInt(eventRange[0].trim());
+            } catch (NumberFormatException e) {
+                return false;
+            }
+
+        }
+
+        if (eventRange[1].contains("nay")) {
+            eventEnd = Integer.MAX_VALUE;
+        } else if (eventRange[1].contains("TCN")) {
+            eventRange[1] = eventRange[1].split(" ")[0];
+            eventEnd = -Integer.parseInt(eventRange[1].trim());
+        } else {
+            eventEnd = Integer.parseInt(eventRange[1].trim());
+        }
+
+        // Check if the figure's time range is within the dynasty's time range
+        return (eventStart >= dynastyStart && eventStart <= dynastyEnd) || (eventEnd >= dynastyStart && eventEnd <= dynastyEnd);
     }
 
     public static void main(String[] args) throws Exception {
@@ -115,6 +180,7 @@ public class DynastyConnection {
                 if (eventTookPlaceInDynasty(eventTime, dynastyTime)) {
                     event.addDynasty(dynasty);
                     dynasty.addEvent(event);
+                }
             }
         }
 
@@ -125,6 +191,11 @@ public class DynastyConnection {
 
         json = gson.toJson(figures);
         writer = new FileWriter("data/Figure.json");
+        writer.write(json);
+        writer.close();
+
+        json = gson.toJson(events);
+        writer = new FileWriter("data/Event.json");
         writer.write(json);
         writer.close();
 
