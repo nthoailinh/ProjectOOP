@@ -29,10 +29,10 @@ public class FestivalConnection {
             }
         }
 
-        String json = gson.toJson(festivals);
-        FileWriter writer = new FileWriter("data/Festival.json");
-        writer.write(json);
-        writer.close();
+//        String json = gson.toJson(festivals);
+//        FileWriter writer = new FileWriter("data/Festival.json");
+//        writer.write(json);
+//        writer.close();
 
 //        json = gson.toJson(events);
 //        writer = new FileWriter("data/Event.json");
