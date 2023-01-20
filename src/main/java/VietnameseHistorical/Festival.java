@@ -8,7 +8,7 @@ public class Festival {
     private String name;
     private String dates;
     private String description;
-    private List<Integer> dynastiesID;
+    private List<Integer> figuresID;
     private List<Integer> eventsID;
 
     public Festival(int ID, String name, String dates, String description) {
@@ -16,7 +16,7 @@ public class Festival {
         this.name = name;
         this.dates = dates;
         this.description = description;
-        this.dynastiesID = new ArrayList<>();
+        this.figuresID = new ArrayList<>();
         this.eventsID = new ArrayList<>();
     }
 
@@ -25,42 +25,34 @@ public class Festival {
     }
 
     public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+        return name;
     }
 
     public String getDates() {
-        return this.dates;
-    }
-
-    public void setDates(String dates) {
-        this.dates = dates;
+        return dates;
     }
 
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public List<Integer> getFiguresID() {
+        return figuresID;
     }
 
-    public List<Integer> getDynasties() {
-        return this.dynastiesID;
+    public List<Integer> getEventsID() {
+        return eventsID;
     }
 
-    public List<Integer> getEvents() {
-        return this.eventsID;
-    }
-
-    public void addDynasty(Dynasty dynasty) {
-        this.dynastiesID.add(dynasty.getID());
+    public void addFigure(Figure figure) {
+        if (!figuresID.contains(figure.getID())){
+            this.figuresID.add(figure.getID());
+        }
     }
 
     public void addEvent(Event event) {
-        this.eventsID.add(event.getID());
+        if (!eventsID.contains(event.getID())){
+            this.eventsID.add(event.getID());
+        }
     }
 }
