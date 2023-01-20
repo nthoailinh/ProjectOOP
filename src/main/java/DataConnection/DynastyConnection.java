@@ -3,6 +3,7 @@ package DataConnection;
 import VietnameseHistorical.Dynasty;
 import VietnameseHistorical.Figure;
 import VietnameseHistorical.Place;
+import VietnameseHistorical.Festival;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -15,7 +16,11 @@ public class DynastyConnection {
         Gson gson = new Gson();
         List<Dynasty> dynasties = gson.fromJson(new FileReader("data/Dynasty.json"), new TypeToken<List<Dynasty>>() {
         }.getType());
-//        List<Figure> figures = gson.fromJson(new FileReader("data/Figure.json"), new TypeToken<List<Figure>>() {
+        List<Figure> figures = gson.fromJson(new FileReader("data/Figure.json"), new TypeToken<List<Figure>>() {
+        }.getType());
+        List<Place> places = gson.fromJson(new FileReader("data/Place.json"), new TypeToken<List<Place>>() {
+        }.getType());
+//        List<Festival> festivals = gson.fromJson(new FileReader("data/Festival.json"), new TypeToken<List<Festival>>() {
 //        }.getType());
 //        for (int i=0; i<figures.size(); ++i) {
 //            for (int j=0; j<dynasties.size(); ++j){
@@ -23,17 +28,23 @@ public class DynastyConnection {
 //                    figures.get(i).addDynasty(dynasties.get(j));
 //                    dynasties.get(j).addFigure((figures.get(i)));
 //                }
+//
 //            }
 //        }
-//        for(int i=0; i<dynasties.size(); ++i){
-//            List<Figure> fs = dynasties.get(i).getFigures();
-//            for(Figure f : fs){
-//                System.out.println(dynasties.get(i).getName() + " " + f.getName());
-//            }
-//        }
+        for(Dynasty dynasty:dynasties){
+            for(Figure figure:figures){
+                if(dynasty.getDescription().contains(figure.getName())){
+                    figure.addDynasty(dynasty);
+                    dynasty.addFigure(figure);
+                }
 
-        for(Dynasty dyn:dynasties){
-            System.out.println(dyn.getID());
+            }
+        }
+        for(Dynasty dynasty:dynasties){
+            List<Integer> figuresID = dynasty.getFigures();
+            for(int id:figuresID){
+                System.out.println(dynasty.getName() + " " + figures.get(id).getName());
+            }
         }
     }
 }
