@@ -36,19 +36,23 @@ public class Figure {
         return this.description;
     }
 
-    public List<Integer> getDynasties() {
+    public List<Integer> getDynastiesID() {
         return this.dynastiesID;
     }
 
-    public List<Integer> getEvents() {
+    public List<Integer> getEventsID() {
         return this.eventsID;
     }
 
     public void addDynasty(Dynasty dynasty) {
-        this.dynastiesID.add(dynasty.getID());
+        if (!dynastiesID.contains(dynasty.getID())){
+            this.dynastiesID.add(dynasty.getID());
+        }
     }
 
     public void addEvent(Event event) {
-        this.eventsID.add(event.getID());
+        if (!eventsID.contains(event.getID())){
+            this.eventsID.add(event.getID());
+        }
     }
 }
