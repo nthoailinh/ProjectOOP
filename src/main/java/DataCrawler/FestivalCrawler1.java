@@ -19,7 +19,7 @@ public class FestivalCrawler1 {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         // Set the path to the ChromeDriver executable
-        System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+        System.setProperty("web-driver.chrome.driver", "/usr/bin/chromedriver");
 
         // Crawl festival data from Vietnamtravellog
         List<String> page_urls = new ArrayList<>();
