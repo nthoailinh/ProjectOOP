@@ -20,7 +20,7 @@ public class PlaceCrawler {
         long start = System.currentTimeMillis();
         // Set the path to the ChromeDriver executable
         // Diff: link to path chromedriver
-        System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+        System.setProperty("web-driver.chrome.driver", "/usr/bin/chromedriver");
         String page_url = "https://thuvienlichsu.com/dia-diem";
         String previous_page_url = "";
 

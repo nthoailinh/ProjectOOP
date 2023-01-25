@@ -19,7 +19,8 @@ public class EventCrawler {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         // Set the path to the ChromeDriver executable
-        System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+        System.setProperty("web-" +
+                "driver.chrome.driver", "/usr/bin/chromedriver");
 
         String page_url = "https://thuvienlichsu.com/su-kien";
         String previous_page_url = "";
@@ -52,7 +53,7 @@ public class EventCrawler {
                 // Locate the element containing the desired data, e1 for the name and dates, e2 for the description
                 WebElement e1 = driver.findElement(By.className("header-edge"));
                 WebElement e2 = driver.findElement(By.xpath("/html/body/div[1]/div[3]/div[2]/div[1]/div[3]/div/div[2]"));
-
+                List<WebElement> e3 = driver.findElements(By.className("/html/body/div[1]/div[3]/div[2]/div[1]/div[5]/div//div[@class='card']"));
                 // Get text from the element e1
                 String data = e1.getText();
                 String description = e2.getText();
@@ -69,6 +70,11 @@ public class EventCrawler {
 
                 if (parts[1].trim().charAt(0) == '-') {
                     dates = "? " + dates;
+                }
+
+                for (WebElement e : e3) {
+                    String figure = e.findElement(By.xpath("./div/div[2]/div[1]/a/h3")).getText();
+
                 }
 
                 events.add(new Event(ID, name, dates, description));
@@ -91,7 +97,7 @@ public class EventCrawler {
         String json = gson.toJson(events);
 
         // write the JSON array to a file
-        FileWriter writer = new FileWriter("data/Event.json");
+        FileWriter writer = new FileWriter("data/Event1.json");
         writer.write(json);
         writer.close();
 
