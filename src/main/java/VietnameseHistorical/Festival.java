@@ -3,7 +3,7 @@ package VietnameseHistorical;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Dynasty {
+public class Festival {
     private int ID;
     private String name;
     private String dates;
@@ -11,7 +11,7 @@ public class Dynasty {
     private List<Integer> figuresID;
     private List<Integer> eventsID;
 
-    public Dynasty(int ID, String name, String dates, String description) {
+    public Festival(int ID, String name, String dates, String description) {
         this.ID = ID;
         this.name = name;
         this.dates = dates;

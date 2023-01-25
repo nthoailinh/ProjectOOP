@@ -1,7 +1,7 @@
 package DataCrawler;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
+import VietnameseHistorical.Festival;
+import com.google.gson.Gson;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -12,16 +12,16 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-public class CulturalFestivalCrawler1 {
+public class FestivalCrawler1 {
+    public static int ID = 0;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         // Set the path to the ChromeDriver executable
         System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
 
+        // Crawl festival data from Vietnamtravellog
         List<String> page_urls = new ArrayList<>();
         page_urls.add("https://vietnamtravellog.com/le_hoi/le-hoi-dien-truong-ba/");
         page_urls.add("https://vietnamtravellog.com/le_hoi/le-hoi-dem-ram-hoi-an-to-diem-sac-mau-lung-linh-noi-pho-co-yen-binh/");
@@ -45,37 +45,26 @@ public class CulturalFestivalCrawler1 {
         chromeOptions.addArguments("--headless");
         WebDriver driver = new ChromeDriver(chromeOptions);
 
-        // jsonArray to save jsonObject
-        JSONArray jsonArray = new JSONArray();
+        Gson gson = new Gson();
+        List<Festival> festivals = new ArrayList<>();
 
         for (String page_url : page_urls) {
             driver.get(page_url);
-            JSONObject jsonObject = new JSONObject();
-
             String festival_name = driver.findElement(By.xpath("//*[@id=\"main\"]/div[1]/div/div/h2")).getText();
-            System.out.println(festival_name);
-
             String festival_date = driver.findElement(By.xpath("//*[@id=\"main\"]/div[3]/div/div/div/div[2]/div/div[2]/p[2]/b")).getText();
-            System.out.println(festival_date);
-
             String festival_description = driver.findElement(By.xpath("//*[@id=\"main\"]/div[3]/div/div/div/div[2]/div/div[2]/div")).getText();
-            System.out.println(festival_description);
-
-            jsonObject.put("name", festival_name);
-            jsonObject.put("dates", festival_date);
-            jsonObject.put("description", festival_description);
-
-            jsonArray.put(jsonObject);
+            festivals.add(new Festival(ID, festival_name, festival_date, festival_description));
+            ID++;
             System.out.println("Website: " + page_url + " crawl successful");
         }
 
-        // Save jsonArray to file
-        try (FileWriter file = new FileWriter("data/CulturalFestival1.json", true)) {
-            file.write(jsonArray.toString());
-            System.out.println("Successfully wrote to the file.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        // convert the list to a JSON array
+        String json = gson.toJson(festivals);
+
+        // write the JSON array to a file
+        FileWriter writer = new FileWriter("data/Festival.json");
+        writer.write(json);
+        writer.close();
 
         // Close the browser
         driver.quit();

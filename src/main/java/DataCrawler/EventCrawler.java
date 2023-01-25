@@ -1,7 +1,7 @@
 package DataCrawler;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
+import VietnameseHistorical.Event;
+import com.google.gson.Gson;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,13 +14,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HistoricalFigureCrawler {
+public class EventCrawler {
+    public static int ID = 0;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         // Set the path to the ChromeDriver executable
         System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
 
-        String page_url = "https://thuvienlichsu.com/nhan-vat";
+        String page_url = "https://thuvienlichsu.com/su-kien";
         String previous_page_url = "";
 
         // Create a new ChromeDriver instance
@@ -29,8 +30,8 @@ public class HistoricalFigureCrawler {
         WebDriver driver = new ChromeDriver(chromeOptions);
         WebDriver page_driver = new ChromeDriver(chromeOptions);
 
-        // jsonArray to save jsonObject
-        JSONArray jsonArray = new JSONArray();
+        Gson gson = new Gson();
+        List<Event> events = new ArrayList<>();
 
         do {
             // Navigate to the target URL in page 1, 2, ...
@@ -50,13 +51,11 @@ public class HistoricalFigureCrawler {
 
                 // Locate the element containing the desired data, e1 for the name and dates, e2 for the description
                 WebElement e1 = driver.findElement(By.className("header-edge"));
-                List<WebElement> e2 = driver.findElements(By.xpath("//div[contains(@class,'mb-3')]//div[contains(@class,'card-body')]//p[contains(@class,'card-text')]"));
+                WebElement e2 = driver.findElement(By.xpath("/html/body/div[1]/div[3]/div[2]/div[1]/div[3]/div/div[2]"));
 
                 // Get text from the element e1
                 String data = e1.getText();
-
-                // Save data in jsonObject
-                JSONObject jsonObject = new JSONObject();
+                String description = e2.getText();
 
                 // Split data. For example "Trần Hưng Đạo (1228 - 1300)" -> "Trần Hưng Đạo" and "(1228 - 1300)"
                 String[] parts = data.split("\\(", 2);
@@ -65,21 +64,16 @@ public class HistoricalFigureCrawler {
                 // If the dates is empty in data. Set dates = ""
                 try {
                     dates = parts[1].trim().replace(")", "");
-                } catch (Exception ignored) {}
-
-                // put name, dates and description into json object
-                jsonObject.put("name", name);
-                jsonObject.put("dates", dates);
-
-                // Get text from the element e2
-                StringBuilder description = new StringBuilder();
-                for (WebElement e : e2) {
-                    description.append(e.getText());
+                } catch (Exception ignored) {
                 }
-                jsonObject.put("description", description.toString());
 
-                // put jsonObject into jsonArray
-                jsonArray.put(jsonObject);
+                if (parts[1].trim().charAt(0) == '-') {
+                    dates = "? " + dates;
+                }
+
+                events.add(new Event(ID, name, dates, description));
+                ID++;
+
                 System.out.println("Website: " + url + " crawl successful");
             }
             previous_page_url = page_url;
@@ -92,13 +86,14 @@ public class HistoricalFigureCrawler {
             }
         } while (!page_url.equals(previous_page_url));
 
-        // Save jsonArray to file
-        try (FileWriter file = new FileWriter("data/HistoricalFigure.json", true)) {
-            file.write(jsonArray.toString());
-            System.out.println("Successfully wrote to the file.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+        // convert the list to a JSON array
+        String json = gson.toJson(events);
+
+        // write the JSON array to a file
+        FileWriter writer = new FileWriter("data/Event.json");
+        writer.write(json);
+        writer.close();
 
         // Close the browser
         driver.quit();
