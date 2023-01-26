@@ -1,40 +1,38 @@
 package DataCrawler;
 
 import VietnameseHistorical.Dynasty;
-import com.google.gson.Gson;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
-public class DynastyCrawler {
-    public static int ID = 0;
+public class DynastyCrawler extends Crawler<Dynasty> {
+    private static final String URL = "https://vi.wikipedia.org/wiki/L%E1%BB%8Bch_s%E1%BB%AD_Vi%E1%BB%87t_Nam";
+    private static final String JSON_PATH = "data/Dynasty.json";
+
+    public DynastyCrawler(String page_url, String json_file_path) {
+        super(page_url, json_file_path);
+    }
+
     public static void main(String[] args) throws IOException {
-        long start = System.currentTimeMillis();
-        // Set the path to the ChromeDriver executable
-        System.setProperty("web-driver.chrome.driver", "/usr/bin/chromedriver");
+        DynastyCrawler dynastyCrawler = new DynastyCrawler(URL, JSON_PATH);
+        dynastyCrawler.run();
+    }
 
-        String page_url = "https://vi.wikipedia.org/wiki/L%E1%BB%8Bch_s%E1%BB%AD_Vi%E1%BB%87t_Nam";
+    public void run() throws IOException {
+        crawlData();
+        saveDataToFile();
+        driver.quit();
+    }
 
-        // Create a new ChromeDriver instance
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--headless");
-        WebDriver driver = new ChromeDriver(chromeOptions);
+    @Override
+    public void crawlData() {
+        driver.get(PAGE_URL);
 
-        Gson gson = new Gson();
-        List<Dynasty> dynasties = new ArrayList<>();
+        List<WebElement> list_objects = driver.findElements(By.xpath("//*[name() = \"h3\" or name() = \"h4\"]"));
 
-        driver.get(page_url);
-
-        List<WebElement> list_dynasties = driver.findElements(By.xpath("//*[name() = \"h3\" or name() = \"h4\"]"));
-
-        for (WebElement element : list_dynasties) {
+        for (WebElement element : list_objects) {
             WebElement name_date = element.findElement(By.xpath("./span[@class='mw-headline']"));
             if (name_date.getAttribute("id").equals("Thời_Hồng_Bàng")) {
                 break;
@@ -59,21 +57,8 @@ public class DynastyCrawler {
                 }
                 pElement = pElement.findElement(By.xpath("following-sibling::*"));
             }
-            dynasties.add(new Dynasty(ID, name, dates, description.toString()));
+            objects.add(new Dynasty(ID, name, dates, description.toString()));
             ID++;
         }
-
-        // convert the list to a JSON array
-        String json = gson.toJson(dynasties);
-
-        // write the JSON array to a file
-        FileWriter writer = new FileWriter("data/Dynasty.json");
-        writer.write(json);
-        writer.close();
-
-        // Close the browser
-        driver.quit();
-
-        System.out.println("Time: " + ((System.currentTimeMillis() - start)) / 1000);
     }
 }
