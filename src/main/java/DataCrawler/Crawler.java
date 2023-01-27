@@ -13,7 +13,7 @@ import java.util.List;
 
 public abstract class Crawler<T> {
     protected static int ID = 0;
-    protected final List<T> objects;
+    protected List<T> objects;
     protected final WebDriver driver;
     protected final WebDriver page_driver;
     protected final Gson gson;
