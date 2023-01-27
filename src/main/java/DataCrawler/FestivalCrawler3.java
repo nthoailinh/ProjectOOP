@@ -10,73 +10,55 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-public class FestivalCrawler3 {
-    public static int ID = 0;
-    public static void main(String[] args) throws NoSuchElementException, IOException {
-        long start = System.currentTimeMillis();
-        // Set the path to the ChromeDriver executable
-        System.setProperty("web-driver.chrome.driver", "/usr/bin/chromedriver");
+public class FestivalCrawler3 extends Crawler<Festival> {
+    private static final String URL = "https://vi.wikipedia.org/wiki/C%C3%A1c_ng%C3%A0y_l%E1%BB%85_%E1%BB%9F_Vi%E1%BB%87t_Nam";
 
-        // Crawl festival data from "https://vi.wikipedia.org/wiki/C%C3%A1c_ng%C3%A0y_l%E1%BB%85_%E1%BB%9F_Vi%E1%BB%87t_Nam"
-        String main_page_url = "https://vi.wikipedia.org/wiki/C%C3%A1c_ng%C3%A0y_l%E1%BB%85_%E1%BB%9F_Vi%E1%BB%87t_Nam";
-        String festival_description_link = "";
+    private static final String JSON_PATH = "data/Festival.json";
 
-        // Create a new ChromeDriver instance
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--headless");
-        WebDriver main_page_driver = new ChromeDriver(chromeOptions);
-        WebDriver subpage_driver = new ChromeDriver(chromeOptions);
+    public FestivalCrawler3(String json_file_path, String... page_urls) {
+        super(json_file_path, page_urls);
+    }
 
-        Gson gson = new Gson();
-        List<Festival> festivals = gson.fromJson(new FileReader("data/Festival.json"), new TypeToken<List<Festival>>() {
-        }.getType());
-        ID = festivals.size();
+    public static void main(String[] args) throws IOException {
+        FestivalCrawler3 festivalCrawler = new FestivalCrawler3(JSON_PATH, URL);
+        festivalCrawler.run();
+    }
 
-        main_page_driver.get(main_page_url);
-        List<WebElement> e1 = main_page_driver.findElements(By.xpath("//*[@id=\"mw-content-text\"]/div[1]/table[2]/tbody/tr"));
-        WebElement cell1 = null;
-        WebElement cell2 = null;
-        WebElement cell3 = null;
-        for (int i = 1; i < e1.size(); i++) {
-            cell1 = e1.get(i).findElement(By.xpath("td[1]"));
-            String festival_date = cell1.getText();
+    @Override
+    public void crawlData() {
+        String festival_description_link;
+        try {
+            objects = gson.fromJson(new FileReader("data/Festival.json"), new TypeToken<List<Festival>>() {
+            }.getType());
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        ID = objects.size();
 
-            cell2 = e1.get(i).findElement(By.xpath("td[2]")).findElement(By.xpath("a"));
-            String festival_name = cell2.getText();
-
-            cell3 = e1.get(i).findElement(By.xpath("td[3]")).findElement(By.xpath("a"));
-            StringBuffer festival_description = new StringBuffer("Địa điểm tổ chức: " + cell3.getText() + ".\n");
-
+        driver.get(URL);
+        List<WebElement> records = driver.findElements(By.xpath("//*[@id=\"mw-content-text\"]/div[1]/table[2]/tbody/tr"));
+        for (int i = 1; i < records.size(); i++) {
+            String festival_date = records.get(i).findElement(By.xpath("td[1]")).getText();
+            String festival_name = records.get(i).findElement(By.xpath("td[2]")).findElement(By.xpath("a")).getText();
+            StringBuilder festival_description = new StringBuilder("Địa điểm tổ chức: " + records.get(i).findElement(By.xpath("td[3]")).findElement(By.xpath("a")).getText() + ".\n");
             try {
-                festival_description_link = cell2.getAttribute("href");
-                subpage_driver.get(festival_description_link);
-                WebElement festival_description_element = subpage_driver.findElement(By.xpath("//*[@id=\"mw-content-text\"]/div[1]/p[1]"));
+                festival_description_link = records.get(i).findElement(By.xpath("td[2]")).findElement(By.xpath("a")).getAttribute("href");
+                page_driver.get(festival_description_link);
+                WebElement festival_description_element = page_driver.findElement(By.xpath("//*[@id=\"mw-content-text\"]/div[1]/p[1]"));
                 festival_description.append(festival_description_element.getText());
-            } catch (NoSuchElementException e) {
-                // Handle the exception
+            } catch (NoSuchElementException ignored) {
+
             }
-            festivals.add(new Festival(ID, festival_name, festival_date, festival_description.toString()));
+            objects.add(new Festival(ID, festival_name, festival_date, festival_description.toString()));
             ID++;
             System.out.println("Crawl successful: " + festival_name + ".");
         }
-
-        // convert the list to a JSON array
-        String json = gson.toJson(festivals);
-
-        // write the JSON array to a file
-        FileWriter writer = new FileWriter("data/Festival.json");
-        writer.write(json);
-        writer.close();
-
-        // Close the browser
-        main_page_driver.quit();
-        subpage_driver.quit();
-
-        System.out.println("Time: " + ((System.currentTimeMillis() - start)) / 1000);
+        page_driver.quit();
     }
 }
