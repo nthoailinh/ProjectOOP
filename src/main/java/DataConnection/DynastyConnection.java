@@ -6,7 +6,6 @@ import com.google.gson.reflect.TypeToken;
 
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.time.LocalDate;
 import java.util.List;
 
 public class DynastyConnection {
