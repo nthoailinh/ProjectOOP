@@ -1,6 +1,6 @@
-package DataCrawler;
+package crawlers;
 
-import VietnameseHistorical.Event;
+import models.Event;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -14,8 +14,8 @@ public class EventCrawler extends Crawler<Event> {
 
     private static final String JSON_PATH = "data/Event.json";
 
-    public EventCrawler(String json_file_path, String page_url) {
-        super(json_file_path, page_url);
+    public EventCrawler(String json_file_path, String... page_urls) {
+        super(json_file_path, page_urls);
     }
 
     public static void main(String[] args) throws IOException {
@@ -28,18 +28,18 @@ public class EventCrawler extends Crawler<Event> {
         for (String PAGE_URL : PAGE_URLs) {
             do {
                 // Navigate to the target URL in page 1, 2, ...
-                page_driver.get(PAGE_URL);
+                homePageDriver.get(PAGE_URL);
 
-                // Get list_figure_url from tag "click"
-                List<WebElement> list_elements = page_driver.findElements(By.className("click"));
-                List<String> list_figure_url = new ArrayList<String>();
-                for (WebElement element : list_elements) {
-                    list_figure_url.add(element.getAttribute("href"));
+                // Get listFigureURL from tag "click"
+                List<WebElement> listElements = homePageDriver.findElements(By.className("click"));
+                List<String> listFigureURL = new ArrayList<String>();
+                for (WebElement element : listElements) {
+                    listFigureURL.add(element.getAttribute("href"));
                 }
 
                 // Get url for each figure
-                for (String url : list_figure_url) {
-                    // Navigate to the target URL in list_figure_url
+                for (String url : listFigureURL) {
+                    // Navigate to the target URL in listFigureURL
                     driver.get(url);
 
                     // Locate the element containing the desired data, e1 for the name and dates, e2 for the description
@@ -66,7 +66,7 @@ public class EventCrawler extends Crawler<Event> {
 
                     for (WebElement e : e3) {
                         String figure = e.findElement(By.xpath("./div/div[2]/div[1]/a/h3")).getText();
-
+                        // ????????????????????????????????????????????????????????????
                     }
 
                     objects.add(new Event(ID, name, dates, description));
@@ -74,15 +74,15 @@ public class EventCrawler extends Crawler<Event> {
 
                     System.out.println("Website: " + url + " crawl successful");
                 }
-                previous_page_url = PAGE_URL;
+                previousPageURL = PAGE_URL;
                 // go to the next page
                 try {
-                    WebElement nextElement = page_driver.findElement(By.xpath("//li[@class='next']/a"));
+                    WebElement nextElement = homePageDriver.findElement(By.xpath("//li[@class='next']/a"));
                     PAGE_URL = nextElement.getAttribute("href");
                 } catch (NoSuchElementException ignored) {
 
                 }
-            } while (!PAGE_URL.equals(previous_page_url));
+            } while (!PAGE_URL.equals(previousPageURL));
         }
     }
 }

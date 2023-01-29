@@ -1,6 +1,6 @@
-package DataCrawler;
+package crawlers;
 
-import VietnameseHistorical.Place;
+import models.Place;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -16,8 +16,8 @@ public class PlaceCrawler extends Crawler<Place> {
 
     private final String[] provinces = {"Hà Nội", "Hồ Chí Minh", "Đà Nẵng", "Hải Phòng", "Cần Thơ", "An Giang", "Bà Rịa - Vũng Tàu", "Bắc Giang", "Bắc Kạn", "Bạc Liêu", "Bắc Ninh", "Bến Tre", "Bình Định", "Bình Dương", "Bình Phước", "Bình Thuận", "Cà Mau", "Cao Bằng", "Đắk Lắk", "Đắk Nông", "Điện Biên", "Đồng Nai", "Đồng Tháp", "Gia Lai", "Hà Giang", "Hà Nam", "Hà Tĩnh", "Hải Dương", "Hậu Giang", "Hòa Bình", "Hưng Yên", "Khánh Hòa", "Kiên Giang", "Kon Tum", "Lai Châu", "Lâm Đồng", "Lạng Sơn", "Lào Cai", "Long An", "Nam Định", "Nghệ An", "Ninh Bình", "Ninh Thuận", "Phú Thọ", "Quảng Bình", "Quảng Nam", "Quảng Ngãi", "Quảng Ninh", "Quảng Trị", "Sóc Trăng", "Sơn La", "Tây Ninh", "Thái Bình", "Thái Nguyên", "Thanh Hóa", "Thừa Thiên Huế", "Tiền Giang", "Trà Vinh", "Tuyên Quang", "Vĩnh Long", "Vĩnh Phúc", "Yên Bái"};
 
-    public PlaceCrawler(String json_file_path, String page_url) {
-        super(json_file_path, page_url);
+    public PlaceCrawler(String json_file_path, String... page_urls) {
+        super(json_file_path, page_urls);
     }
 
     public static void main(String[] args) throws IOException {
@@ -30,18 +30,18 @@ public class PlaceCrawler extends Crawler<Place> {
         for (String PAGE_URL : PAGE_URLs) {
             do {
             // Navigate to the target URL in page 1, 2, ...
-            page_driver.get(PAGE_URL);
+            homePageDriver.get(PAGE_URL);
 
-            // Get list_figure_url from tag "click"
-            List<WebElement> list_elements = page_driver.findElements(By.className("click"));
-            List<String> list_figure_url = new ArrayList<String>();
-            for (WebElement element : list_elements) {
-                list_figure_url.add(element.getAttribute("href"));
+            // Get listPlaceURL from tag "click"
+            List<WebElement> listElements = homePageDriver.findElements(By.className("click"));
+            List<String> listPlaceURL = new ArrayList<String>();
+            for (WebElement element : listElements) {
+                listPlaceURL.add(element.getAttribute("href"));
             }
 
             // Get url for each figure
-            for (String url : list_figure_url) {
-                // Navigate to the target URL in list_figure_url
+            for (String url : listPlaceURL) {
+                // Navigate to the target URL in listPlaceUrl
                 driver.get(url);
 
                 // Locate the element containing the desired data, e1 for the name and dates, e2 for the description
@@ -71,15 +71,15 @@ public class PlaceCrawler extends Crawler<Place> {
                 ID++;
                 System.out.println("The crawl of the website: " + url + " was successful.");
             }
-            previous_page_url = PAGE_URL;
+            previousPageURL = PAGE_URL;
             // go to the next page
             try {
-                WebElement nextElement = page_driver.findElement(By.xpath("//li[@class='next']/a"));
+                WebElement nextElement = homePageDriver.findElement(By.xpath("//li[@class='next']/a"));
                 PAGE_URL = nextElement.getAttribute("href");
             } catch (NoSuchElementException ignored) {
 
             }
-        } while (!PAGE_URL.equals(previous_page_url));
+        } while (!PAGE_URL.equals(previousPageURL));
         }
     }
 }

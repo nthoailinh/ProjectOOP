@@ -1,6 +1,6 @@
-package DataConnection;
+package connectors;
 
-import VietnameseHistorical.*;
+import models.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -8,7 +8,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.List;
 
-public class DynastyConnection {
+public class DynastyConnector {
     public static boolean checkValidTime(String time1, String time2){
         boolean containsDash = time1.contains("-") && time2.contains("-");
         boolean notContainsTwoQuestionsMark = !(time1.contains("? - ?") || time2.contains("? - ?"));
@@ -197,16 +197,5 @@ public class DynastyConnection {
         writer = new FileWriter("data/Event.json");
         writer.write(json);
         writer.close();
-
-//        int line = 0;
-//        for (Dynasty dynasty : dynasties) {
-//            List<Integer> figuresID = dynasty.getFiguresID();
-//            for (int id : figuresID) {
-//                System.out.println(dynasty.getName() + " " + figures.get(id).getName());
-//                line++;
-//            }
-//        }
-//        System.out.println(line);
-//        System.out.println(checkValidTime("1924 - 2015", "1955–1975"));
     }
 }

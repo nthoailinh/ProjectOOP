@@ -1,22 +1,20 @@
-package VietnameseHistorical;
+package models;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Festival {
+public class Place {
     private int ID;
     private String name;
-    private String dates;
+    private String location;
     private String description;
-    private List<Integer> figuresID;
     private List<Integer> eventsID;
 
-    public Festival(int ID, String name, String dates, String description) {
+    public Place(int ID, String name, String location, String description) {
         this.ID = ID;
         this.name = name;
-        this.dates = dates;
+        this.location = location;
         this.description = description;
-        this.figuresID = new ArrayList<>();
         this.eventsID = new ArrayList<>();
     }
 
@@ -28,26 +26,16 @@ public class Festival {
         return name;
     }
 
-    public String getDates() {
-        return dates;
+    public String getLocation() {
+        return location;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public List<Integer> getFiguresID() {
-        return figuresID;
-    }
-
     public List<Integer> getEventsID() {
         return eventsID;
-    }
-
-    public void addFigure(Figure figure) {
-        if (!figuresID.contains(figure.getID())){
-            this.figuresID.add(figure.getID());
-        }
     }
 
     public void addEvent(Event event) {

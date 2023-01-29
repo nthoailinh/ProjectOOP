@@ -1,6 +1,6 @@
-package DataCrawler;
+package crawlers;
 
-import VietnameseHistorical.Dynasty;
+import models.Dynasty;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -12,8 +12,8 @@ public class DynastyCrawler extends Crawler<Dynasty> {
 
     private static final String JSON_PATH = "data/Dynasty.json";
 
-    public DynastyCrawler(String json_file_path, String page_url) {
-        super(json_file_path, page_url);
+    public DynastyCrawler(String json_file_path, String... page_urls) {
+        super(json_file_path, page_urls);
     }
 
     public static void main(String[] args) throws IOException {
@@ -26,14 +26,14 @@ public class DynastyCrawler extends Crawler<Dynasty> {
         for (String PAGE_URL : PAGE_URLs) {
             driver.get(PAGE_URL);
 
-            List<WebElement> list_objects = driver.findElements(By.xpath("//*[name() = \"h3\" or name() = \"h4\"]"));
+            List<WebElement> listObjects = driver.findElements(By.xpath("//*[name() = \"h3\" or name() = \"h4\"]"));
 
-            for (WebElement element : list_objects) {
-                WebElement name_date = element.findElement(By.xpath("./span[@class='mw-headline']"));
-                if (name_date.getAttribute("id").equals("Thời_Hồng_Bàng")) {
+            for (WebElement element : listObjects) {
+                WebElement nameDate = element.findElement(By.xpath("./span[@class='mw-headline']"));
+                if (nameDate.getAttribute("id").equals("Thời_Hồng_Bàng")) {
                     break;
                 }
-                String header = name_date.getText();
+                String header = nameDate.getText();
 
                 // Split data. For example "Trần Hưng Đạo (1228 - 1300)" -> "Trần Hưng Đạo" and "(1228 - 1300)"
                 String[] parts = header.split("\\(", 2);
