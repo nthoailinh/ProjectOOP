@@ -1,16 +1,14 @@
-package DataCrawler;
+package crawlers;
 
-import VietnameseHistorical.Festival;
+import models.Festival;
 import org.openqa.selenium.By;
 
 import java.io.IOException;
 
 public class FestivalCrawler1 extends Crawler<Festival> {
-    private static final String URL = "https://vietnamtravellog.com/";
-
     private static final String JSON_PATH = "data/Festival.json";
 
-    public FestivalCrawler1(String json_file_path, String ...page_urls) {
+    public FestivalCrawler1(String json_file_path, String... page_urls) {
         super(json_file_path, page_urls);
     }
 
@@ -36,14 +34,14 @@ public class FestivalCrawler1 extends Crawler<Festival> {
     }
 
     public void crawlData() {
-        for (String page_url : PAGE_URLs) {
-            driver.get(page_url);
-            String festival_name = driver.findElement(By.xpath("//*[@id=\"main\"]/div[1]/div/div/h2")).getText();
-            String festival_date = driver.findElement(By.xpath("//*[@id=\"main\"]/div[3]/div/div/div/div[2]/div/div[2]/p[2]/b")).getText();
-            String festival_description = driver.findElement(By.xpath("//*[@id=\"main\"]/div[3]/div/div/div/div[2]/div/div[2]/div")).getText();
-            objects.add(new Festival(ID, festival_name, festival_date, festival_description));
+        for (String pageURL : PAGE_URLs) {
+            driver.get(pageURL);
+            String festivalName = driver.findElement(By.xpath("//*[@id=\"main\"]/div[1]/div/div/h2")).getText();
+            String festivalDate = driver.findElement(By.xpath("//*[@id=\"main\"]/div[3]/div/div/div/div[2]/div/div[2]/p[2]/b")).getText();
+            String festivalDescription = driver.findElement(By.xpath("//*[@id=\"main\"]/div[3]/div/div/div/div[2]/div/div[2]/div")).getText();
+            objects.add(new Festival(ID, festivalName, festivalDate, festivalDescription));
             ID++;
-            System.out.println("Website: " + page_url + " crawl successful");
+            System.out.println("Website: " + pageURL + " crawl successful");
         }
     }
 }

@@ -1,15 +1,22 @@
-package DataConnection;
+package connectors;
 
-import VietnameseHistorical.Dynasty;
-import VietnameseHistorical.Event;
-import VietnameseHistorical.Festival;
-import VietnameseHistorical.Figure;
-import VietnameseHistorical.Place;
-public class EventConnection extends GeneralConnection {
-    public void Connection() {
+import models.Event;
+import models.Festival;
+import models.Figure;
+import models.Place;
+
+public class EventConnector extends GeneralConnector {
+    public static void main(String[] args) throws Exception {
+        EventConnector eventConnector = new EventConnector();
+        eventConnector.getData();
+        eventConnector.connect();
+        eventConnector.writeToJsonEvent();
+    }
+
+    public void connect() {
 
         for (Event event : events) {
-            for(Figure figure : figures) {
+            for (Figure figure : figures) {
                 if (event.getDescription().contains(figure.getName())) {
                     event.addFigure(figure);
                 }
@@ -25,7 +32,7 @@ public class EventConnection extends GeneralConnection {
         for (Event event : events) {
             for (Festival festival : festivals) {
                 for (int id : event.getFiguresID()) {
-                    if(festival.getDescription().contains(figures.get(id).getName())) {
+                    if (festival.getDescription().contains(figures.get(id).getName())) {
                         event.addFestival(festival);
                     }
                 }
@@ -37,11 +44,5 @@ public class EventConnection extends GeneralConnection {
                 }
             }
         }
-    }
-    public static  void main(String[] args) throws  Exception{
-        EventConnection eventConnection = new EventConnection();
-        eventConnection.getData();
-        eventConnection.Connection();
-        eventConnection.writeJsonEvent();
     }
 }
