@@ -1,4 +1,4 @@
-package controller;
+package UI.controller;
 
 import models.Dynasty;
 import models.Event;

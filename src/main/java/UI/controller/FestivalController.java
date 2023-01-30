@@ -1,4 +1,4 @@
-package controller;
+package UI.controller;
 
 import models.Event;
 import models.Festival;
