@@ -8,9 +8,10 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="767.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.controller.Controller">
    <children>
-      <VBox prefHeight="768.0" prefWidth="244.0" style="-fx-background-color: #EBE8F9;">
+      <VBox prefHeight="768.0" prefWidth="244.0" style="-fx-background-color: #9A6619;">
+         <Pane prefHeight="51.0" prefWidth="244.0" />
          <children>
-            <Button fx:id="btnTrangChu" graphicTextGap="20.0" mnemonicParsing="false" onAction="#handleClicksSidebar" prefHeight="157.0" prefWidth="244.0" stylesheets="@style.css" text="Trang chủ">
+            <Button fx:id="btnTrangChu" contentDisplay="TOP" graphicTextGap="20.0" mnemonicParsing="false" onAction="#handleClicksSidebar" prefHeight="157.0" prefWidth="244.0" stylesheets="@style.css" text="Trang chủ" textFill="#b7c0c0">
                <font>
                   <Font size="22.0" />
                </font>
@@ -22,7 +23,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="btnTrieuDai" alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="10.0" layoutY="167.0" mnemonicParsing="false" onAction="#handleClicksSidebar" prefHeight="87.0" prefWidth="265.0" stylesheets="@style.css" text="Triều đại">
+            <Button fx:id="btnTrieuDai" alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="10.0" layoutY="167.0" mnemonicParsing="false" onAction="#handleClicksSidebar" prefHeight="87.0" prefWidth="265.0" stylesheets="@style.css" text="Triều đại" textFill="#b7c0c0">
                <font>
                   <Font size="17.0" />
                </font>
@@ -40,7 +41,7 @@
                   <Insets />
                </opaqueInsets>
             </Button>
-            <Button fx:id="btnNhanVatLichSu" alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="10.0" layoutY="345.0" mnemonicParsing="false" onAction="#handleClicksSidebar" prefHeight="87.0" prefWidth="265.0" stylesheets="@style.css" text="Nhân vật lịch sử">
+            <Button fx:id="btnNhanVatLichSu" alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="10.0" layoutY="345.0" mnemonicParsing="false" onAction="#handleClicksSidebar" prefHeight="87.0" prefWidth="265.0" stylesheets="@style.css" text="Nhân vật lịch sử" textFill="#b7c0c0">
                <font>
                   <Font size="17.0" />
                </font>
@@ -58,7 +59,7 @@
                   <Insets />
                </opaqueInsets>
             </Button>
-            <Button fx:id="btnDiTichLichSu" alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="10.0" layoutY="520.0" mnemonicParsing="false" onAction="#handleClicksSidebar" prefHeight="87.0" prefWidth="265.0" stylesheets="@style.css" text="Di tích lịch sử">
+            <Button fx:id="btnDiTichLichSu" alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="10.0" layoutY="520.0" mnemonicParsing="false" onAction="#handleClicksSidebar" prefHeight="87.0" prefWidth="265.0" stylesheets="@style.css" text="Di tích lịch sử" textFill="#b7c0c0">
                <font>
                   <Font size="17.0" />
                </font>
@@ -76,7 +77,7 @@
                   <Insets />
                </opaqueInsets>
             </Button>
-            <Button fx:id="btnLeHoiVanHoa" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#handleClicksSidebar" prefHeight="87.0" prefWidth="265.0" stylesheets="@style.css" text="Lễ hội văn hóa">
+            <Button fx:id="btnLeHoiVanHoa" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#handleClicksSidebar" prefHeight="87.0" prefWidth="265.0" stylesheets="@style.css" text="Lễ hội văn hóa" textFill="#b7c0c0">
                <font>
                   <Font size="17.0" />
                </font>
@@ -94,7 +95,7 @@
                   <Insets />
                </opaqueInsets>
             </Button>
-            <Button fx:id="btnSuKienLichSu" alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="10.0" layoutY="342.0" mnemonicParsing="false" onAction="#handleClicksSidebar" prefHeight="87.0" prefWidth="265.0" stylesheets="@style.css" text="Sự kiện lịch sử">
+            <Button fx:id="btnSuKienLichSu" alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="10.0" layoutY="342.0" mnemonicParsing="false" onAction="#handleClicksSidebar" prefHeight="87.0" prefWidth="265.0" stylesheets="@style.css" text="Sự kiện lịch sử" textFill="#b7c0c0">
                <font>
                   <Font size="17.0" />
                </font>
@@ -112,8 +113,8 @@
                   <Insets />
                </opaqueInsets>
             </Button>
-            <Pane prefHeight="171.0" prefWidth="244.0" />
-            <Button id="btnThongKe" fx:id="DangXuat" alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="10.0" layoutY="582.0" mnemonicParsing="false" onAction="#handleClicksSidebar" prefHeight="89.0" prefWidth="244.0" stylesheets="@style.css" text="Thoát">
+            <Pane prefHeight="150.0" prefWidth="244.0" />
+            <Button id="btnThongKe" fx:id="DangXuat" alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="10.0" layoutY="582.0" mnemonicParsing="false" onAction="#handleClicksSidebar" prefHeight="89.0" prefWidth="244.0" stylesheets="@style.css" text="Thoát" textFill="#b7c0c0">
                <font>
                   <Font size="17.0" />
                </font>
