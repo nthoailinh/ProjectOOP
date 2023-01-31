@@ -21,7 +21,7 @@ public class Home extends Application {
         stage.show();
     }
 
-    public static void main(String[] args)fir {
+    public static void main(String[] args) {
         launch();
     }
 }
