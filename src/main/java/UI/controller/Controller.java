@@ -83,6 +83,9 @@ public class Controller implements Initializable {
     private Button btnTimKiemLehoi;
 
     @FXML
+    private Button btnTimKiem_DT;
+
+    @FXML
     private Button btnTrangChu;
 
     @FXML
@@ -103,6 +106,9 @@ public class Controller implements Initializable {
     private BorderPane contentSuKien;
 
     @FXML
+    private BorderPane contentDiTich;
+
+    @FXML
     private TextField input;
 
     @FXML
@@ -111,6 +117,9 @@ public class Controller implements Initializable {
 
     @FXML
     private TextField input_SK;
+
+    @FXML
+    private TextField input_DT;
 
     @FXML
     private ListView<Dynasty> listviewTrieuDai;
@@ -127,7 +136,17 @@ public class Controller implements Initializable {
     @FXML
     private ListView<Event> listviewSuKien;
 
+    @FXML
+    private ListView<Place> listviewDiTich;
 
+    @FXML
+    private Button btnChiTiet_DT;
+
+    @FXML
+    private Button btnTDLQ_DT;
+
+    @FXML
+    private Button btnSKLQ_DT;
 
 
     @FXML
@@ -153,6 +172,9 @@ public class Controller implements Initializable {
         }else if(event.getSource()==btnLeHoiVanHoa){
             resetVisible();
             contentLehoi.setVisible(true);
+        }else if(event.getSource() == btnDiTichLichSu){
+            resetVisible();
+            contentDiTich.setVisible(true);
         }
     }
 
@@ -162,6 +184,7 @@ public class Controller implements Initializable {
         contentNhanVat.setVisible(false);
         contentSuKien.setVisible(false);
         contentLehoi.setVisible(false);
+        contentDiTich.setVisible(false);
     }
 
     @Override
@@ -171,6 +194,8 @@ public class Controller implements Initializable {
             dynastyController.initialize();
             FigureController figurecontroller = new FigureController(input_NV, btnTimKiem_NV, btnChiTiet_NV, btnTDLQ_NV, btnSKLQ_NV, listviewNhanVat);
             figurecontroller.initialize();
+            PlaceController placecontroller = new PlaceController(input_DT, btnTimKiem_DT, btnChiTiet_DT, btnTDLQ_DT, btnSKLQ_DT, listviewDiTich);
+            placecontroller.initialize();
             EventController eventcontroller = new EventController(input_SK, btnTimKiem_SK, btnChiTiet_SK, btnTDLQ_SK, btnNVLQ_SK, btnDTLQ_SK, btnLHLQ_SK, listviewSuKien);
             eventcontroller.initialize();
             FestivalController festivalController = new FestivalController(inputLehoi,btnTimKiemLehoi,btnChiTietLehoi,btnNVLQLehoi,btnSKLQLehoi,(ListView<Festival>) listviewlehoi);
@@ -180,11 +205,3 @@ public class Controller implements Initializable {
         }
     }
 }
-
-
-
-
-
-
-
-
