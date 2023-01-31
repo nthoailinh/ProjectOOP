@@ -252,6 +252,7 @@
       </BorderPane>
       <BorderPane fx:id="contentDiTich" layoutX="243.0" layoutY="68.0" prefHeight="702.0" prefWidth="780.0" visible="false">
          <top>
+            <Label text="Tiêu đề" />
             <!--Thanh tìm kiếm ở góc trên cùng-->
             <HBox prefHeight="45.0" prefWidth="786.0" BorderPane.alignment="CENTER">
                <children>
