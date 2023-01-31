@@ -19,23 +19,23 @@ public class Place {
     }
 
     public int getID() {
-        return ID;
+        return this.ID;
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public String getLocation() {
-        return location;
+        return this.location;
     }
 
     public String getDescription() {
-        return description;
+        return this.description;
     }
 
     public List<Integer> getEventsID() {
-        return eventsID;
+        return this.eventsID;
     }
 
     public void addEvent(Event event) {
