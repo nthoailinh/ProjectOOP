@@ -1,5 +1,11 @@
 package UI.controller;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import models.Dynasty;
 import models.Event;
 import models.Figure;
@@ -12,6 +18,7 @@ import javafx.scene.control.*;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
 
 public class DynastyController {
@@ -46,7 +53,17 @@ public class DynastyController {
         figures = gson.fromJson(new FileReader("data/Figure.json"), new TypeToken<List<Figure>>() {
         }.getType());
     }
-
+    private void loadStage(String fxml) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource(fxml));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL);
+//            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public void initialize() {
         listviewTrieuDai.setItems(dynasties);
         listviewTrieuDai.setCellFactory(listView -> new ListCell<Dynasty>() {
@@ -64,11 +81,24 @@ public class DynastyController {
         btnChiTiet.setOnMouseClicked(event -> {
             Dynasty selectedDynasty = listviewTrieuDai.getSelectionModel().getSelectedItem();
             if (selectedDynasty != null) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Thông tin về triều đại");
-                alert.setHeaderText(selectedDynasty.getName() + " (" + selectedDynasty.getDates() + ")");
-                alert.setContentText("Mô tả: " + selectedDynasty.getDescription());
-                alert.showAndWait();
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("item.fxml"));
+                    AnchorPane chitiet = loader.load();
+                    ChitietController controller = loader.getController();
+                    controller.setTitle(selectedDynasty.getName() + " (" + selectedDynasty.getDates() + ")");
+                    controller.setDescription(selectedDynasty.getDescription());
+                    Scene scene = new Scene(loader.load(), 1024, 768);
+                    Stage stage = new Stage();
+                    stage.setScene(scene);
+                    stage.show();
+//                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//                alert.setTitle("Thông tin về triều đại");
+//                alert.setHeaderText(selectedDynasty.getName() + " (" + selectedDynasty.getDates() + ")");
+//                alert.setContentText("Mô tả: " + selectedDynasty.getDescription());
+//                alert.showAndWait();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
