@@ -6,6 +6,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 public class ItemController {
+    @FXML
+    private Label title;
 
     @FXML
     private Button btnDong;
@@ -14,7 +16,7 @@ public class ItemController {
     private Label lienquan;
 
     @FXML
-    private Label title;
+    private Label description;
 
     @FXML
     private VBox vboxlienquan;
