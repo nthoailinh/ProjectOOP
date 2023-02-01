@@ -1,5 +1,6 @@
 package UI.controller;
 
+import javafx.scene.layout.AnchorPane;
 import models.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -97,7 +98,7 @@ public class Controller implements Initializable {
     private BorderPane contentLehoi;
 
     @FXML
-    private GridPane contentTrangChu;
+    private AnchorPane contentTrangChu;
 
     @FXML
     private BorderPane contentTrieuDai;

@@ -13,9 +13,6 @@ public class Details {
     private Button btnBack;
 
     @FXML
-    private Button btnPrePage;
-
-    @FXML
     private TextArea description;
 
     @FXML
@@ -64,12 +61,7 @@ public class Details {
             stage.show();
         });
 
-        btnPrePage.setOnMouseClicked(event -> {
-            Stage stage = (Stage) btnBack.getScene().getWindow();
-            stage.setScene(preScene);
-            SceneManager.switchScene("PreScene");
-            stage.show();
-        });
+
     }
 
     public void setNameText(String text){

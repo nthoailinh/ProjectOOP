@@ -92,44 +92,35 @@ public class PlaceController {
                 }
             }
             Node detailRoot = fxmlLoader.getRoot();
+            detailRoot.lookup("#ta2").setVisible(false);
+            detailRoot.lookup("#ta3").setVisible(false);
+            detailRoot.lookup("#ta4").setVisible(false);
             Label lblTitle = (Label) detailRoot.lookup("#name");
             lblTitle.setText(selectedPlace.getName());
-            Label lblLocation = (Label) detailRoot.lookup("#location");
+            Label lbl1 = (Label) detailRoot.lookup("#lbl1");
+            lbl1.setText("Địa điểm");
+            Label lbl2 = (Label) detailRoot.lookup("#lbl2");
+            lbl2.setText("Mô tả");
+            Label lbl3 = (Label) detailRoot.lookup("#lbl3");
+            lbl3.setText("Sự kiện liên quan");
+//            Label lbl4 = (Label) detailRoot.lookup("#lbl4");
+//            lbl4.setText("Triều đại liên quan");
+
+            Label lblLocation = (Label) detailRoot.lookup("#place");
             lblLocation.setText(selectedPlace.getLocation());
-            Label lblDescription = (Label) detailRoot.lookup("#description");
-            lblDescription.setText(selectedPlace.getDescription());
-        });
 
-        btnSKLQ_DT.setOnMouseClicked(event -> {
-            Place selectedPlace = listviewDiTich.getSelectionModel().getSelectedItem();
-            if (selectedPlace != null) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Thông tin về di tích");
-                alert.setHeaderText("Sự kiện liên quan");
-                StringBuilder stringBuilder = new StringBuilder();
-                for (int eventID : selectedPlace.getEventsID()) {
-                    stringBuilder.append(events.get(eventID).getName()).append("\n\n");
-                }
-                alert.setContentText(stringBuilder.toString());
-                alert.showAndWait();
+            TextArea TaDescription = (TextArea) detailRoot.lookup("#description");
+            TaDescription.setText(selectedPlace.getDescription());
+
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int eventID : selectedPlace.getEventsID()) {
+                stringBuilder.append(events.get(eventID).getName()).append("\n\n");
             }
+            TextArea TaSKLQ = (TextArea) detailRoot.lookup("#ta1");
+            TaSKLQ.setText(stringBuilder.toString());
+
         });
 
-//---------TRIỀU ĐẠI LIÊN QUAN------------
-//        btnTDLQ_DT.setOnMouseClicked(event -> {
-//            Figure selectedDynasty = listviewDiTich.getSelectionModel().getSelectedItem();
-//            if (selectedDynasty != null) {
-//                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//                alert.setTitle("Thông tin về triều đại");
-//                alert.setHeaderText("Di tích liên quan");
-//                StringBuilder stringBuilder = new StringBuilder();
-//                for (int dynastyID : selectedDynasty.getDynastiesID()) {
-//                    stringBuilder.append(dynasties.get(dynastyID).getName()).append("\n\n");
-//                }
-//                alert.setContentText(stringBuilder.toString());
-//                alert.showAndWait();
-//            }
-//        });
 
         btnTimKiem_DT.setOnMouseClicked(event -> {
             ObservableList<Place> place_search = FXCollections.observableArrayList();
