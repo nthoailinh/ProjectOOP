@@ -1,5 +1,10 @@
 package UI.controller;
 
+import UI.views.Home;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import models.Dynasty;
 import models.Event;
 import models.Figure;
@@ -11,10 +16,14 @@ import javafx.scene.control.*;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 public class PlaceController {
     @FXML
@@ -32,6 +41,7 @@ public class PlaceController {
     private final ObservableList<Place> places;
     private final List<Dynasty> dynasties;
     private final List<Event> events;
+
     Gson gson = new Gson();
 
     public PlaceController(TextField input_DT, Button btnTimKiem_DT, Button btnChiTiet_DT, Button btnTDLQ_DT, Button btnSKLQ_DT, ListView<Place> listviewDiTich) throws FileNotFoundException {
@@ -65,13 +75,29 @@ public class PlaceController {
 
         btnChiTiet_DT.setOnMouseClicked(event -> {
             Place selectedPlace = listviewDiTich.getSelectionModel().getSelectedItem();
+            FXMLLoader fxmlLoader = new FXMLLoader(Home.class.getResource("details.fxml"));
             if (selectedPlace != null) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Thông tin về di tích lịch sử");
-                alert.setHeaderText(selectedPlace.getName());
-                alert.setContentText("Mô tả: " + selectedPlace.getDescription());
-                alert.showAndWait();
+                Stage currentStage = (Stage) btnChiTiet_DT.getScene().getWindow();
+                Scene detailScene = null;
+                Scene currentScene = btnChiTiet_DT.getScene();
+                try {
+                    Parent parent = fxmlLoader.load();
+                    SceneManager.setStage(currentStage);
+                    SceneManager.addScene("PreScene", currentScene);
+                    detailScene = new Scene(parent, 1024, 768);
+                    currentStage.setScene(detailScene);
+                    currentStage.show();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
+            Node detailRoot = fxmlLoader.getRoot();
+            Label lblTitle = (Label) detailRoot.lookup("#name");
+            lblTitle.setText(selectedPlace.getName());
+            Label lblLocation = (Label) detailRoot.lookup("#location");
+            lblLocation.setText(selectedPlace.getLocation());
+            Label lblDescription = (Label) detailRoot.lookup("#description");
+            lblDescription.setText(selectedPlace.getDescription());
         });
 
         btnSKLQ_DT.setOnMouseClicked(event -> {
