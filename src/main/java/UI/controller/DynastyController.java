@@ -1,6 +1,8 @@
 package UI.controller;
 
+import UI.views.Home;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -53,17 +55,17 @@ public class DynastyController {
         figures = gson.fromJson(new FileReader("data/Figure.json"), new TypeToken<List<Figure>>() {
         }.getType());
     }
-    private void loadStage(String fxml) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource(fxml));
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.initModality(Modality.APPLICATION_MODAL);
-//            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+//    private void loadStage(String fxml) {
+//        try {
+//            Parent root = FXMLLoader.load(getClass().getResource(fxml));
+//            Stage stage = new Stage();
+//            stage.setScene(new Scene(root));
+//            stage.initModality(Modality.APPLICATION_MODAL);
+////            stage.show();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
     public void initialize() {
         listviewTrieuDai.setItems(dynasties);
         listviewTrieuDai.setCellFactory(listView -> new ListCell<Dynasty>() {
@@ -80,57 +82,80 @@ public class DynastyController {
 
         btnChiTiet.setOnMouseClicked(event -> {
             Dynasty selectedDynasty = listviewTrieuDai.getSelectionModel().getSelectedItem();
+            FXMLLoader fxmlLoader = new FXMLLoader(Home.class.getResource("details.fxml"));
             if (selectedDynasty != null) {
+                Stage currentStage = (Stage) btnChiTiet.getScene().getWindow();
+                Scene detailScene = null;
+                Scene currentScene = btnChiTiet.getScene();
                 try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("item.fxml"));
-                    AnchorPane chitiet = loader.load();
-                    ChitietController controller = loader.getController();
-                    controller.setTitle(selectedDynasty.getName() + " (" + selectedDynasty.getDates() + ")");
-                    controller.setDescription(selectedDynasty.getDescription());
-                    Scene scene = new Scene(loader.load(), 1024, 768);
-                    Stage stage = new Stage();
-                    stage.setScene(scene);
-                    stage.show();
-//                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//                alert.setTitle("Thông tin về triều đại");
-//                alert.setHeaderText(selectedDynasty.getName() + " (" + selectedDynasty.getDates() + ")");
-//                alert.setContentText("Mô tả: " + selectedDynasty.getDescription());
-//                alert.showAndWait();
+                    Parent parent = fxmlLoader.load();
+                    SceneManager.setStage(currentStage);
+                    SceneManager.addScene("PreScene", currentScene);
+                    detailScene = new Scene(parent, 1024, 768);
+                    currentStage.setScene(detailScene);
+                    currentStage.show();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-            }
-        });
 
-        btnSKLQ.setOnMouseClicked(event -> {
-            Dynasty selectedDynasty = listviewTrieuDai.getSelectionModel().getSelectedItem();
-            if (selectedDynasty != null) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Thông tin về triều đại");
-                alert.setHeaderText("Sự kiện liên quan");
+
+                Node detailRoot = fxmlLoader.getRoot();
+                detailRoot.lookup("#ta3").setVisible(false);
+                detailRoot.lookup("#ta4").setVisible(false);
+                Label lbl2 = (Label) detailRoot.lookup("#lbl2");
+                lbl2.setText("Mô tả");
+                Label lbl3 = (Label) detailRoot.lookup("#lbl3");
+                lbl3.setText("Sự kiện liên quan");
+                Label lblTitle = (Label) detailRoot.lookup("#name");
+                lblTitle.setText(selectedDynasty.getName());
+                TextArea TaDescription = (TextArea) detailRoot.lookup("#description");
+                TaDescription.setText(selectedDynasty.getDescription());
                 StringBuilder stringBuilder = new StringBuilder();
                 for (int eventID : selectedDynasty.getEventsID()) {
                     stringBuilder.append(events.get(eventID).getName()).append("\n\n");
                 }
-                alert.setContentText(stringBuilder.toString());
-                alert.showAndWait();
+                TextArea TaSKLQ = (TextArea) detailRoot.lookup("#ta1");
+                TaSKLQ.setText(stringBuilder.toString());
+                Label lbl4 = (Label) detailRoot.lookup("#lbl4");
+                lbl4.setText("Nhân vật liên quan");
+                StringBuilder stringBuilder1 = new StringBuilder();
+                for (int figureID : selectedDynasty.getFiguresID()) {
+                    stringBuilder1.append(figures.get(figureID).getName()).append("\n\n");
+                }
+                TextArea TaNVLQ = (TextArea) detailRoot.lookup("#ta2");
+                TaNVLQ.setText(stringBuilder1.toString());
             }
         });
 
-        btnNVLQ.setOnMouseClicked(event -> {
-            Dynasty selectedDynasty = listviewTrieuDai.getSelectionModel().getSelectedItem();
-            if (selectedDynasty != null) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Thông tin về triều đại");
-                alert.setHeaderText("Nhân vật liên quan");
-                StringBuilder stringBuilder = new StringBuilder();
-                for (int figureID : selectedDynasty.getFiguresID()) {
-                    stringBuilder.append(figures.get(figureID).getName()).append("\n\n");
-                }
-                alert.setContentText(stringBuilder.toString());
-                alert.showAndWait();
-            }
-        });
+//        btnSKLQ.setOnMouseClicked(event -> {
+//            Dynasty selectedDynasty = listviewTrieuDai.getSelectionModel().getSelectedItem();
+//            if (selectedDynasty != null) {
+//                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//                alert.setTitle("Thông tin về triều đại");
+//                alert.setHeaderText("Sự kiện liên quan");
+//                StringBuilder stringBuilder = new StringBuilder();
+//                for (int eventID : selectedDynasty.getEventsID()) {
+//                    stringBuilder.append(events.get(eventID).getName()).append("\n\n");
+//                }
+//                alert.setContentText(stringBuilder.toString());
+//                alert.showAndWait();
+//            }
+//        });
+//
+//        btnNVLQ.setOnMouseClicked(event -> {
+//            Dynasty selectedDynasty = listviewTrieuDai.getSelectionModel().getSelectedItem();
+//            if (selectedDynasty != null) {
+//                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//                alert.setTitle("Thông tin về triều đại");
+//                alert.setHeaderText("Nhân vật liên quan");
+//                StringBuilder stringBuilder = new StringBuilder();
+//                for (int figureID : selectedDynasty.getFiguresID()) {
+//                    stringBuilder.append(figures.get(figureID).getName()).append("\n\n");
+//                }
+//                alert.setContentText(stringBuilder.toString());
+//                alert.showAndWait();
+//            }
+//        });
 
         btnTimKiem.setOnMouseClicked(event -> {
             ObservableList<Dynasty> dynasty_search = FXCollections.observableArrayList();
