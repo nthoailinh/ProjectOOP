@@ -204,7 +204,7 @@
                   </VBox>
                </children>
             </GridPane>
-            <VBox alignment="CENTER" layoutX="18.0" layoutY="9.0" prefHeight="201.0" prefWidth="748.0">
+            <VBox alignment="CENTER" layoutY="1.0" prefHeight="208.0" prefWidth="780.0" style="-fx-background-color: E4C99D;">
                <children>
                   <ImageView fitHeight="130.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
                      <image>
