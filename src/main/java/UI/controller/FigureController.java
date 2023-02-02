@@ -1,5 +1,11 @@
 package UI.controller;
 
+import UI.views.Home;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import models.Dynasty;
 import models.Event;
 import models.Figure;
@@ -12,6 +18,7 @@ import javafx.scene.control.*;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
 
 public class FigureController {
@@ -19,10 +26,6 @@ public class FigureController {
     private final TextField input_NV;
     @FXML
     private final Button btnTimKiem_NV;
-    @FXML
-    private final Button btnTDLQ_NV;
-    @FXML
-    private final Button btnSKLQ_NV;
     @FXML
     private final Button btnChiTiet_NV;
     @FXML
@@ -32,12 +35,10 @@ public class FigureController {
     private final List<Event> events;
     Gson gson = new Gson();
 
-    public FigureController(TextField input_NV, Button btnTimKiem_NV, Button btnChiTiet_NV, Button btnTDLQ_NV, Button btnSKLQ_NV, ListView<Figure> listviewNhanVat) throws FileNotFoundException {
+    public FigureController(TextField input_NV, Button btnTimKiem_NV, Button btnChiTiet_NV, ListView<Figure> listviewNhanVat) throws FileNotFoundException {
         this.input_NV = input_NV;
         this.btnTimKiem_NV = btnTimKiem_NV;
         this.btnChiTiet_NV = btnChiTiet_NV;
-        this.btnTDLQ_NV = btnTDLQ_NV;
-        this.btnSKLQ_NV = btnSKLQ_NV;
         this.listviewNhanVat = listviewNhanVat;
         figures = FXCollections.observableList(gson.fromJson(new FileReader("data/Figure.json"), new TypeToken<List<Figure>>() {
         }.getType()));
@@ -63,44 +64,51 @@ public class FigureController {
 
         btnChiTiet_NV.setOnMouseClicked(event -> {
             Figure selectedFigure = listviewNhanVat.getSelectionModel().getSelectedItem();
+            FXMLLoader fxmlLoader = new FXMLLoader(Home.class.getResource("details.fxml"));
             if (selectedFigure != null) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Thông tin về nhân vật lịch sử");
-                alert.setHeaderText(selectedFigure.getName() + " (" + selectedFigure.getDates() + ")");
-                alert.setContentText("Mô tả: " + selectedFigure.getDescription());
-                alert.showAndWait();
-            }
-        });
-
-        btnSKLQ_NV.setOnMouseClicked(event -> {
-            Figure selectedFigure = listviewNhanVat.getSelectionModel().getSelectedItem();
-            if (selectedFigure != null) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Thông tin về nhân vật");
-                alert.setHeaderText("Sự kiện liên quan");
+                Stage currentStage = (Stage) btnChiTiet_NV.getScene().getWindow();
+                Scene detailScene = null;
+                Scene currentScene = btnChiTiet_NV.getScene();
+                try {
+                    Parent parent = fxmlLoader.load();
+                    SceneManager.setStage(currentStage);
+                    SceneManager.addScene("PreScene", currentScene);
+                    detailScene = new Scene(parent, 1024, 768);
+                    currentStage.setScene(detailScene);
+                    currentStage.show();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                Node detailRoot = fxmlLoader.getRoot();
+                detailRoot.lookup("#ta3").setVisible(false);
+                detailRoot.lookup("#ta4").setVisible(false);
+                Label lbl2 = (Label) detailRoot.lookup("#lbl2");
+                lbl2.setText("Mô tả");
+                Label lbl3 = (Label) detailRoot.lookup("#lbl3");
+                lbl3.setText("Triều đại liên quan");
+                Label lbl4 = (Label) detailRoot.lookup("#lbl4");
+                lbl4.setText("Sự kiện liên quan");
+                Label lblTitle = (Label) detailRoot.lookup("#name");
+                lblTitle.setText(selectedFigure.getName()+ " (" + selectedFigure.getDates() + ")");
+                TextArea TaDescription = (TextArea) detailRoot.lookup("#description");
+                TaDescription.setText(selectedFigure.getDescription());
                 StringBuilder stringBuilder = new StringBuilder();
+                for (int dynID : selectedFigure.getDynastiesID()) {
+                    stringBuilder.append(dynasties.get(dynID).getName()).append("\n\n");
+                }
+                TextArea TaTDLQ = (TextArea) detailRoot.lookup("#ta1");
+                TaTDLQ.setText(stringBuilder.toString());
+                StringBuilder stringBuilder1 = new StringBuilder();
                 for (int eventID : selectedFigure.getEventsID()) {
-                    stringBuilder.append(events.get(eventID).getName()).append("\n\n");
+                    stringBuilder1.append(events.get(eventID).getName()).append("\n\n");
                 }
-                alert.setContentText(stringBuilder.toString());
-                alert.showAndWait();
+                TextArea TaSKLQ = (TextArea) detailRoot.lookup("#ta2");
+                TaSKLQ.setText(stringBuilder1.toString());
+
             }
         });
 
-        btnTDLQ_NV.setOnMouseClicked(event -> {
-            Figure selectedDynasty = listviewNhanVat.getSelectionModel().getSelectedItem();
-            if (selectedDynasty != null) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Thông tin về triều đại");
-                alert.setHeaderText("Nhân vật liên quan");
-                StringBuilder stringBuilder = new StringBuilder();
-                for (int dynastyID : selectedDynasty.getDynastiesID()) {
-                    stringBuilder.append(dynasties.get(dynastyID).getName()).append("\n\n");
-                }
-                alert.setContentText(stringBuilder.toString());
-                alert.showAndWait();
-            }
-        });
+
 
         btnTimKiem_NV.setOnMouseClicked(event -> {
             ObservableList<Figure> figure_search = FXCollections.observableArrayList();

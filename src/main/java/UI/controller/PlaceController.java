@@ -1,5 +1,10 @@
 package UI.controller;
 
+import UI.views.Home;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import models.Dynasty;
 import models.Event;
 import models.Figure;
@@ -11,10 +16,14 @@ import javafx.scene.control.*;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 public class PlaceController {
     @FXML
@@ -22,24 +31,19 @@ public class PlaceController {
     @FXML
     private final Button btnTimKiem_DT;
     @FXML
-    private final Button btnTDLQ_DT;
-    @FXML
-    private final Button btnSKLQ_DT;
-    @FXML
     private final Button btnChiTiet_DT;
     @FXML
     private final ListView<Place> listviewDiTich;
     private final ObservableList<Place> places;
     private final List<Dynasty> dynasties;
     private final List<Event> events;
+
     Gson gson = new Gson();
 
-    public PlaceController(TextField input_DT, Button btnTimKiem_DT, Button btnChiTiet_DT, Button btnTDLQ_DT, Button btnSKLQ_DT, ListView<Place> listviewDiTich) throws FileNotFoundException {
+    public PlaceController(TextField input_DT, Button btnTimKiem_DT, Button btnChiTiet_DT, ListView<Place> listviewDiTich) throws FileNotFoundException {
         this.input_DT = input_DT;
         this.btnTimKiem_DT = btnTimKiem_DT;
         this.btnChiTiet_DT = btnChiTiet_DT;
-        this.btnTDLQ_DT = btnTDLQ_DT;
-        this.btnSKLQ_DT = btnSKLQ_DT;
         this.listviewDiTich = listviewDiTich;
         places = FXCollections.observableList(gson.fromJson(new FileReader("data/Place.json"), new TypeToken<List<Place>>() {
         }.getType()));
@@ -65,45 +69,52 @@ public class PlaceController {
 
         btnChiTiet_DT.setOnMouseClicked(event -> {
             Place selectedPlace = listviewDiTich.getSelectionModel().getSelectedItem();
+            FXMLLoader fxmlLoader = new FXMLLoader(Home.class.getResource("details.fxml"));
             if (selectedPlace != null) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Thông tin về di tích lịch sử");
-                alert.setHeaderText(selectedPlace.getName());
-                alert.setContentText("Mô tả: " + selectedPlace.getDescription());
-                alert.showAndWait();
-            }
-        });
-
-        btnSKLQ_DT.setOnMouseClicked(event -> {
-            Place selectedPlace = listviewDiTich.getSelectionModel().getSelectedItem();
-            if (selectedPlace != null) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Thông tin về di tích");
-                alert.setHeaderText("Sự kiện liên quan");
-                StringBuilder stringBuilder = new StringBuilder();
-                for (int eventID : selectedPlace.getEventsID()) {
-                    stringBuilder.append(events.get(eventID).getName()).append("\n\n");
+                Stage currentStage = (Stage) btnChiTiet_DT.getScene().getWindow();
+                Scene detailScene = null;
+                Scene currentScene = btnChiTiet_DT.getScene();
+                try {
+                    Parent parent = fxmlLoader.load();
+                    SceneManager.setStage(currentStage);
+                    SceneManager.addScene("PreScene", currentScene);
+                    detailScene = new Scene(parent, 1024, 768);
+                    currentStage.setScene(detailScene);
+                    currentStage.show();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
-                alert.setContentText(stringBuilder.toString());
-                alert.showAndWait();
             }
+            Node detailRoot = fxmlLoader.getRoot();
+            detailRoot.lookup("#ta2").setVisible(false);
+            detailRoot.lookup("#ta3").setVisible(false);
+            detailRoot.lookup("#ta4").setVisible(false);
+            Label lblTitle = (Label) detailRoot.lookup("#name");
+            lblTitle.setText(selectedPlace.getName());
+            Label lbl1 = (Label) detailRoot.lookup("#lbl1");
+            lbl1.setText("Địa điểm");
+            Label lbl2 = (Label) detailRoot.lookup("#lbl2");
+            lbl2.setText("Mô tả");
+            Label lbl3 = (Label) detailRoot.lookup("#lbl3");
+            lbl3.setText("Sự kiện liên quan");
+//            Label lbl4 = (Label) detailRoot.lookup("#lbl4");
+//            lbl4.setText("Triều đại liên quan");
+
+            Label lblLocation = (Label) detailRoot.lookup("#place");
+            lblLocation.setText(selectedPlace.getLocation());
+
+            TextArea TaDescription = (TextArea) detailRoot.lookup("#description");
+            TaDescription.setText(selectedPlace.getDescription());
+
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int eventID : selectedPlace.getEventsID()) {
+                stringBuilder.append(events.get(eventID).getName()).append("\n\n");
+            }
+            TextArea TaSKLQ = (TextArea) detailRoot.lookup("#ta1");
+            TaSKLQ.setText(stringBuilder.toString());
+
         });
 
-//---------TRIỀU ĐẠI LIÊN QUAN------------
-//        btnTDLQ_DT.setOnMouseClicked(event -> {
-//            Figure selectedDynasty = listviewDiTich.getSelectionModel().getSelectedItem();
-//            if (selectedDynasty != null) {
-//                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//                alert.setTitle("Thông tin về triều đại");
-//                alert.setHeaderText("Di tích liên quan");
-//                StringBuilder stringBuilder = new StringBuilder();
-//                for (int dynastyID : selectedDynasty.getDynastiesID()) {
-//                    stringBuilder.append(dynasties.get(dynastyID).getName()).append("\n\n");
-//                }
-//                alert.setContentText(stringBuilder.toString());
-//                alert.showAndWait();
-//            }
-//        });
 
         btnTimKiem_DT.setOnMouseClicked(event -> {
             ObservableList<Place> place_search = FXCollections.observableArrayList();

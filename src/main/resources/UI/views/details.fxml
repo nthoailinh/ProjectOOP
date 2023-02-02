@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.controller.Details">
+    <VBox layoutX="30.0" layoutY="30.0" prefHeight="663.0" prefWidth="923.0">
+        <Label fx:id="name" prefHeight="35.0" prefWidth="922.0" text="Hai Bà Trưng">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Label>
+        <GridPane prefHeight="629.0" prefWidth="923.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="458.0" minWidth="10.0" prefWidth="203.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="720.0" minWidth="10.0" prefWidth="720.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="63.999996185302734" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="124.4" vgrow="ALWAYS" />
+            <RowConstraints maxHeight="190.39998474121091" minHeight="0.0" prefHeight="123.4" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="190.39998474121091" minHeight="10.0" prefHeight="115.19998779296878" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="190.39998474121091" minHeight="10.0" prefHeight="140.80001220703127" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="190.39998474121091" minHeight="10.0" prefHeight="140.80001220703127" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Label fx:id="lbl1">
+               <font>
+                  <Font size="15.0" />
+               </font></Label>
+                <Label fx:id="place" prefHeight="59.0" prefWidth="452.0" GridPane.columnIndex="1">
+               <font>
+                  <Font size="15.0" />
+               </font></Label>
+                <Label fx:id="lbl2" text="Mo ta" GridPane.rowIndex="1">
+               <font>
+                  <Font size="15.0" />
+               </font></Label>
+            <TextArea fx:id="ta1" editable="false" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent;" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextArea>
+            <Label fx:id="lbl3" text="Lienquan" GridPane.rowIndex="2">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextArea fx:id="description" editable="false" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent;" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextArea>
+            <Label fx:id="lbl4" GridPane.rowIndex="3">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbl5" prefWidth="142.0" GridPane.rowIndex="4">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbl6" prefHeight="18.0" prefWidth="122.0" GridPane.rowIndex="5">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextArea fx:id="ta2" editable="false" prefHeight="97.0" prefWidth="720.0" style="-fx-background-color: transparent;" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextArea>
+            <TextArea fx:id="ta3" editable="false" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent;" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextArea>
+            <TextArea fx:id="ta4" editable="false" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent;" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="5">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextArea>
+            </children>
+        </GridPane>
+    </VBox>
+    <Button fx:id="btnBack" layoutX="893.0" layoutY="720.0" mnemonicParsing="false" text="Quay lại" />
+</AnchorPane>
