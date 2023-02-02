@@ -1,5 +1,11 @@
 package UI.controller;
 
+import UI.views.Home;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import models.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -10,6 +16,7 @@ import javafx.scene.control.*;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
 
 public class EventController {
@@ -73,74 +80,67 @@ public class EventController {
 
         btnChiTiet_SK.setOnMouseClicked(event -> {
             Event selectedEvent = listviewSuKien.getSelectionModel().getSelectedItem();
+            FXMLLoader fxmlLoader = new FXMLLoader(Home.class.getResource("details.fxml"));
             if (selectedEvent != null) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Thông tin về sự kiện lịch sử");
-                alert.setHeaderText(selectedEvent.getName() + " (" + selectedEvent.getDates() + ")");
-                alert.setContentText("Mô tả: " + selectedEvent.getDescription());
-                alert.showAndWait();
-            }
-        });
-
-        btnTDLQ_SK.setOnMouseClicked(event -> {
-            Event selectedEvent = listviewSuKien.getSelectionModel().getSelectedItem();
-            if (selectedEvent != null) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Thông tin về sự kiện");
-                alert.setHeaderText("Triều đại liên quan");
-                StringBuilder stringBuilder = new StringBuilder();
-                for (int dynastyID : selectedEvent.getDynastiesID()) {
-                    stringBuilder.append(dynasties.get(dynastyID).getName()).append("\n\n");
+                Stage currentStage = (Stage) btnChiTiet_SK.getScene().getWindow();
+                Scene detailScene = null;
+                Scene currentScene = btnChiTiet_SK.getScene();
+                try {
+                    Parent parent = fxmlLoader.load();
+                    SceneManager.setStage(currentStage);
+                    SceneManager.addScene("PreScene", currentScene);
+                    detailScene = new Scene(parent, 1024, 768);
+                    currentStage.setScene(detailScene);
+                    currentStage.show();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
-                alert.setContentText(stringBuilder.toString());
-                alert.showAndWait();
-            }
-        });
+                Node detailRoot = fxmlLoader.getRoot();
 
-        btnNVLQ_SK.setOnMouseClicked(event -> {
-            Event selectedEvent = listviewSuKien.getSelectionModel().getSelectedItem();
-            if (selectedEvent != null) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Thông tin về sự kiện");
-                alert.setHeaderText("Nhân vật liên quan");
+                Label lbl2 = (Label) detailRoot.lookup("#lbl2");
+                lbl2.setText("Mô tả");
+                Label lbl3 = (Label) detailRoot.lookup("#lbl3");
+                lbl3.setText("Triều đại liên quan");
+                Label lbl4 = (Label) detailRoot.lookup("#lbl4");
+                lbl4.setText("Nhân vật liên quan");
+                Label lbl5 = (Label) detailRoot.lookup("#lbl5");
+                lbl5.setText("Địa điểm liên quan");
+                Label lbl6 = (Label) detailRoot.lookup("#lbl6");
+                lbl6.setText("Lễ hội liên quan");
+
+                Label lblTitle = (Label) detailRoot.lookup("#name");
+                lblTitle.setText(selectedEvent.getName());
+                TextArea TaDescription = (TextArea) detailRoot.lookup("#description");
+                TaDescription.setText(selectedEvent.getDescription());
                 StringBuilder stringBuilder = new StringBuilder();
-                for (int figureID : selectedEvent.getFiguresID()) {
-                    stringBuilder.append(figures.get(figureID).getName()).append("\n\n");
+                for (int dynID : selectedEvent.getDynastiesID()) {
+                    stringBuilder.append(dynasties.get(dynID).getName()).append("\n\n");
                 }
-                alert.setContentText(stringBuilder.toString());
-                alert.showAndWait();
-            }
-        });
-
-        btnDTLQ_SK.setOnMouseClicked(event -> {
-            Event selectedEvent = listviewSuKien.getSelectionModel().getSelectedItem();
-            if (selectedEvent != null) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Thông tin về sự kiện");
-                alert.setHeaderText("Di tích lịch sử liên quan");
-                StringBuilder stringBuilder = new StringBuilder();
+                TextArea TaTDLQ = (TextArea) detailRoot.lookup("#ta1");
+                TaTDLQ.setText(stringBuilder.toString());
+                StringBuilder stringBuilder1 = new StringBuilder();
+                for (int figID : selectedEvent.getFiguresID()) {
+                    stringBuilder1.append(figures.get(figID).getName()).append("\n\n");
+                }
+                TextArea TaNVLQ = (TextArea) detailRoot.lookup("#ta2");
+                TaNVLQ.setText(stringBuilder1.toString());
+                StringBuilder stringBuilder2 = new StringBuilder();
                 for (int placeID : selectedEvent.getPlacesID()) {
-                    stringBuilder.append(places.get(placeID).getName()).append("\n\n");
+                    stringBuilder2.append(places.get(placeID).getName()).append("\n\n");
                 }
-                alert.setContentText(stringBuilder.toString());
-                alert.showAndWait();
+                TextArea TaDDLQ = (TextArea) detailRoot.lookup("#ta3");
+                TaDDLQ.setText(stringBuilder2.toString());
+                StringBuilder stringBuilder3 = new StringBuilder();
+                for (int fesID : selectedEvent.getFestivalsID()) {
+                    stringBuilder3.append(festivals.get(fesID).getName()).append("\n\n");
+                }
+                TextArea TaLHLQ = (TextArea) detailRoot.lookup("#ta4");
+                TaLHLQ.setText(stringBuilder3.toString());
+
+
             }
         });
 
-        btnLHLQ_SK.setOnMouseClicked(event -> {
-            Event selectedEvent = listviewSuKien.getSelectionModel().getSelectedItem();
-            if (selectedEvent != null) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Thông tin về sự kiện");
-                alert.setHeaderText("Lễ hội văn hóa liên quan");
-                StringBuilder stringBuilder = new StringBuilder();
-                for (int festivalID : selectedEvent.getFestivalsID()) {
-                    stringBuilder.append(festivals.get(festivalID).getName()).append("\n\n");
-                }
-                alert.setContentText(stringBuilder.toString());
-                alert.showAndWait();
-            }
-        });
 
         btnTimKiem_SK.setOnMouseClicked(event -> {
             ObservableList<Event> event_search = FXCollections.observableArrayList();

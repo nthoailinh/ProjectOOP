@@ -100,15 +100,15 @@ public class FestivalController {
                 TaDescription.setText(selectedFestival.getDescription());
                 StringBuilder stringBuilder = new StringBuilder();
                 for (int figID : selectedFestival.getFiguresID()) {
-                    stringBuilder.append(events.get(figID).getName()).append("\n\n");
+                    stringBuilder.append(figures.get(figID).getName()).append("\n\n");
                 }
                 TextArea TaNVLQ = (TextArea) detailroot.lookup("#ta1");
                 TaNVLQ.setText(stringBuilder.toString());
                 StringBuilder stringBuilder1 = new StringBuilder();
-                for (int eventID : selectedFestival.getFiguresID()) {
+                for (int eventID : selectedFestival.getEventsID()) {
                     stringBuilder1.append(events.get(eventID).getName()).append("\n\n");
                 }
-                TextArea TaSKLQ = (TextArea) detailroot.lookup("#ta1");
+                TextArea TaSKLQ = (TextArea) detailroot.lookup("#ta2");
                 TaSKLQ.setText(stringBuilder1.toString());
 
             }
