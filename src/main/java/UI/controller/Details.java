@@ -11,7 +11,6 @@ public class Details {
     @FXML
     Button btnBack;
 
-    Scene preScene;
 
     @FXML
     Button btnPrePage;
@@ -22,14 +21,12 @@ public class Details {
     public void initialize(){
         btnBack.setOnMouseClicked(event -> {
             Stage stage = (Stage) btnBack.getScene().getWindow();
-            stage.setScene(preScene);
             SceneManager.switchScene("PreScene");
             stage.show();
         });
 
         btnPrePage.setOnMouseClicked(event -> {
             Stage stage = (Stage) btnBack.getScene().getWindow();
-            stage.setScene(preScene);
             SceneManager.switchScene("PreScene");
             stage.show();
         });

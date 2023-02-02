@@ -76,9 +76,9 @@ public class PlaceController {
         btnChiTiet_DT.setOnMouseClicked(event -> {
             Place selectedPlace = listviewDiTich.getSelectionModel().getSelectedItem();
             FXMLLoader fxmlLoader = new FXMLLoader(Home.class.getResource("details.fxml"));
+            Scene detailScene = null;
             if (selectedPlace != null) {
                 Stage currentStage = (Stage) btnChiTiet_DT.getScene().getWindow();
-                Scene detailScene = null;
                 Scene currentScene = btnChiTiet_DT.getScene();
                 try {
                     Parent parent = fxmlLoader.load();
@@ -98,6 +98,13 @@ public class PlaceController {
             lblLocation.setText(selectedPlace.getLocation());
             Label lblDescription = (Label) detailRoot.lookup("#description");
             lblDescription.setText(selectedPlace.getDescription());
+
+            TextArea lblDescriptionSKLQ = (TextArea) detailRoot.lookup("#description_SKLQ");
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int eventID : selectedPlace.getEventsID()) {
+                stringBuilder.append(events.get(eventID).getName()).append("\n\n");
+            }
+            lblDescriptionSKLQ.setText(stringBuilder.toString());
         });
 
         btnSKLQ_DT.setOnMouseClicked(event -> {
