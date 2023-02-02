@@ -29,10 +29,6 @@ public class DynastyController {
     @FXML
     private final Button btnTimKiem;
     @FXML
-    private final Button btnNVLQ;
-    @FXML
-    private final Button btnSKLQ;
-    @FXML
     private final Button btnChiTiet;
     @FXML
     private final ListView<Dynasty> listviewTrieuDai;
@@ -41,12 +37,10 @@ public class DynastyController {
     private final List<Figure> figures;
     Gson gson = new Gson();
 
-    public DynastyController(TextField input, Button btnTimKiem, Button btnChiTiet, Button btnNVLQ, Button btnSKLQ, ListView<Dynasty> listviewTrieuDai) throws FileNotFoundException {
+    public DynastyController(TextField input, Button btnTimKiem, Button btnChiTiet, ListView<Dynasty> listviewTrieuDai) throws FileNotFoundException {
         this.input = input;
         this.btnTimKiem = btnTimKiem;
         this.btnChiTiet = btnChiTiet;
-        this.btnNVLQ = btnNVLQ;
-        this.btnSKLQ = btnSKLQ;
         this.listviewTrieuDai = listviewTrieuDai;
         dynasties = FXCollections.observableList(gson.fromJson(new FileReader("data/Dynasty.json"), new TypeToken<List<Dynasty>>() {
         }.getType()));
@@ -107,7 +101,7 @@ public class DynastyController {
                 Label lbl3 = (Label) detailRoot.lookup("#lbl3");
                 lbl3.setText("Sự kiện liên quan");
                 Label lblTitle = (Label) detailRoot.lookup("#name");
-                lblTitle.setText(selectedDynasty.getName());
+                lblTitle.setText(selectedDynasty.getName()+ " (" + selectedDynasty.getDates() + ")");
                 TextArea TaDescription = (TextArea) detailRoot.lookup("#description");
                 TaDescription.setText(selectedDynasty.getDescription());
                 StringBuilder stringBuilder = new StringBuilder();
@@ -126,36 +120,6 @@ public class DynastyController {
                 TaNVLQ.setText(stringBuilder1.toString());
             }
         });
-
-//        btnSKLQ.setOnMouseClicked(event -> {
-//            Dynasty selectedDynasty = listviewTrieuDai.getSelectionModel().getSelectedItem();
-//            if (selectedDynasty != null) {
-//                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//                alert.setTitle("Thông tin về triều đại");
-//                alert.setHeaderText("Sự kiện liên quan");
-//                StringBuilder stringBuilder = new StringBuilder();
-//                for (int eventID : selectedDynasty.getEventsID()) {
-//                    stringBuilder.append(events.get(eventID).getName()).append("\n\n");
-//                }
-//                alert.setContentText(stringBuilder.toString());
-//                alert.showAndWait();
-//            }
-//        });
-//
-//        btnNVLQ.setOnMouseClicked(event -> {
-//            Dynasty selectedDynasty = listviewTrieuDai.getSelectionModel().getSelectedItem();
-//            if (selectedDynasty != null) {
-//                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//                alert.setTitle("Thông tin về triều đại");
-//                alert.setHeaderText("Nhân vật liên quan");
-//                StringBuilder stringBuilder = new StringBuilder();
-//                for (int figureID : selectedDynasty.getFiguresID()) {
-//                    stringBuilder.append(figures.get(figureID).getName()).append("\n\n");
-//                }
-//                alert.setContentText(stringBuilder.toString());
-//                alert.showAndWait();
-//            }
-//        });
 
         btnTimKiem.setOnMouseClicked(event -> {
             ObservableList<Dynasty> dynasty_search = FXCollections.observableArrayList();
