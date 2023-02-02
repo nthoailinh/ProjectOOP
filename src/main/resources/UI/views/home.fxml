@@ -431,9 +431,7 @@
                <children>
                   <Button fx:id="btnChiTietLehoi" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Chi tiết" />
                   <Pane prefHeight="24.0" prefWidth="140.0" />
-                  <Button fx:id="btnNVLQLehoi" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Nhân vật liên quan" />
                   <Pane prefHeight="24.0" prefWidth="140.0" />
-                  <Button fx:id="btnSKLQLehoi" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Sự kiện liên quan" />
                   <Pane prefHeight="24.0" prefWidth="140.0" />
                </children>
             </VBox>
