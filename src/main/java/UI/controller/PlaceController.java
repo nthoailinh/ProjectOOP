@@ -31,10 +31,6 @@ public class PlaceController {
     @FXML
     private final Button btnTimKiem_DT;
     @FXML
-    private final Button btnTDLQ_DT;
-    @FXML
-    private final Button btnSKLQ_DT;
-    @FXML
     private final Button btnChiTiet_DT;
     @FXML
     private final ListView<Place> listviewDiTich;
@@ -44,12 +40,10 @@ public class PlaceController {
 
     Gson gson = new Gson();
 
-    public PlaceController(TextField input_DT, Button btnTimKiem_DT, Button btnChiTiet_DT, Button btnTDLQ_DT, Button btnSKLQ_DT, ListView<Place> listviewDiTich) throws FileNotFoundException {
+    public PlaceController(TextField input_DT, Button btnTimKiem_DT, Button btnChiTiet_DT, ListView<Place> listviewDiTich) throws FileNotFoundException {
         this.input_DT = input_DT;
         this.btnTimKiem_DT = btnTimKiem_DT;
         this.btnChiTiet_DT = btnChiTiet_DT;
-        this.btnTDLQ_DT = btnTDLQ_DT;
-        this.btnSKLQ_DT = btnSKLQ_DT;
         this.listviewDiTich = listviewDiTich;
         places = FXCollections.observableList(gson.fromJson(new FileReader("data/Place.json"), new TypeToken<List<Place>>() {
         }.getType()));

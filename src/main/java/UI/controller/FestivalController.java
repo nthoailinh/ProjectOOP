@@ -27,10 +27,6 @@ public class FestivalController {
     @FXML
     private final Button BtnTimKiemLehoi;
     @FXML
-    private final Button btnNVLQLehoi ;
-    @FXML
-    private final Button btnSKLQLehoi ;
-    @FXML
     private final Button btnChiTietLehoi;
     @FXML
     private final ListView<Festival> listviewlehoi;
@@ -39,12 +35,10 @@ public class FestivalController {
     private final List<Figure> figures;
     Gson gson = new Gson();
 
-    public FestivalController(TextField input, Button BtnTimKiemLehoi, Button btnChiTiet, Button btnNVLQ, Button btnSKLQ, ListView<Festival> listviewlehoi) throws FileNotFoundException {
+    public FestivalController(TextField input, Button BtnTimKiemLehoi, Button btnChiTiet, ListView<Festival> listviewlehoi) throws FileNotFoundException {
         this.inputLehoi = input;
         this.BtnTimKiemLehoi = BtnTimKiemLehoi;
         this.btnChiTietLehoi = btnChiTiet;
-        this.btnNVLQLehoi = btnNVLQ;
-        this.btnSKLQLehoi = btnSKLQ;
         this.listviewlehoi = listviewlehoi;
         festivals = FXCollections.observableList(gson.fromJson(new FileReader("data/Festival.json"), new TypeToken<List<Festival>>() {
         }.getType()));
@@ -95,7 +89,7 @@ public class FestivalController {
                 Label lbl4 = (Label) detailroot.lookup("#lbl4");
                 lbl4.setText("Sự kiện liên quan");
                 Label lblTitle = (Label) detailroot.lookup("#name");
-                lblTitle.setText(selectedFestival.getName());
+                lblTitle.setText(selectedFestival.getName()+ " (" + selectedFestival.getDates() + ")");
                 TextArea TaDescription = (TextArea) detailroot.lookup("#description");
                 TaDescription.setText(selectedFestival.getDescription());
                 StringBuilder stringBuilder = new StringBuilder();
@@ -113,36 +107,6 @@ public class FestivalController {
 
             }
         });
-
-        /*btnSKLQLehoi.setOnMouseClicked(event -> {
-            Festival selectedFestival = listviewlehoi.getSelectionModel().getSelectedItem();
-            if (selectedFestival != null) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Thông tin về triều đại");
-                alert.setHeaderText("Sự kiện liên quan");
-                StringBuilder stringBuilder = new StringBuilder();
-                for (int eventID : selectedFestival.getEventsID()) {
-                    stringBuilder.append(events.get(eventID).getName()).append("\n\n");
-                }
-                alert.setContentText(stringBuilder.toString());
-                alert.showAndWait();
-            }
-        });
-
-        btnNVLQLehoi.setOnMouseClicked(event -> {
-            Festival selectedFestival = listviewlehoi.getSelectionModel().getSelectedItem();
-            if (selectedFestival != null) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Thông tin về triều đại");
-                alert.setHeaderText("Nhân vật liên quan");
-                StringBuilder stringBuilder = new StringBuilder();
-                for (int figureID : selectedFestival.getFiguresID()) {
-                    stringBuilder.append(figures.get(figureID).getName()).append("\n\n");
-                }
-                alert.setContentText(stringBuilder.toString());
-                alert.showAndWait();
-            }
-        });*/
 
         BtnTimKiemLehoi.setOnMouseClicked(event -> {
             ObservableList<Festival> Festival_search = FXCollections.observableArrayList();

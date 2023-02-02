@@ -27,10 +27,6 @@ public class FigureController {
     @FXML
     private final Button btnTimKiem_NV;
     @FXML
-    private final Button btnTDLQ_NV;
-    @FXML
-    private final Button btnSKLQ_NV;
-    @FXML
     private final Button btnChiTiet_NV;
     @FXML
     private final ListView<Figure> listviewNhanVat;
@@ -39,12 +35,10 @@ public class FigureController {
     private final List<Event> events;
     Gson gson = new Gson();
 
-    public FigureController(TextField input_NV, Button btnTimKiem_NV, Button btnChiTiet_NV, Button btnTDLQ_NV, Button btnSKLQ_NV, ListView<Figure> listviewNhanVat) throws FileNotFoundException {
+    public FigureController(TextField input_NV, Button btnTimKiem_NV, Button btnChiTiet_NV, ListView<Figure> listviewNhanVat) throws FileNotFoundException {
         this.input_NV = input_NV;
         this.btnTimKiem_NV = btnTimKiem_NV;
         this.btnChiTiet_NV = btnChiTiet_NV;
-        this.btnTDLQ_NV = btnTDLQ_NV;
-        this.btnSKLQ_NV = btnSKLQ_NV;
         this.listviewNhanVat = listviewNhanVat;
         figures = FXCollections.observableList(gson.fromJson(new FileReader("data/Figure.json"), new TypeToken<List<Figure>>() {
         }.getType()));
@@ -95,7 +89,7 @@ public class FigureController {
                 Label lbl4 = (Label) detailRoot.lookup("#lbl4");
                 lbl4.setText("Sự kiện liên quan");
                 Label lblTitle = (Label) detailRoot.lookup("#name");
-                lblTitle.setText(selectedFigure.getName());
+                lblTitle.setText(selectedFigure.getName()+ " (" + selectedFigure.getDates() + ")");
                 TextArea TaDescription = (TextArea) detailRoot.lookup("#description");
                 TaDescription.setText(selectedFigure.getDescription());
                 StringBuilder stringBuilder = new StringBuilder();

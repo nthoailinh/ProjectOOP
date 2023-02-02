@@ -25,14 +25,6 @@ public class EventController {
     @FXML
     private final Button btnTimKiem_SK;
     @FXML
-    private final Button btnTDLQ_SK;
-    @FXML
-    private final Button btnDTLQ_SK;
-    @FXML
-    private final Button btnNVLQ_SK;
-    @FXML
-    private final Button btnLHLQ_SK;
-    @FXML
     private final Button btnChiTiet_SK;
     @FXML
     private final ListView<Event> listviewSuKien;
@@ -43,14 +35,10 @@ public class EventController {
     private final List<Festival> festivals;
     Gson gson = new Gson();
 
-    public EventController(TextField input_SK, Button btnTimKiem_SK, Button btnChiTiet_SK, Button btnTDLQ_SK, Button btnNVLQ_SK, Button btnDTLQ_SK, Button btnLHLQ_SK, ListView<Event> listviewSuKien) throws FileNotFoundException {
+    public EventController(TextField input_SK, Button btnTimKiem_SK, Button btnChiTiet_SK, ListView<Event> listviewSuKien) throws FileNotFoundException {
         this.input_SK = input_SK;
         this.btnTimKiem_SK = btnTimKiem_SK;
         this.btnChiTiet_SK = btnChiTiet_SK;
-        this.btnTDLQ_SK = btnTDLQ_SK;
-        this.btnNVLQ_SK = btnNVLQ_SK;
-        this.btnDTLQ_SK = btnDTLQ_SK;
-        this.btnLHLQ_SK = btnLHLQ_SK;
         this.listviewSuKien = listviewSuKien;
         events = FXCollections.observableList(gson.fromJson(new FileReader("data/Event.json"), new TypeToken<List<Event>>() {
         }.getType()));
@@ -109,7 +97,7 @@ public class EventController {
                 lbl6.setText("Lễ hội liên quan");
 
                 Label lblTitle = (Label) detailRoot.lookup("#name");
-                lblTitle.setText(selectedEvent.getName());
+                lblTitle.setText(selectedEvent.getName()+ " (" + selectedEvent.getDates() + ")");
                 TextArea TaDescription = (TextArea) detailRoot.lookup("#description");
                 TaDescription.setText(selectedEvent.getDescription());
                 StringBuilder stringBuilder = new StringBuilder();
