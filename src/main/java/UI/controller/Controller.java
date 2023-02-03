@@ -1,5 +1,6 @@
 package UI.controller;
 
+import javafx.scene.layout.AnchorPane;
 import models.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,46 +31,20 @@ public class Controller implements Initializable {
     private Button btnChiTiet_SK;
 
     @FXML
-    private Button btnDTLQ_SK;
-    @FXML
     private Button btnChiTietLehoi;
 
     @FXML
     private Button btnDiTichLichSu;
 
-    @FXML
-    private Button btnLHLQ_SK;
 
     @FXML
     private Button btnLeHoiVanHoa;
 
     @FXML
-    private Button btnNVLQ;
-
-    @FXML
-    private Button btnNVLQ_SK;
-    @FXML
-    private Button btnNVLQLehoi;
-
-    @FXML
     private Button btnNhanVatLichSu;
 
     @FXML
-    private Button btnSKLQ;
-
-    @FXML
-    private Button btnSKLQ_NV;
-    @FXML
-    private Button btnSKLQLehoi;
-
-    @FXML
     private Button btnSuKienLichSu;
-
-    @FXML
-    private Button btnTDLQ_NV;
-
-    @FXML
-    private Button btnTDLQ_SK;
 
     @FXML
     private Button btnTimKiem;
@@ -97,7 +72,7 @@ public class Controller implements Initializable {
     private BorderPane contentLehoi;
 
     @FXML
-    private GridPane contentTrangChu;
+    private AnchorPane contentTrangChu;
 
     @FXML
     private BorderPane contentTrieuDai;
@@ -142,12 +117,6 @@ public class Controller implements Initializable {
     @FXML
     private Button btnChiTiet_DT;
 
-    @FXML
-    private Button btnTDLQ_DT;
-
-    @FXML
-    private Button btnSKLQ_DT;
-
 
     @FXML
     void handleClicksSidebar(ActionEvent event) throws FileNotFoundException {
@@ -190,15 +159,15 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            DynastyController dynastyController = new DynastyController(input, btnTimKiem, btnChiTiet, btnNVLQ, btnSKLQ, (ListView<Dynasty>) listviewTrieuDai);
+            DynastyController dynastyController = new DynastyController(input, btnTimKiem, btnChiTiet, (ListView<Dynasty>) listviewTrieuDai);
             dynastyController.initialize();
-            FigureController figurecontroller = new FigureController(input_NV, btnTimKiem_NV, btnChiTiet_NV, btnTDLQ_NV, btnSKLQ_NV, listviewNhanVat);
+            FigureController figurecontroller = new FigureController(input_NV, btnTimKiem_NV, btnChiTiet_NV, listviewNhanVat);
             figurecontroller.initialize();
-            PlaceController placecontroller = new PlaceController(input_DT, btnTimKiem_DT, btnChiTiet_DT, btnTDLQ_DT, btnSKLQ_DT, listviewDiTich);
+            PlaceController placecontroller = new PlaceController(input_DT, btnTimKiem_DT, btnChiTiet_DT, listviewDiTich);
             placecontroller.initialize();
-            EventController eventcontroller = new EventController(input_SK, btnTimKiem_SK, btnChiTiet_SK, btnTDLQ_SK, btnNVLQ_SK, btnDTLQ_SK, btnLHLQ_SK, listviewSuKien);
+            EventController eventcontroller = new EventController(input_SK, btnTimKiem_SK, btnChiTiet_SK, listviewSuKien);
             eventcontroller.initialize();
-            FestivalController festivalController = new FestivalController(inputLehoi,btnTimKiemLehoi,btnChiTietLehoi,btnNVLQLehoi,btnSKLQLehoi,(ListView<Festival>) listviewlehoi);
+            FestivalController festivalController = new FestivalController(inputLehoi,btnTimKiemLehoi,btnChiTietLehoi,(ListView<Festival>) listviewlehoi);
             festivalController.initialize();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);

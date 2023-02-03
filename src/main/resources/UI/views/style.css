@@ -72,3 +72,6 @@
   -fx-border-color: derive(-fx-pie-color, 1%);
   -fx-border-width: 0px;
 }
+.text-area {
+    -fx-background-color: transparent;
+}

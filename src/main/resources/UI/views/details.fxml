@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #B7C0C0;" stylesheets="@details.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.controller.Details">
+   <children>
+        <Label id="title" layoutX="407.0" layoutY="14.0" text="Thông tin di tích lịch sử" />
+        <ScrollPane blendMode="DARKEN" layoutX="30.0" layoutY="78.0" prefHeight="635.0" prefWidth="958.0" style="-fx-border-color: #B7C0C0;">
+            <content>
+<!--          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="456.0" prefWidth="1024.0">-->
+              <VBox>
+                  <Label id="name" text="Tên" />
+                  <Label id="h2" text="Mô tả" />
+                  <Label id="description" maxWidth="950.0" text="Mô tả" wrapText="true" />
+                  <Label id="h2" text="Sự kiện liên quan"></Label>
+                  <VBox id="relatedEvents" maxWidth="950.0">
+<!--                        <Label id="relatedEvent" wrapText="true" text="E1"/>-->
+                  </VBox>
+              </VBox>
+<!--          </AnchorPane>-->
+            </content>
+        </ScrollPane>
+       <Button fx:id="btnBack" layoutX="893.0" layoutY="720.0" mnemonicParsing="false" text="Quay lại" />
+   </children>
+</AnchorPane>

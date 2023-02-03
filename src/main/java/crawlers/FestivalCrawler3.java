@@ -29,8 +29,7 @@ public class FestivalCrawler3 extends Crawler<Festival> {
     public void crawlData() {
         String festivalDescriptionLink = "";
         try {
-            objects = gson.fromJson(new FileReader(JSON_PATH), new TypeToken<List<Festival>>() {
-            }.getType());
+            objects = gson.fromJson(JSON_PATH);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
