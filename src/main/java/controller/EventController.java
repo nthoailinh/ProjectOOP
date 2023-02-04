@@ -1,11 +1,5 @@
 package controller;
 
-import views.Home;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 import models.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -16,7 +10,6 @@ import javafx.scene.control.*;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.List;
 
 public class EventController {
@@ -24,6 +17,14 @@ public class EventController {
     private final TextField input_SK;
     @FXML
     private final Button btnTimKiem_SK;
+    @FXML
+    private final Button btnTDLQ_SK;
+    @FXML
+    private final Button btnDTLQ_SK;
+    @FXML
+    private final Button btnNVLQ_SK;
+    @FXML
+    private final Button btnLHLQ_SK;
     @FXML
     private final Button btnChiTiet_SK;
     @FXML
@@ -35,10 +36,14 @@ public class EventController {
     private final List<Festival> festivals;
     Gson gson = new Gson();
 
-    public EventController(TextField input_SK, Button btnTimKiem_SK, Button btnChiTiet_SK, ListView<Event> listviewSuKien) throws FileNotFoundException {
+    public EventController(TextField input_SK, Button btnTimKiem_SK, Button btnChiTiet_SK, Button btnTDLQ_SK, Button btnNVLQ_SK, Button btnDTLQ_SK, Button btnLHLQ_SK, ListView<Event> listviewSuKien) throws FileNotFoundException {
         this.input_SK = input_SK;
         this.btnTimKiem_SK = btnTimKiem_SK;
         this.btnChiTiet_SK = btnChiTiet_SK;
+        this.btnTDLQ_SK = btnTDLQ_SK;
+        this.btnNVLQ_SK = btnNVLQ_SK;
+        this.btnDTLQ_SK = btnDTLQ_SK;
+        this.btnLHLQ_SK = btnLHLQ_SK;
         this.listviewSuKien = listviewSuKien;
         events = FXCollections.observableList(gson.fromJson(new FileReader("data/Event.json"), new TypeToken<List<Event>>() {
         }.getType()));
@@ -68,67 +73,75 @@ public class EventController {
 
         btnChiTiet_SK.setOnMouseClicked(event -> {
             Event selectedEvent = listviewSuKien.getSelectionModel().getSelectedItem();
-            FXMLLoader fxmlLoader = new FXMLLoader(Home.class.getResource("details.fxml"));
             if (selectedEvent != null) {
-                Stage currentStage = (Stage) btnChiTiet_SK.getScene().getWindow();
-                Scene detailScene = null;
-                Scene currentScene = btnChiTiet_SK.getScene();
+                DetailController details = new DetailController();
                 try {
-                    Parent parent = fxmlLoader.load();
-                    SceneManager.setStage(currentStage);
-                    SceneManager.addScene("PreScene", currentScene);
-                    detailScene = new Scene(parent, 1024, 768);
-                    currentStage.setScene(detailScene);
-                    currentStage.show();
-                } catch (IOException e) {
+                    details.showDetailScene(btnChiTiet_SK, selectedEvent);
+                } catch (FileNotFoundException e) {
                     throw new RuntimeException(e);
                 }
-                Node detailRoot = fxmlLoader.getRoot();
-
-                Label lbl2 = (Label) detailRoot.lookup("#lbl2");
-                lbl2.setText("Mô tả");
-                Label lbl3 = (Label) detailRoot.lookup("#lbl3");
-                lbl3.setText("Triều đại liên quan");
-                Label lbl4 = (Label) detailRoot.lookup("#lbl4");
-                lbl4.setText("Nhân vật liên quan");
-                Label lbl5 = (Label) detailRoot.lookup("#lbl5");
-                lbl5.setText("Địa điểm liên quan");
-                Label lbl6 = (Label) detailRoot.lookup("#lbl6");
-                lbl6.setText("Lễ hội liên quan");
-
-                Label lblTitle = (Label) detailRoot.lookup("#name");
-                lblTitle.setText(selectedEvent.getName()+ " (" + selectedEvent.getDates() + ")");
-                TextArea TaDescription = (TextArea) detailRoot.lookup("#description");
-                TaDescription.setText(selectedEvent.getDescription());
-                StringBuilder stringBuilder = new StringBuilder();
-                for (int dynID : selectedEvent.getDynastiesID()) {
-                    stringBuilder.append(dynasties.get(dynID).getName()).append("\n\n");
-                }
-                TextArea TaTDLQ = (TextArea) detailRoot.lookup("#ta1");
-                TaTDLQ.setText(stringBuilder.toString());
-                StringBuilder stringBuilder1 = new StringBuilder();
-                for (int figID : selectedEvent.getFiguresID()) {
-                    stringBuilder1.append(figures.get(figID).getName()).append("\n\n");
-                }
-                TextArea TaNVLQ = (TextArea) detailRoot.lookup("#ta2");
-                TaNVLQ.setText(stringBuilder1.toString());
-                StringBuilder stringBuilder2 = new StringBuilder();
-                for (int placeID : selectedEvent.getPlacesID()) {
-                    stringBuilder2.append(places.get(placeID).getName()).append("\n\n");
-                }
-                TextArea TaDDLQ = (TextArea) detailRoot.lookup("#ta3");
-                TaDDLQ.setText(stringBuilder2.toString());
-                StringBuilder stringBuilder3 = new StringBuilder();
-                for (int fesID : selectedEvent.getFestivalsID()) {
-                    stringBuilder3.append(festivals.get(fesID).getName()).append("\n\n");
-                }
-                TextArea TaLHLQ = (TextArea) detailRoot.lookup("#ta4");
-                TaLHLQ.setText(stringBuilder3.toString());
-
-
             }
         });
 
+        btnTDLQ_SK.setOnMouseClicked(event -> {
+            Event selectedEvent = listviewSuKien.getSelectionModel().getSelectedItem();
+            if (selectedEvent != null) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Thông tin về sự kiện");
+                alert.setHeaderText("Triều đại liên quan");
+                StringBuilder stringBuilder = new StringBuilder();
+                for (int dynastyID : selectedEvent.getDynastiesID()) {
+                    stringBuilder.append(dynasties.get(dynastyID).getName()).append("\n\n");
+                }
+                alert.setContentText(stringBuilder.toString());
+                alert.showAndWait();
+            }
+        });
+
+        btnNVLQ_SK.setOnMouseClicked(event -> {
+            Event selectedEvent = listviewSuKien.getSelectionModel().getSelectedItem();
+            if (selectedEvent != null) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Thông tin về sự kiện");
+                alert.setHeaderText("Nhân vật liên quan");
+                StringBuilder stringBuilder = new StringBuilder();
+                for (int figureID : selectedEvent.getFiguresID()) {
+                    stringBuilder.append(figures.get(figureID).getName()).append("\n\n");
+                }
+                alert.setContentText(stringBuilder.toString());
+                alert.showAndWait();
+            }
+        });
+
+        btnDTLQ_SK.setOnMouseClicked(event -> {
+            Event selectedEvent = listviewSuKien.getSelectionModel().getSelectedItem();
+            if (selectedEvent != null) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Thông tin về sự kiện");
+                alert.setHeaderText("Di tích lịch sử liên quan");
+                StringBuilder stringBuilder = new StringBuilder();
+                for (int placeID : selectedEvent.getPlacesID()) {
+                    stringBuilder.append(places.get(placeID).getName()).append("\n\n");
+                }
+                alert.setContentText(stringBuilder.toString());
+                alert.showAndWait();
+            }
+        });
+
+        btnLHLQ_SK.setOnMouseClicked(event -> {
+            Event selectedEvent = listviewSuKien.getSelectionModel().getSelectedItem();
+            if (selectedEvent != null) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Thông tin về sự kiện");
+                alert.setHeaderText("Lễ hội văn hóa liên quan");
+                StringBuilder stringBuilder = new StringBuilder();
+                for (int festivalID : selectedEvent.getFestivalsID()) {
+                    stringBuilder.append(festivals.get(festivalID).getName()).append("\n\n");
+                }
+                alert.setContentText(stringBuilder.toString());
+                alert.showAndWait();
+            }
+        });
 
         btnTimKiem_SK.setOnMouseClicked(event -> {
             ObservableList<Event> event_search = FXCollections.observableArrayList();
