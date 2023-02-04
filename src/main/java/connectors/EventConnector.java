@@ -12,7 +12,7 @@ public class EventConnector extends GeneralConnector {
         eventConnector.connect();
         eventConnector.writeToJsonEvent();
     }
-
+    @Override
     public void connect() {
 
         for (Event event : events) {
