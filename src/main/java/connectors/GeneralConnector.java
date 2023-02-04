@@ -1,5 +1,6 @@
 package connectors;
 
+import com.google.gson.reflect.TypeToken;
 import models.*;
 import services.GsonHandler;
 import services.IJsonHandler;
@@ -14,17 +15,20 @@ public class GeneralConnector {
     public List<Dynasty> dynasties;
     public List<Place> places;
     IJsonHandler gson = new GsonHandler();
-
     public GeneralConnector() {
 
     }
-
     public void getData() throws Exception {
-        festivals = gson.fromJson("data/Festival.json");
-        figures = gson.fromJson("data/Figure.json");
-        events = gson.fromJson("data/Event.json");
-        dynasties = gson.fromJson("data/Dynasty.json");
-        places = gson.fromJson("data/Place.json");
+        festivals = gson.fromJson("data/Festival.json", new TypeToken<List<Festival>>() {
+        }.getType());
+        figures = gson.fromJson("data/Figure.json", new TypeToken<List<Figure>>() {
+        }.getType());
+        events = gson.fromJson("data/Event.json", new TypeToken<List<Event>>() {
+        }.getType());
+        dynasties = gson.fromJson("data/Dynasty.json", new TypeToken<List<Dynasty>>() {
+        }.getType());
+        places = gson.fromJson("data/Place.json", new TypeToken<List<Place>>() {
+        }.getType());
     }
 
     public void writeToJsonDynasty() throws Exception {

@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlaceCrawler extends Crawler<Place> {
+public class PlaceCrawler extends CrawlerWithHomePage<Place> {
     private static final String URL = "https://thuvienlichsu.com/dia-diem";
 
     private static final String JSON_PATH = "data/Place.json";

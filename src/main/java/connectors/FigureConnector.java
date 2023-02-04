@@ -1,6 +1,5 @@
 package connectors;
 
-
 import models.Event;
 
 public class FigureConnector extends GeneralConnector {
