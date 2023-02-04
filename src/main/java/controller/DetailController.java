@@ -66,6 +66,19 @@ public class DetailController {
             e.printStackTrace();
         }
 
+        FXMLLoader fxmlLoader = new FXMLLoader(Home.class.getResource("details.fxml"));
+        Scene detailScene = null;
+        Stage currentStage = (Stage) button.getScene().getWindow();
+        Scene currentScene = button.getScene();
+        try {
+            Parent parent = fxmlLoader.load();
+            detailScene = new Scene(parent, 1024, 768);
+            SceneManager.setStage(currentStage);
+            SceneManager.addScene("PreScene", currentScene);
+            currentStage.setScene(detailScene);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         String name = "";
         String description = "";
         List<Integer> eventIDs = null;
@@ -119,23 +132,6 @@ public class DetailController {
             optionalText = "Năm sinh - năm mất: " + figure.getDates();
             MaHienThi = "FIGURE";
         }
-
-        places = FXCollections.observableList(gson.fromJson(new FileReader("data/Place.json"), new TypeToken<List<Place>>() {
-        }.getType()));
-        FXMLLoader fxmlLoader = new FXMLLoader(Home.class.getResource("details.fxml"));
-        Scene detailScene = null;
-        Stage currentStage = (Stage) button.getScene().getWindow();
-        Scene currentScene = button.getScene();
-        try {
-            Parent parent = fxmlLoader.load();
-            detailScene = new Scene(parent, 1024, 768);
-            SceneManager.setStage(currentStage);
-            SceneManager.addScene("PreScene", currentScene);
-            currentStage.setScene(detailScene);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
         Node detailRoot = fxmlLoader.getRoot();
         Label lblName = (Label) detailRoot.lookup("#name");
         lblName.setText(name);
@@ -275,6 +271,7 @@ public class DetailController {
                 relatedFestival.getChildren().add(relatedEvent);
             }
         }
+
         return currentScene;
     }
 
