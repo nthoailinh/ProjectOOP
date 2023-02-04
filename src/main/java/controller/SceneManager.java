@@ -1,4 +1,4 @@
-package UI.controller;
+package controller;
 
 import java.util.ArrayList;
 import javafx.stage.Stage;
