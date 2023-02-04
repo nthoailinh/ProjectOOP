@@ -1,6 +1,6 @@
-package UI.controller;
+package controller;
 
-import UI.views.Home;
+import views.Home;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import models.Dynasty;
 import models.Event;
-import models.Figure;
 import models.Place;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
@@ -23,7 +22,6 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class PlaceController {
