@@ -9,7 +9,7 @@ public class PlaceConnector extends GeneralConnector {
         placeConnection .connect();
         placeConnection.writeToJsonPlace();
     }
-
+    @Override
     public void connect() {
         for (Event event : events) {
             for (int id : event.getPlacesID()) {

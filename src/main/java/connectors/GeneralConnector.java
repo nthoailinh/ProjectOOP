@@ -5,10 +5,11 @@ import models.*;
 import services.GsonHandler;
 import services.IJsonHandler;
 
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.util.List;
 
-public class GeneralConnector {
+public abstract class GeneralConnector {
     public List<Festival> festivals;
     public List<Figure> figures;
     public List<Event> events;
@@ -66,4 +67,5 @@ public class GeneralConnector {
         writer.close();
     }
 
+    public abstract void connect() throws FileNotFoundException;
 }
