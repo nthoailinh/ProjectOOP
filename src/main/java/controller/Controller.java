@@ -30,15 +30,10 @@ public class Controller implements Initializable {
     private Button btnChiTiet_SK;
 
     @FXML
-    private Button btnDTLQ_SK;
-    @FXML
     private Button btnChiTietLehoi;
 
     @FXML
     private Button btnDiTichLichSu;
-
-    @FXML
-    private Button btnLHLQ_SK;
 
     @FXML
     private Button btnLeHoiVanHoa;
