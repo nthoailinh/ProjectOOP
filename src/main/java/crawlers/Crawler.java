@@ -17,7 +17,6 @@ public abstract class Crawler<T> {
     protected static int ID = 0;
     protected List<T> objects;
     protected IWebDriver<WebElement, By> driver;
-    protected IWebDriver<WebElement, By> homePageDriver;
     protected final IJsonHandler gson;
     protected final List<String> PAGE_URLs = new ArrayList<>();
     protected final String JSON_FILE_PATH;
@@ -25,7 +24,6 @@ public abstract class Crawler<T> {
 
     public Crawler(String json_file_path, String ...page_urls) {
         driver = new ChromeDriverSelenium();
-        homePageDriver = new ChromeDriverSelenium();
         gson = new GsonHandler();
         objects = new ArrayList<>();
         this.JSON_FILE_PATH = json_file_path;
@@ -36,7 +34,6 @@ public abstract class Crawler<T> {
         crawlData();
         saveDataToFile();
         driver.quit();
-        homePageDriver.quit();
     }
 
     public void saveDataToFile() throws IOException {

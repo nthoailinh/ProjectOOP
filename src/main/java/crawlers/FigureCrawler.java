@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FigureCrawler extends Crawler<Figure> {
+public class FigureCrawler extends CrawlerWithHomePage<Figure> {
     private static final String URL = "https://thuvienlichsu.com/nhan-vat";
 
     private static final String JSON_PATH = "data/Figure.json";
