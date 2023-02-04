@@ -30,46 +30,20 @@ public class Controller implements Initializable {
     private Button btnChiTiet_SK;
 
     @FXML
-    private Button btnDTLQ_SK;
-    @FXML
     private Button btnChiTietLehoi;
 
     @FXML
     private Button btnDiTichLichSu;
 
     @FXML
-    private Button btnLHLQ_SK;
-
-    @FXML
     private Button btnLeHoiVanHoa;
-
-    @FXML
-    private Button btnNVLQ;
-
-    @FXML
-    private Button btnNVLQ_SK;
-    @FXML
-    private Button btnNVLQLehoi;
 
     @FXML
     private Button btnNhanVatLichSu;
 
     @FXML
-    private Button btnSKLQ;
-
-    @FXML
-    private Button btnSKLQ_NV;
-    @FXML
-    private Button btnSKLQLehoi;
-
-    @FXML
     private Button btnSuKienLichSu;
 
-    @FXML
-    private Button btnTDLQ_NV;
-
-    @FXML
-    private Button btnTDLQ_SK;
 
     @FXML
     private Button btnTimKiem;
@@ -143,13 +117,6 @@ public class Controller implements Initializable {
     private Button btnChiTiet_DT;
 
     @FXML
-    private Button btnTDLQ_DT;
-
-    @FXML
-    private Button btnSKLQ_DT;
-
-
-    @FXML
     void handleClicksSidebar(ActionEvent event) throws FileNotFoundException {
         if (event.getSource() == btnTrangChu) {
             resetVisible();
@@ -190,11 +157,11 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            DynastyController dynastyController = new DynastyController(input, btnTimKiem, btnChiTiet, btnNVLQ, btnSKLQ, (ListView<Dynasty>) listviewTrieuDai);
+            DynastyController dynastyController = new DynastyController(input, btnTimKiem, btnChiTiet, (ListView<Dynasty>) listviewTrieuDai);
             dynastyController.initialize();
             FigureController figurecontroller = new FigureController(input_NV, btnTimKiem_NV, btnChiTiet_NV, listviewNhanVat);
             figurecontroller.initialize();
-            PlaceController placecontroller = new PlaceController(input_DT, btnTimKiem_DT, btnChiTiet_DT, listviewDiTich);
+            PlaceController placecontroller = new PlaceController(input_DT, btnTimKiem_DT, btnChiTiet_DT, (ListView<Place>) listviewDiTich);
             placecontroller.initialize();
             EventController eventcontroller = new EventController(input_SK, btnTimKiem_SK, btnChiTiet_SK, listviewSuKien);
             eventcontroller.initialize();
