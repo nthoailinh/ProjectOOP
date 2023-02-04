@@ -1,10 +1,9 @@
 package connectors;
 
 import models.*;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import services.GsonHandler;
+import services.IJsonHandler;
 
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.List;
 
@@ -14,23 +13,18 @@ public class GeneralConnector {
     public List<Event> events;
     public List<Dynasty> dynasties;
     public List<Place> places;
-    Gson gson = new Gson();
+    IJsonHandler gson = new GsonHandler();
 
     public GeneralConnector() {
 
     }
 
     public void getData() throws Exception {
-        festivals = gson.fromJson(new FileReader("data/Festival.json"), new TypeToken<List<Festival>>() {
-        }.getType());
-        figures = gson.fromJson(new FileReader("data/Figure.json"), new TypeToken<List<Figure>>() {
-        }.getType());
-        events = gson.fromJson(new FileReader("data/Event.json"), new TypeToken<List<Event>>() {
-        }.getType());
-        dynasties = gson.fromJson(new FileReader("data/Dynasty.json"), new TypeToken<List<Dynasty>>() {
-        }.getType());
-        places = gson.fromJson(new FileReader("data/Place.json"), new TypeToken<List<Place>>() {
-        }.getType());
+        festivals = gson.fromJson("data/Festival.json");
+        figures = gson.fromJson("data/Figure.json");
+        events = gson.fromJson("data/Event.json");
+        dynasties = gson.fromJson("data/Dynasty.json");
+        places = gson.fromJson("data/Place.json");
     }
 
     public void writeToJsonDynasty() throws Exception {
