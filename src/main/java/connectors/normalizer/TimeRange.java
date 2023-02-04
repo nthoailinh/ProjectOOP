@@ -40,4 +40,6 @@ public class TimeRange {
     public boolean withinRange(TimeRange other) {
         return (start >= other.start && start <= other.end) || (end >= other.start && end <= other.end);
     }
+    public static void main(String[] args) {
+    }
 }
