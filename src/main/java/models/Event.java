@@ -3,41 +3,18 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Event {
-    private int ID;
-    private String name;
-    private String dates;
-    private String description;
+public class Event extends HistoryObject {
     private List<Integer> dynastiesID;
     private List<Integer> figuresID;
     private List<Integer> placesID;
     private List<Integer> festivalsID;
 
     public Event(int ID, String name, String dates, String description) {
-        this.ID = ID;
-        this.name = name;
-        this.dates = dates;
-        this.description = description;
+        super(ID, name, dates, description);
         this.dynastiesID = new ArrayList<>();
         this.figuresID = new ArrayList<>();
         this.placesID = new ArrayList<>();
         this.festivalsID = new ArrayList<>();
-    }
-
-    public int getID() {
-        return ID;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDates() {
-        return dates;
-    }
-
-    public String getDescription() {
-        return description;
     }
 
     public List<Integer> getDynastiesID() {

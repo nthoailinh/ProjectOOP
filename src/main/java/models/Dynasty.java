@@ -3,37 +3,14 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Dynasty {
-    private int ID;
-    private String name;
-    private String dates;
-    private String description;
+public class Dynasty extends HistoryObject {
     private List<Integer> figuresID;
     private List<Integer> eventsID;
 
     public Dynasty(int ID, String name, String dates, String description) {
-        this.ID = ID;
-        this.name = name;
-        this.dates = dates;
-        this.description = description;
+        super(ID, name, dates, description);
         this.figuresID = new ArrayList<>();
         this.eventsID = new ArrayList<>();
-    }
-
-    public int getID() {
-        return ID;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDates() {
-        return dates;
-    }
-
-    public String getDescription() {
-        return description;
     }
 
     public List<Integer> getFiguresID() {
