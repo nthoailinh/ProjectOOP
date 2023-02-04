@@ -1,11 +1,5 @@
 package controller;
 
-import views.Home;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 import models.Dynasty;
 import models.Event;
 import models.Figure;
@@ -18,7 +12,6 @@ import javafx.scene.control.*;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.List;
 
 public class FigureController {
@@ -64,51 +57,15 @@ public class FigureController {
 
         btnChiTiet_NV.setOnMouseClicked(event -> {
             Figure selectedFigure = listviewNhanVat.getSelectionModel().getSelectedItem();
-            FXMLLoader fxmlLoader = new FXMLLoader(Home.class.getResource("details.fxml"));
             if (selectedFigure != null) {
-                Stage currentStage = (Stage) btnChiTiet_NV.getScene().getWindow();
-                Scene detailScene = null;
-                Scene currentScene = btnChiTiet_NV.getScene();
+                DetailController details = new DetailController();
                 try {
-                    Parent parent = fxmlLoader.load();
-                    SceneManager.setStage(currentStage);
-                    SceneManager.addScene("PreScene", currentScene);
-                    detailScene = new Scene(parent, 1024, 768);
-                    currentStage.setScene(detailScene);
-                    currentStage.show();
-                } catch (IOException e) {
+                    details.showDetailScene(btnChiTiet_NV, selectedFigure);
+                } catch (FileNotFoundException e) {
                     throw new RuntimeException(e);
                 }
-                Node detailRoot = fxmlLoader.getRoot();
-                detailRoot.lookup("#ta3").setVisible(false);
-                detailRoot.lookup("#ta4").setVisible(false);
-                Label lbl2 = (Label) detailRoot.lookup("#lbl2");
-                lbl2.setText("Mô tả");
-                Label lbl3 = (Label) detailRoot.lookup("#lbl3");
-                lbl3.setText("Triều đại liên quan");
-                Label lbl4 = (Label) detailRoot.lookup("#lbl4");
-                lbl4.setText("Sự kiện liên quan");
-                Label lblTitle = (Label) detailRoot.lookup("#name");
-                lblTitle.setText(selectedFigure.getName()+ " (" + selectedFigure.getDates() + ")");
-                TextArea TaDescription = (TextArea) detailRoot.lookup("#description");
-                TaDescription.setText(selectedFigure.getDescription());
-                StringBuilder stringBuilder = new StringBuilder();
-                for (int dynID : selectedFigure.getDynastiesID()) {
-                    stringBuilder.append(dynasties.get(dynID).getName()).append("\n\n");
-                }
-                TextArea TaTDLQ = (TextArea) detailRoot.lookup("#ta1");
-                TaTDLQ.setText(stringBuilder.toString());
-                StringBuilder stringBuilder1 = new StringBuilder();
-                for (int eventID : selectedFigure.getEventsID()) {
-                    stringBuilder1.append(events.get(eventID).getName()).append("\n\n");
-                }
-                TextArea TaSKLQ = (TextArea) detailRoot.lookup("#ta2");
-                TaSKLQ.setText(stringBuilder1.toString());
-
             }
         });
-
-
 
         btnTimKiem_NV.setOnMouseClicked(event -> {
             ObservableList<Figure> figure_search = FXCollections.observableArrayList();
