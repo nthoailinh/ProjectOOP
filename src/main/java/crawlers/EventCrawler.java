@@ -63,7 +63,7 @@ public class EventCrawler extends CrawlerWithHomePage<Event> {
                     if (parts[1].trim().charAt(0) == '-') {
                         dates = "? " + dates;
                     }
-
+                    
                     objects.add(new Event(ID, name, dates, description));
                     ID++;
 

@@ -40,9 +40,4 @@ public class TimeRange {
     public boolean withinRange(TimeRange other) {
         return (start >= other.start && start <= other.end) || (end >= other.start && end <= other.end);
     }
-
-    public static void main(String[] args){
-        TimeRange t = new TimeRange("257 SCN –179 SCN");
-        System.out.println(t.start + " " + t.end);
-    }
 }
