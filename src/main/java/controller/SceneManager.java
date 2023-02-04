@@ -1,4 +1,4 @@
-package UI.controller;
+package controller;
 
 import java.util.ArrayList;
 import javafx.stage.Stage;
@@ -16,9 +16,15 @@ public class SceneManager {
         }
     }
     public static void addScene(String sceneKey, Scene scene) {
-        scene.setUserData(sceneKey);
-        stack.add(scene);
+        if (sceneKey == null || sceneKey.isEmpty()) {
+            sceneKey = String.valueOf(System.currentTimeMillis());
+        }
+        if (!stack.contains(scene)) {
+            scene.setUserData(sceneKey);
+            stack.add(scene);
+        }
     }
+
     public static void switchScene(String sceneKey) {
         Scene targetScene = null;
         // Tìm scene tương ứng với sceneKey trong stack
@@ -36,4 +42,27 @@ public class SceneManager {
         }
     }
 
+    public static Scene getCurrentScene() {
+        return stage.getScene();
+    }
+
+    public static void printAllScenes() {
+        System.out.println("All Scenes in Stack: ");
+        for (Scene scene : stack) {
+            System.out.println(scene.getUserData() + " và " +scene.toString() + "\n");
+        }
+    }
+
+    public static void backScene(){
+        if (stack.size() > 1) {
+            stage.setScene(stack.get(stack.size() - 1));
+            stack.remove(stack.size() - 1);
+        }
+    }
+
+    public static void removeAllEx1(){
+        for (int i = stack.size() - 1; i > 0; i--) {
+            stack.remove(i);
+        }
+    }
 }

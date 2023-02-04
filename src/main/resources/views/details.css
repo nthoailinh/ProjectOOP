@@ -1,0 +1,39 @@
+.root {
+    -fx-font-size: 16px;
+    -fx-text-fill: #9A6619;
+}
+
+#title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-font-family: "SF Pro Display";
+}
+#name {
+    -fx-font-size: 35px;
+    -fx-font-weight: bold;
+    -fx-font-family: "SF Pro Display";
+    -fx-padding: 15px 15px 15px 0px;
+}
+
+#h2 {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-font-family: "SF Pro Display";
+    -fx-padding: 15px 15px 15px 0px;
+
+}
+
+.button {
+    -fx-background-color: #3C2C2D;
+    -fx-text-fill: #B7C0C0;
+}
+
+#relatedEvent {
+    max-width: 930px;
+    -fx-wrap-text: true;
+}
+
+#relatedEvent:hover {
+    max-width: 930px;
+    -fx-text-fill: red;
+}

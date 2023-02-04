@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventCrawler extends Crawler<Event> {
+public class EventCrawler extends CrawlerWithHomePage<Event> {
     private static final String URL = "https://thuvienlichsu.com/su-kien";
 
     private static final String JSON_PATH = "data/Event.json";

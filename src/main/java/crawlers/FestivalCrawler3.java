@@ -7,11 +7,10 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
-public class FestivalCrawler3 extends Crawler<Festival> {
+public class FestivalCrawler3 extends CrawlerWithHomePage<Festival> {
     private static final String URL = "https://vi.wikipedia.org/wiki/C%C3%A1c_ng%C3%A0y_l%E1%BB%85_%E1%BB%9F_Vi%E1%BB%87t_Nam";
 
     private static final String JSON_PATH = "data/Festival.json";
@@ -29,8 +28,7 @@ public class FestivalCrawler3 extends Crawler<Festival> {
     public void crawlData() {
         String festivalDescriptionLink = "";
         try {
-            objects = gson.fromJson(new FileReader(JSON_PATH), new TypeToken<List<Festival>>() {
-            }.getType());
+            objects = gson.fromJson(JSON_PATH, new TypeToken<List<Festival>>() {}.getType());
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
