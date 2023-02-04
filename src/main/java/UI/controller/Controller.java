@@ -9,7 +9,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
@@ -193,7 +192,7 @@ public class Controller implements Initializable {
         try {
             DynastyController dynastyController = new DynastyController(input, btnTimKiem, btnChiTiet, btnNVLQ, btnSKLQ, (ListView<Dynasty>) listviewTrieuDai);
             dynastyController.initialize();
-            FigureController figurecontroller = new FigureController(input_NV, btnTimKiem_NV, btnChiTiet_NV, btnTDLQ_NV, btnSKLQ_NV, listviewNhanVat);
+            FigureController figurecontroller = new FigureController(input_NV, btnTimKiem_NV, btnChiTiet_NV, listviewNhanVat);
             figurecontroller.initialize();
             PlaceController placecontroller = new PlaceController(input_DT, btnTimKiem_DT, btnChiTiet_DT, btnTDLQ_DT, btnSKLQ_DT, listviewDiTich);
             placecontroller.initialize();

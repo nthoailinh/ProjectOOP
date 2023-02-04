@@ -74,11 +74,12 @@ public class EventController {
         btnChiTiet_SK.setOnMouseClicked(event -> {
             Event selectedEvent = listviewSuKien.getSelectionModel().getSelectedItem();
             if (selectedEvent != null) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Thông tin về sự kiện lịch sử");
-                alert.setHeaderText(selectedEvent.getName() + " (" + selectedEvent.getDates() + ")");
-                alert.setContentText("Mô tả: " + selectedEvent.getDescription());
-                alert.showAndWait();
+                Details details = new Details();
+                try {
+                    details.showDetailScene(btnChiTiet_SK, selectedEvent);
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 

@@ -1,5 +1,6 @@
 .root {
     -fx-font-size: 16px;
+    -fx-text-fill: #9A6619;
 }
 
 #title {
@@ -28,5 +29,11 @@
 }
 
 #relatedEvent {
-    max-width: 950px;
+    max-width: 930px;
+    -fx-wrap-text: true;
+}
+
+#relatedEvent:hover {
+    max-width: 930px;
+    -fx-text-fill: red;
 }

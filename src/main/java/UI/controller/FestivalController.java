@@ -64,43 +64,15 @@ public class FestivalController {
         btnChiTietLehoi.setOnMouseClicked(event -> {
             Festival selectedFestival = listviewlehoi.getSelectionModel().getSelectedItem();
             if (selectedFestival != null) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Thông tin về triều đại");
-                alert.setHeaderText(selectedFestival.getName() + " (" + selectedFestival.getDates() + ")");
-                alert.setContentText("Mô tả: " + selectedFestival.getDescription());
-                alert.showAndWait();
+                Details details = new Details();
+                try {
+                    details.showDetailScene(btnChiTietLehoi, selectedFestival);
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
-        btnSKLQLehoi.setOnMouseClicked(event -> {
-            Festival selectedFestival = listviewlehoi.getSelectionModel().getSelectedItem();
-            if (selectedFestival != null) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Thông tin về triều đại");
-                alert.setHeaderText("Sự kiện liên quan");
-                StringBuilder stringBuilder = new StringBuilder();
-                for (int eventID : selectedFestival.getEventsID()) {
-                    stringBuilder.append(events.get(eventID).getName()).append("\n\n");
-                }
-                alert.setContentText(stringBuilder.toString());
-                alert.showAndWait();
-            }
-        });
-
-        btnNVLQLehoi.setOnMouseClicked(event -> {
-            Festival selectedFestival = listviewlehoi.getSelectionModel().getSelectedItem();
-            if (selectedFestival != null) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Thông tin về triều đại");
-                alert.setHeaderText("Nhân vật liên quan");
-                StringBuilder stringBuilder = new StringBuilder();
-                for (int figureID : selectedFestival.getFiguresID()) {
-                    stringBuilder.append(figures.get(figureID).getName()).append("\n\n");
-                }
-                alert.setContentText(stringBuilder.toString());
-                alert.showAndWait();
-            }
-        });
 
         BtnTimKiemLehoi.setOnMouseClicked(event -> {
             ObservableList<Festival> Festival_search = FXCollections.observableArrayList();

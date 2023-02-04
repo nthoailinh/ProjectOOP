@@ -1,5 +1,6 @@
 package UI.views;
 
+import UI.controller.PlaceController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

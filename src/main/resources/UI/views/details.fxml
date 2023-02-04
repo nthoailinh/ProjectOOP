@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -11,17 +10,31 @@
             <content>
 <!--          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="456.0" prefWidth="1024.0">-->
               <VBox>
-                  <Label id="name" text="Tên" />
+                  <Label id="name" text="Tên" wrapText="true" maxWidth="930.0"/>
+                  <VBox id="optionalInfo" maxWidth="930.0">
+                  </VBox>
                   <Label id="h2" text="Mô tả" />
-                  <Label id="description" maxWidth="950.0" text="Mô tả" wrapText="true" />
-                  <Label id="h2" text="Sự kiện liên quan"></Label>
-                  <VBox id="relatedEvents" maxWidth="950.0">
-<!--                        <Label id="relatedEvent" wrapText="true" text="E1"/>-->
+                  <Label id="description" maxWidth="930.0" text="Mô tả" wrapText="true" />
+                  <VBox id="relatedEvents" maxWidth="930.0">
+  <!--                        <Label id="relatedEvent" wrapText="true" text="E1"/>-->
+                  </VBox>
+                  <VBox id="relatedFigures" maxWidth="930.0">
+                      <!--                        <Label id="relatedEvent" wrapText="true" text="E1"/>-->
+                  </VBox>
+                  <VBox id="relatedDynasty" maxWidth="930.0">
+                      <!--                        <Label id="relatedEvent" wrapText="true" text="E1"/>-->
+                  </VBox>
+                  <VBox id="relatedPlace" maxWidth="930.0">
+                      <!--                        <Label id="relatedEvent" wrapText="true" text="E1"/>-->
+                  </VBox>
+                  <VBox id="relatedFestival" maxWidth="930.0">
+                      <!--                        <Label id="relatedEvent" wrapText="true" text="E1"/>-->
                   </VBox>
               </VBox>
 <!--          </AnchorPane>-->
             </content>
         </ScrollPane>
-       <Button fx:id="btnBack" layoutX="893.0" layoutY="720.0" mnemonicParsing="false" text="Quay lại" />
+       <Button fx:id="btnBackDetails" layoutX="789.0" layoutY="720.0" mnemonicParsing="false" text="Quay lại trang thông tin" />
+       <Button fx:id="btnBack" layoutX="500.0" layoutY="720.0" mnemonicParsing="false" text="Quay lại trang điều hướng" />
    </children>
 </AnchorPane>

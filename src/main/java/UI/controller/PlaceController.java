@@ -76,54 +76,13 @@ public class PlaceController {
 
         btnChiTiet_DT.setOnMouseClicked(event -> {
             Place selectedPlace = listviewDiTich.getSelectionModel().getSelectedItem();
-            FXMLLoader fxmlLoader = new FXMLLoader(Home.class.getResource("details.fxml"));
             if (selectedPlace != null) {
-                Stage currentStage = (Stage) btnChiTiet_DT.getScene().getWindow();
-                Scene detailScene = null;
-                Scene currentScene = btnChiTiet_DT.getScene();
+                Details details= new Details();
                 try {
-                    Parent parent = fxmlLoader.load();
-                    SceneManager.setStage(currentStage);
-                    SceneManager.addScene("PreScene", currentScene);
-                    detailScene = new Scene(parent, 1024, 768);
-                    currentStage.setScene(detailScene);
-                    currentStage.show();
-                } catch (IOException e) {
+                    details.showDetailScene(btnChiTiet_DT, selectedPlace);
+                } catch (FileNotFoundException e) {
                     throw new RuntimeException(e);
                 }
-            }
-            Node detailRoot = fxmlLoader.getRoot();
-//            detailRoot.lookup("#ta2").setVisible(false);
-//            detailRoot.lookup("#ta3").setVisible(false);
-//            detailRoot.lookup("#ta4").setVisible(false);
-            Label lblTitle = (Label) detailRoot.lookup("#name");
-            lblTitle.setText(selectedPlace.getName());
-
-            Label lblDescription = (Label) detailRoot.lookup("#description");
-            lblDescription.setText(selectedPlace.getDescription());
-
-//            Label lbl1 = (Label) detailRoot.lookup("#lbl1");
-//            lbl1.setText("Địa điểm");
-//            Label lbl2 = (Label) detailRoot.lookup("#lbl2");
-//            lbl2.setText("Mô tả");
-//            Label lbl3 = (Label) detailRoot.lookup("#lbl3");
-//            lbl3.setText("Sự kiện liên quan");
-//            Label lbl4 = (Label) detailRoot.lookup("#lbl4");
-//            lbl4.setText("Triều đại liên quan");
-
-//            Label lblLocation = (Label) detailRoot.lookup("#place");
-//            lblLocation.setText(selectedPlace.getLocation());
-
-//            Label lblDescription = (Label) detailRoot.lookup("#description");
-//            lblDescription.setText(selectedPlace.getDescription());
-            VBox relatedEvents = (VBox) detailRoot.lookup("#relatedEvents");
-
-            for (int eventID : selectedPlace.getEventsID()) {
-                Label relatedEvent = new Label();
-                relatedEvent.setWrapText(true);
-                relatedEvent.setId("relatedEvent");
-                relatedEvent.setText(events.get(eventID).getName());
-                relatedEvents.getChildren().add(relatedEvent);
             }
         });
 
