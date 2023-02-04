@@ -20,7 +20,6 @@ public abstract class Crawler<T> {
     protected final IJsonHandler gson;
     protected final List<String> PAGE_URLs = new ArrayList<>();
     protected final String JSON_FILE_PATH;
-    protected String previousPageURL = "";
 
     public Crawler(String json_file_path, String ...page_urls) {
         driver = new ChromeDriverSelenium();
