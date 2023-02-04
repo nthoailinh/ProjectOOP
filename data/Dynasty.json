@@ -63,8 +63,7 @@
         "figuresID": [
             4,
             5,
-            187,
-            392
+            187
         ],
         "eventsID": []
     },
@@ -76,9 +75,7 @@
         "figuresID": [
             5,
             168,
-            187,
-            392,
-            393
+            187
         ],
         "eventsID": []
     },
@@ -87,9 +84,7 @@
         "name": "Bắc thuộc lần 1",
         "dates": "111 TCN–40 SCN",
         "description": "Năm 111 TCN, đội quân của Hán Vũ Đế xâm chiếm nước Nam Việt và sáp nhập Nam Việt vào đế chế Hán. Người Trung Quốc muốn cai quản miền châu thổ sông Hồng để có điểm dừng cho tàu bè đang buôn bán với Đông Nam Á[9]. Trong thế kỷ I, các tướng Lạc Việt vẫn còn được giữ chức, nhưng Trung Quốc bắt đầu chính sách đồng hóa các lãnh thổ bằng cách tăng thuế và cải tổ luật hôn nhân để biến Việt Nam thành một xã hội phụ hệ để dễ tiếp thu quyền lực chính trị hơn.\n",
-        "figuresID": [
-            392
-        ],
+        "figuresID": [],
         "eventsID": []
     },
     {
@@ -119,12 +114,13 @@
             181,
             182,
             183,
-            190,
+            187,
             191,
             290,
             307,
             377,
             378,
+            392,
             393
         ],
         "eventsID": [
@@ -484,6 +480,7 @@
             60,
             278,
             280,
+            290,
             313
         ]
     },
@@ -1632,6 +1629,7 @@
             252,
             253,
             254,
+            259,
             260,
             261,
             262,
@@ -2135,6 +2133,7 @@
             805
         ],
         "eventsID": [
+            259,
             260,
             261,
             262,

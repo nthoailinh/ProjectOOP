@@ -27,7 +27,7 @@ public class FestivalCrawler2 extends Crawler<Festival> {
 
     public void crawlData() {
         try {
-            objects = gson.fromJson(JSON_PATH);
+            objects = gson.fromJson(JSON_PATH, new TypeToken<List<Festival>>() {}.getType());
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
