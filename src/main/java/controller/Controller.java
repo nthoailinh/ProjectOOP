@@ -194,11 +194,11 @@ public class Controller implements Initializable {
             dynastyController.initialize();
             FigureController figurecontroller = new FigureController(input_NV, btnTimKiem_NV, btnChiTiet_NV, listviewNhanVat);
             figurecontroller.initialize();
-            PlaceController placecontroller = new PlaceController(input_DT, btnTimKiem_DT, btnChiTiet_DT, btnTDLQ_DT, btnSKLQ_DT, listviewDiTich);
+            PlaceController placecontroller = new PlaceController(input_DT, btnTimKiem_DT, btnChiTiet_DT, listviewDiTich);
             placecontroller.initialize();
-            EventController eventcontroller = new EventController(input_SK, btnTimKiem_SK, btnChiTiet_SK, btnTDLQ_SK, btnNVLQ_SK, btnDTLQ_SK, btnLHLQ_SK, listviewSuKien);
+            EventController eventcontroller = new EventController(input_SK, btnTimKiem_SK, btnChiTiet_SK, listviewSuKien);
             eventcontroller.initialize();
-            FestivalController festivalController = new FestivalController(inputLehoi,btnTimKiemLehoi,btnChiTietLehoi,btnNVLQLehoi,btnSKLQLehoi,(ListView<Festival>) listviewlehoi);
+            FestivalController festivalController = new FestivalController(inputLehoi,btnTimKiemLehoi,btnChiTietLehoi, (ListView<Festival>) listviewlehoi);
             festivalController.initialize();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);

@@ -20,10 +20,6 @@ public class FestivalController {
     @FXML
     private final Button BtnTimKiemLehoi;
     @FXML
-    private final Button btnNVLQLehoi ;
-    @FXML
-    private final Button btnSKLQLehoi ;
-    @FXML
     private final Button btnChiTietLehoi;
     @FXML
     private final ListView<Festival> listviewlehoi;
@@ -32,12 +28,10 @@ public class FestivalController {
     private final List<Figure> figures;
     Gson gson = new Gson();
 
-    public FestivalController(TextField input, Button BtnTimKiemLehoi, Button btnChiTiet, Button btnNVLQ, Button btnSKLQ, ListView<Festival> listviewlehoi) throws FileNotFoundException {
+    public FestivalController(TextField input, Button BtnTimKiemLehoi, Button btnChiTiet, ListView<Festival> listviewlehoi) throws FileNotFoundException {
         this.inputLehoi = input;
         this.BtnTimKiemLehoi = BtnTimKiemLehoi;
         this.btnChiTietLehoi = btnChiTiet;
-        this.btnNVLQLehoi = btnNVLQ;
-        this.btnSKLQLehoi = btnSKLQ;
         this.listviewlehoi = listviewlehoi;
         festivals = FXCollections.observableList(gson.fromJson(new FileReader("data/Festival.json"), new TypeToken<List<Festival>>() {
         }.getType()));
