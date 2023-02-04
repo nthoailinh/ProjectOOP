@@ -9,6 +9,7 @@ import java.io.IOException;
 
 public abstract class CrawlerWithHomePage<T> extends Crawler<T>{
     protected IWebDriver<WebElement, By> homePageDriver;
+    protected String previousPageURL = "";
     public CrawlerWithHomePage(String json_file_path, String... page_urls) {
         super(json_file_path, page_urls);
         homePageDriver = new ChromeDriverSelenium();
