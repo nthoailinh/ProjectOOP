@@ -1,6 +1,5 @@
-package controller;
+package controllers;
 
-import com.google.gson.Gson;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
@@ -11,7 +10,6 @@ import services.GsonHandler;
 import services.IJsonHandler;
 
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.lang.reflect.Type;
 
 public abstract class EntityController<T> {
