@@ -13,16 +13,10 @@ git clone git@github.com:pmatuan/ProjectOOP.git
 ```shell
 cd ProjectOOP
 ```
-
-3. Compile and package the application using Maven
-```shell
-./mvnw clean package
-```
-
-4. Run the application
-```
-java -jar target/<generated-jar-file>.jar
-```
+3. Open the project with IntellJ IDEA or other IDE.
+4. Run all files in `crawlers` package. 
+5. Run all files in `connector` package.
+6. Run project via `Home.java` to view the UI.
 
 ## Data sources
 The application uses data stored in the data directory in `JSON` format. These files can be updated to add or modify data used in the application.
