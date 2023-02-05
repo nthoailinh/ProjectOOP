@@ -1,22 +1,31 @@
 # Phần mềm thông tin Lịch sử Việt Nam
+## Prerequisites
+- Java 8 or higher
+- Apache Maven
 
-### Địa điểm
+## Running the application
+1. Clone the repository to your local machine (using SSH)
+```shell
+git clone git@github.com:pmatuan/ProjectOOP.git
+```
 
-- Sự kiện liên quan ✅
+2. Go to the project directory
+```shell
+cd ProjectOOP
+```
 
-- Nhân vật liên quan 🚫
+3. Compile and package the application using Maven
+```shell
+./mvnw clean package
+```
 
-# Giao diện
-### Bộ màu
-- Mang phong cách lịch sử thời 2000BC, gồm các màu sắc sau:  
-- <span style="color: #DAA738">#DAA738</span>
-- <span style="color: #9A6619">#9A6619</span>
-- <span style="color: #B7C0C0">#B7C0C0</span>
-- <span style="color: #645F52">#645F52</span>
-- <span style="color: #3C2C2D">#3C2C2D</span>
-  
+4. Run the application
+```
+java -jar target/<generated-jar-file>.jar
+```
 
+## Data sources
+The application uses data stored in the data directory in `JSON` format. These files can be updated to add or modify data used in the application.
 
-
-
-
+## Architecture diagrams
+UML diagrams for the application's architecture can be found in the astah_uml directory in the format of .asta files, which can be opened with Astah Community. The diagram for the services can also be found in img_report directory in the format of .png file.
