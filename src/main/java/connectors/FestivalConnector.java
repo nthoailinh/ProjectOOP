@@ -11,7 +11,7 @@ public class FestivalConnector extends GeneralConnector {
         festivalConnector.connect();
         festivalConnector.writeToJsonFestival();
     }
-
+    @Override
     public void connect() {
         for (Festival festival : festivals) {
             for (Figure figure : figures) {

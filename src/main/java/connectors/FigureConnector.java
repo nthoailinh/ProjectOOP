@@ -9,7 +9,7 @@ public class FigureConnector extends GeneralConnector {
         figureConnector.connect();
         figureConnector.writeToJsonFigure();
     }
-
+    @Override
     public void connect() {
         for (Event event : events) {
             for (int id : event.getFiguresID()) {

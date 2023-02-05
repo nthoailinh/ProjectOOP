@@ -1,6 +1,5 @@
 package controller;
 
-import views.Home;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import javafx.collections.FXCollections;
@@ -14,21 +13,20 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import models.*;
+import views.Home;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-
 import java.util.List;
 
 public class DetailController {
 
+    static Gson gson = new Gson();
     @FXML
     private Button btnBack;
     @FXML
     private Button btnBackDetails;
-    static Gson gson = new Gson();
-
     private List<Dynasty> dynasties;
     private List<Event> events;
     private List<Festival> festivals;
@@ -50,18 +48,37 @@ public class DetailController {
 
         });
     }
+
     public Scene showDetailScene(Node button, Object selectedObject) throws FileNotFoundException {
         Gson gson = new Gson();
         try {
-            this.places = gson.fromJson(new FileReader("data/Place.json"), new TypeToken<List<Place>>() {}.getType());
-            this.dynasties = gson.fromJson(new FileReader("data/Dynasty.json"), new TypeToken<List<Dynasty>>() {}.getType());
-            this.events = gson.fromJson(new FileReader("data/Event.json"), new TypeToken<List<Event>>() {}.getType());
-            this.figures = gson.fromJson(new FileReader("data/Figure.json"), new TypeToken<List<Figure>>() {}.getType());
-            this.festivals = gson.fromJson(new FileReader("data/Festival.json"), new TypeToken<List<Festival>>() {}.getType());
+            this.places = gson.fromJson(new FileReader("data/Place.json"), new TypeToken<List<Place>>() {
+            }.getType());
+            this.dynasties = gson.fromJson(new FileReader("data/Dynasty.json"), new TypeToken<List<Dynasty>>() {
+            }.getType());
+            this.events = gson.fromJson(new FileReader("data/Event.json"), new TypeToken<List<Event>>() {
+            }.getType());
+            this.figures = gson.fromJson(new FileReader("data/Figure.json"), new TypeToken<List<Figure>>() {
+            }.getType());
+            this.festivals = gson.fromJson(new FileReader("data/Festival.json"), new TypeToken<List<Festival>>() {
+            }.getType());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
+        FXMLLoader fxmlLoader = new FXMLLoader(Home.class.getResource("details.fxml"));
+        Scene detailScene = null;
+        Stage currentStage = (Stage) button.getScene().getWindow();
+        Scene currentScene = button.getScene();
+        try {
+            Parent parent = fxmlLoader.load();
+            detailScene = new Scene(parent, 1024, 768);
+            SceneManager.setStage(currentStage);
+            SceneManager.addScene("PreScene", currentScene);
+            currentStage.setScene(detailScene);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         String name = "";
         String description = "";
         List<Integer> eventIDs = null;
@@ -88,7 +105,7 @@ public class DetailController {
             figuresIDs = dynasty.getFiguresID();
             optionalText = "Thời gian: " + dynasty.getDates();
             MaHienThi = "DYNASTY";
-        } else if (selectedObject instanceof Event event){
+        } else if (selectedObject instanceof Event event) {
             title += "sự kiện lịch sử";
             name = event.getName();
             description = event.getDescription();
@@ -98,7 +115,7 @@ public class DetailController {
             festivalIDs = event.getFestivalsID();
             optionalText = null;
             MaHienThi = "EVENT";
-        } else if (selectedObject instanceof Festival festival){
+        } else if (selectedObject instanceof Festival festival) {
             title += "lễ hội";
             name = festival.getName();
             description = festival.getDescription();
@@ -106,7 +123,7 @@ public class DetailController {
             figuresIDs = festival.getFiguresID();
             optionalText = "Thời gian: " + festival.getDates();
             MaHienThi = "FESTIVAL";
-        } else if (selectedObject instanceof Figure figure){
+        } else if (selectedObject instanceof Figure figure) {
             title += "nhân vật lịch sử";
             name = figure.getName();
             description = figure.getDescription();
@@ -115,23 +132,6 @@ public class DetailController {
             optionalText = "Năm sinh - năm mất: " + figure.getDates();
             MaHienThi = "FIGURE";
         }
-
-        places = FXCollections.observableList(gson.fromJson(new FileReader("data/Place.json"), new TypeToken<List<Place>>() {
-        }.getType()));
-        FXMLLoader fxmlLoader = new FXMLLoader(Home.class.getResource("details.fxml"));
-        Scene detailScene = null;
-        Stage currentStage = (Stage) button.getScene().getWindow();
-        Scene currentScene = button.getScene();
-        try {
-            Parent parent = fxmlLoader.load();
-            detailScene = new Scene(parent, 1024, 768);
-            SceneManager.setStage(currentStage);
-            SceneManager.addScene("PreScene", currentScene);
-            currentStage.setScene(detailScene);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
         Node detailRoot = fxmlLoader.getRoot();
         Label lblName = (Label) detailRoot.lookup("#name");
         lblName.setText(name);
@@ -146,7 +146,7 @@ public class DetailController {
         VBox relatedDynasty = (VBox) detailRoot.lookup("#relatedDynasty");
         VBox relatedPlace = (VBox) detailRoot.lookup("#relatedPlace");
         VBox relatedFestival = (VBox) detailRoot.lookup("#relatedFestival");
-        VBox optionalInfo = (VBox)  detailRoot.lookup("#optionalInfo");
+        VBox optionalInfo = (VBox) detailRoot.lookup("#optionalInfo");
 
 
         if (optionalText != null) {
@@ -157,7 +157,7 @@ public class DetailController {
         } else optionalInfo.setVisible(false);
 
         // sự kiện liên quan
-        if (MaHienThi.equals("DYNASTY") || MaHienThi.equals("FESTIVAL") || MaHienThi.equals("FIGURE") || MaHienThi.equals("PLACE")){
+        if (MaHienThi.equals("DYNASTY") || MaHienThi.equals("FESTIVAL") || MaHienThi.equals("FIGURE") || MaHienThi.equals("PLACE")) {
             Label lblH2 = new Label();
             lblH2.setText("Sự kiện liên quan");
             lblH2.setId("h2");
@@ -180,7 +180,7 @@ public class DetailController {
             }
         }
 
-        if(MaHienThi.equals("DYNASTY") || MaHienThi.equals("EVENT") || MaHienThi.equals("FESTIVAL")){
+        if (MaHienThi.equals("DYNASTY") || MaHienThi.equals("EVENT") || MaHienThi.equals("FESTIVAL")) {
             Label lblH2 = new Label();
             lblH2.setText("Nhân vật liên quan");
             lblH2.setId("h2");
@@ -193,7 +193,7 @@ public class DetailController {
                     DetailController details = new DetailController();
                     try {
                         SceneManager.addScene(null, SceneManager.getCurrentScene());
-                        details.showDetailScene((Node) relatedEvents, figures.get(figureID));
+                        details.showDetailScene(relatedEvents, figures.get(figureID));
                     } catch (FileNotFoundException e) {
                         throw new RuntimeException(e);
                     }
@@ -203,7 +203,7 @@ public class DetailController {
             }
         }
 
-        if(MaHienThi.equals("EVENT") || MaHienThi.equals("FIGURE")){
+        if (MaHienThi.equals("EVENT") || MaHienThi.equals("FIGURE")) {
             Label lblH2 = new Label();
             lblH2.setText("Triều đại liên quan");
             lblH2.setId("h2");
@@ -226,7 +226,7 @@ public class DetailController {
             }
         }
 
-        if(MaHienThi.equals("EVENT")){
+        if (MaHienThi.equals("EVENT")) {
             Label lblH2 = new Label();
             lblH2.setText("Di tích liên quan");
             lblH2.setId("h2");
@@ -249,7 +249,7 @@ public class DetailController {
             }
         }
 
-        if(MaHienThi.equals("EVENT")){
+        if (MaHienThi.equals("EVENT")) {
             Label lblH2 = new Label();
             lblH2.setText("Lễ hội liên quan");
             lblH2.setId("h2");
@@ -271,6 +271,7 @@ public class DetailController {
                 relatedFestival.getChildren().add(relatedEvent);
             }
         }
+
         return currentScene;
     }
 

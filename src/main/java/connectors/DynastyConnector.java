@@ -14,7 +14,7 @@ public class DynastyConnector extends GeneralConnector {
         dynastyConnector.writeToJsonFigure();
         dynastyConnector.writeToJsonEvent();
     }
-
+    @Override
     public void connect() throws FileNotFoundException {
         for (Dynasty dynasty : dynasties) {
             String dynastyTime = dynasty.getDates();
