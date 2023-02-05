@@ -1,4 +1,4 @@
-package controller;
+package controllers;
 
 import com.google.gson.reflect.TypeToken;
 import javafx.fxml.FXML;

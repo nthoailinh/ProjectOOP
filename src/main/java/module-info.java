@@ -7,9 +7,9 @@ module ProjectOOP{
     requires jcommander;
     requires async.http.client;
     opens models;
-    opens controller to javafx.fxml;
+    opens controllers to javafx.fxml;
     opens views to javafx.fxml;
-    exports controller;
+    exports controllers;
     exports views;
     exports models;
 }
