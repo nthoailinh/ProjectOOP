@@ -1,4 +1,4 @@
-package controller;
+package controllers;
 
 import models.Dynasty;
 import com.google.gson.reflect.TypeToken;
