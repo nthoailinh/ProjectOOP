@@ -1,12 +1,12 @@
 package models;
 
-public abstract class HistoryObject {
+public abstract class HistoricalObject {
     private int ID;
     private String name;
     private String dates;
     private String description;
 
-    public HistoryObject(int ID, String name, String dates, String description) {
+    public HistoricalObject(int ID, String name, String dates, String description) {
         this.ID = ID;
         this.name = name;
         this.dates = dates;

@@ -1,4 +1,4 @@
-package controller;
+package controllers;
 
 import com.google.gson.reflect.TypeToken;
 import javafx.fxml.FXML;
@@ -19,7 +19,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
-public class DetailController {
+public class DetailsController {
 
     private final IJsonHandler gson;
     @FXML
@@ -32,7 +32,7 @@ public class DetailController {
     private List<Figure> figures;
     private List<Place> places;
 
-    public DetailController() {
+    public DetailsController() {
         gson = new GsonHandler();
     }
 
@@ -165,7 +165,7 @@ public class DetailController {
                 relatedEvent.setId("relatedEvent");
                 relatedEvent.setText(events.get(eventID).getName());
                 relatedEvent.setOnMouseClicked(eventRelatedEvent -> {
-                    DetailController details = new DetailController();
+                    DetailsController details = new DetailsController();
                     try {
                         SceneManager.addScene(null, SceneManager.getCurrentScene());
                         details.showDetailScene(relatedEvents, events.get(eventID));
@@ -188,7 +188,7 @@ public class DetailController {
                 relatedEvent.setId("relatedEvent");
                 relatedEvent.setText(figures.get(figureID).getName());
                 relatedEvent.setOnMouseClicked(eventRelatedEvent -> {
-                    DetailController details = new DetailController();
+                    DetailsController details = new DetailsController();
                     try {
                         SceneManager.addScene(null, SceneManager.getCurrentScene());
                         details.showDetailScene(relatedEvents, figures.get(figureID));
@@ -211,7 +211,7 @@ public class DetailController {
                 relatedEvent.setId("relatedEvent");
                 relatedEvent.setText(dynasties.get(dynastyID).getName());
                 relatedEvent.setOnMouseClicked(eventRelatedEvent -> {
-                    DetailController details = new DetailController();
+                    DetailsController details = new DetailsController();
                     try {
                         SceneManager.addScene(null, SceneManager.getCurrentScene());
                         details.showDetailScene(relatedEvents, dynasties.get(dynastyID));
@@ -234,7 +234,7 @@ public class DetailController {
                 relatedEvent.setId("relatedEvent");
                 relatedEvent.setText(places.get(placeID).getName());
                 relatedEvent.setOnMouseClicked(eventRelatedEvent -> {
-                    DetailController details = new DetailController();
+                    DetailsController details = new DetailsController();
                     try {
                         SceneManager.addScene(null, SceneManager.getCurrentScene());
                         details.showDetailScene(relatedEvents, places.get(placeID));
@@ -257,7 +257,7 @@ public class DetailController {
                 relatedEvent.setId("relatedEvent");
                 relatedEvent.setText(festivals.get(festivalID).getName());
                 relatedEvent.setOnMouseClicked(eventRelatedEvent -> {
-                    DetailController details = new DetailController();
+                    DetailsController details = new DetailsController();
                     try {
                         SceneManager.addScene(null, SceneManager.getCurrentScene());
                         details.showDetailScene(relatedEvents, festivals.get(festivalID));

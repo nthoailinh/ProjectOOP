@@ -1,6 +1,5 @@
-package controller;
+package controllers;
 
-import com.google.gson.Gson;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
@@ -11,7 +10,6 @@ import services.GsonHandler;
 import services.IJsonHandler;
 
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.lang.reflect.Type;
 
 public abstract class EntityController<T> {
@@ -58,7 +56,7 @@ public abstract class EntityController<T> {
         detailButton.setOnMouseClicked(event -> {
             T selectedEntity = listView.getSelectionModel().getSelectedItem();
             if (selectedEntity != null) {
-                DetailController details = new DetailController();
+                DetailsController details = new DetailsController();
                 try {
                     details.showDetailScene(detailButton, selectedEntity);
                 } catch (FileNotFoundException e) {

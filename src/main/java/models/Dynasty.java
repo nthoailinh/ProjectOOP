@@ -3,7 +3,7 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Dynasty extends HistoryObject {
+public class Dynasty extends HistoricalObject {
     private List<Integer> figuresID;
     private List<Integer> eventsID;
 
