@@ -22,8 +22,7 @@ public class EventController extends EntityController<Event> {
     }
 
     protected Type getTypeForListCell() {
-        Type type = new TypeToken<List<Event>>() {
+        return new TypeToken<List<Event>>() {
         }.getType();
-        return type;
     }
 }

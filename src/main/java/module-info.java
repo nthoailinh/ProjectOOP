@@ -11,4 +11,5 @@ module ProjectOOP{
     opens views to javafx.fxml;
     exports controller;
     exports views;
+    exports models;
 }
