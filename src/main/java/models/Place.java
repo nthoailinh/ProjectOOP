@@ -3,7 +3,7 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Place extends HistoryObject {
+public class Place extends HistoricalObject {
     private String location;
     private List<Integer> eventsID;
 

@@ -3,7 +3,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #B7C0C0;" stylesheets="@details.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DetailController">
+
+<AnchorPane prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #B7C0C0;" stylesheets="@details.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DetailsController">
    <children>
         <Label id="title" layoutX="407.0" layoutY="14.0" text="Thông tin di tích lịch sử" />
         <ScrollPane blendMode="DARKEN" layoutX="30.0" layoutY="78.0" prefHeight="635.0" prefWidth="958.0" style="-fx-border-color: #B7C0C0;">

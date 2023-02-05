@@ -56,7 +56,7 @@ public abstract class EntityController<T> {
         detailButton.setOnMouseClicked(event -> {
             T selectedEntity = listView.getSelectionModel().getSelectedItem();
             if (selectedEntity != null) {
-                DetailController details = new DetailController();
+                DetailsController details = new DetailsController();
                 try {
                     details.showDetailScene(detailButton, selectedEntity);
                 } catch (FileNotFoundException e) {
