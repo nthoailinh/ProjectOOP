@@ -18,6 +18,8 @@ import views.Home;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
+import java.util.SplittableRandom;
+import models.HistoricalObject;
 
 public class DetailsController {
 
@@ -31,6 +33,7 @@ public class DetailsController {
     private List<Festival> festivals;
     private List<Figure> figures;
     private List<Place> places;
+    private HistoricalObject historicalObject;
 
     public DetailsController() {
         gson = new GsonHandler();
@@ -156,120 +159,43 @@ public class DetailsController {
 
         // sự kiện liên quan
         if (MaHienThi.equals("DYNASTY") || MaHienThi.equals("FESTIVAL") || MaHienThi.equals("FIGURE") || MaHienThi.equals("PLACE")) {
-            Label lblH2 = new Label();
-            lblH2.setText("Sự kiện liên quan");
-            lblH2.setId("h2");
-            relatedEvents.getChildren().add(lblH2);
-            for (int eventID : eventIDs) {
-                Label relatedEvent = new Label();
-                relatedEvent.setId("relatedEvent");
-                relatedEvent.setText(events.get(eventID).getName());
-                relatedEvent.setOnMouseClicked(eventRelatedEvent -> {
-                    DetailsController details = new DetailsController();
-                    try {
-                        SceneManager.addScene(null, SceneManager.getCurrentScene());
-                        details.showDetailScene(relatedEvents, events.get(eventID));
-                    } catch (FileNotFoundException e) {
-                        throw new RuntimeException(e);
-                    }
-
-                });
-                relatedEvents.getChildren().add(relatedEvent);
-            }
+            displayRelated("Sự kiện", relatedEvents, eventIDs, (List<HistoricalObject>) (List<?>) events);
         }
 
         if (MaHienThi.equals("DYNASTY") || MaHienThi.equals("EVENT") || MaHienThi.equals("FESTIVAL")) {
-            Label lblH2 = new Label();
-            lblH2.setText("Nhân vật liên quan");
-            lblH2.setId("h2");
-            relatedFigures.getChildren().add(lblH2);
-            for (int figureID : figuresIDs) {
-                Label relatedEvent = new Label();
-                relatedEvent.setId("relatedEvent");
-                relatedEvent.setText(figures.get(figureID).getName());
-                relatedEvent.setOnMouseClicked(eventRelatedEvent -> {
-                    DetailsController details = new DetailsController();
-                    try {
-                        SceneManager.addScene(null, SceneManager.getCurrentScene());
-                        details.showDetailScene(relatedEvents, figures.get(figureID));
-                    } catch (FileNotFoundException e) {
-                        throw new RuntimeException(e);
-                    }
-
-                });
-                relatedFigures.getChildren().add(relatedEvent);
-            }
+            displayRelated("Nhân vật", relatedFigures, figuresIDs, (List<HistoricalObject>) (List<?>) figures);
         }
 
         if (MaHienThi.equals("EVENT") || MaHienThi.equals("FIGURE")) {
-            Label lblH2 = new Label();
-            lblH2.setText("Triều đại liên quan");
-            lblH2.setId("h2");
-            relatedDynasty.getChildren().add(lblH2);
-            for (int dynastyID : dynastyIDs) {
-                Label relatedEvent = new Label();
-                relatedEvent.setId("relatedEvent");
-                relatedEvent.setText(dynasties.get(dynastyID).getName());
-                relatedEvent.setOnMouseClicked(eventRelatedEvent -> {
-                    DetailsController details = new DetailsController();
-                    try {
-                        SceneManager.addScene(null, SceneManager.getCurrentScene());
-                        details.showDetailScene(relatedEvents, dynasties.get(dynastyID));
-                    } catch (FileNotFoundException e) {
-                        throw new RuntimeException(e);
-                    }
-
-                });
-                relatedDynasty.getChildren().add(relatedEvent);
-            }
+            displayRelated("Triều đại", relatedDynasty, dynastyIDs, (List<HistoricalObject>) (List<?>) dynasties);
         }
 
         if (MaHienThi.equals("EVENT")) {
-            Label lblH2 = new Label();
-            lblH2.setText("Di tích liên quan");
-            lblH2.setId("h2");
-            relatedPlace.getChildren().add(lblH2);
-            for (int placeID : placeIDs) {
-                Label relatedEvent = new Label();
-                relatedEvent.setId("relatedEvent");
-                relatedEvent.setText(places.get(placeID).getName());
-                relatedEvent.setOnMouseClicked(eventRelatedEvent -> {
-                    DetailsController details = new DetailsController();
-                    try {
-                        SceneManager.addScene(null, SceneManager.getCurrentScene());
-                        details.showDetailScene(relatedEvents, places.get(placeID));
-                    } catch (FileNotFoundException e) {
-                        throw new RuntimeException(e);
-                    }
-
-                });
-                relatedPlace.getChildren().add(relatedEvent);
-            }
+            displayRelated("Lễ hội", relatedFestival, festivalIDs, (List<HistoricalObject>) (List<?>) festivals);
+            displayRelated("Di tích", relatedPlace, placeIDs, (List<HistoricalObject>) (List<?>) places);
         }
 
-        if (MaHienThi.equals("EVENT")) {
-            Label lblH2 = new Label();
-            lblH2.setText("Lễ hội liên quan");
-            lblH2.setId("h2");
-            relatedFestival.getChildren().add(lblH2);
-            for (int festivalID : festivalIDs) {
-                Label relatedEvent = new Label();
-                relatedEvent.setId("relatedEvent");
-                relatedEvent.setText(festivals.get(festivalID).getName());
-                relatedEvent.setOnMouseClicked(eventRelatedEvent -> {
-                    DetailsController details = new DetailsController();
-                    try {
-                        SceneManager.addScene(null, SceneManager.getCurrentScene());
-                        details.showDetailScene(relatedEvents, festivals.get(festivalID));
-                    } catch (FileNotFoundException e) {
-                        throw new RuntimeException(e);
-                    }
-
-                });
-                relatedFestival.getChildren().add(relatedEvent);
-            }
+    }
+    private void displayRelated(String lienquan, VBox relatedEvents, List<Integer> IDs, List<HistoricalObject> hObjects) {
+        Label lblH2 = new Label();
+        lblH2.setText( lienquan + " liên quan");
+        lblH2.setId("h2");
+        relatedEvents.getChildren().add(lblH2);
+        for (int id : IDs) {
+            Label relatedEvent = new Label();
+            relatedEvent.setId("relatedEvent");
+            relatedEvent.setText(hObjects.get(id).getName());
+            relatedEvent.setOnMouseClicked(eventRelatedEvent -> {
+                DetailsController details = new DetailsController();
+                try {
+                    SceneManager.addScene(null, SceneManager.getCurrentScene());
+                    details.showDetailScene(relatedEvents, hObjects.get(id));
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+            relatedEvents.getChildren().add(relatedEvent);
         }
-
     }
 
 }
