@@ -18,7 +18,7 @@ import java.util.ResourceBundle;
 public class Controller implements Initializable {
 
     @FXML
-    private Button DangXuat;
+    private Button btnThoat;
 
     @FXML
     private Button btnChiTiet;
@@ -136,8 +136,8 @@ public class Controller implements Initializable {
             contentSuKien.setVisible(true);
             btnSuKienLichSu.setStyle("-fx-background-color: #3C2C2D");
         }
-        else if(event.getSource() == DangXuat) {
-            Stage stage = (Stage) DangXuat.getScene().getWindow();
+        else if(event.getSource() == btnThoat) {
+            Stage stage = (Stage) btnThoat.getScene().getWindow();
             stage.close();
         }else if(event.getSource()==btnLeHoiVanHoa){
             resetVisible();
