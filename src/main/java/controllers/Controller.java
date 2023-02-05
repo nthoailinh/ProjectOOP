@@ -124,14 +124,17 @@ public class Controller implements Initializable {
         } else if (event.getSource() == btnTrieuDai) {
             resetVisible();
             contentTrieuDai.setVisible(true);
+            btnTrieuDai.setStyle("-fx-background-color: #3C2C2D");
         }
         else if(event.getSource() == btnNhanVatLichSu) {
             resetVisible();
             contentNhanVat.setVisible(true);
+            btnNhanVatLichSu.setStyle("-fx-background-color: #3C2C2D");
         }
         else if(event.getSource() == btnSuKienLichSu) {
             resetVisible();
             contentSuKien.setVisible(true);
+            btnSuKienLichSu.setStyle("-fx-background-color: #3C2C2D");
         }
         else if(event.getSource() == DangXuat) {
             Stage stage = (Stage) DangXuat.getScene().getWindow();
@@ -139,9 +142,11 @@ public class Controller implements Initializable {
         }else if(event.getSource()==btnLeHoiVanHoa){
             resetVisible();
             contentLehoi.setVisible(true);
+            btnLeHoiVanHoa.setStyle("-fx-background-color: #3C2C2D");
         }else if(event.getSource() == btnDiTichLichSu){
             resetVisible();
             contentDiTich.setVisible(true);
+            btnDiTichLichSu.setStyle("-fx-background-color: #3C2C2D");
         }
     }
 
@@ -152,6 +157,12 @@ public class Controller implements Initializable {
         contentSuKien.setVisible(false);
         contentLehoi.setVisible(false);
         contentDiTich.setVisible(false);
+        btnTrieuDai.setStyle("-fx-background-color: #9A6619");
+        btnDiTichLichSu.setStyle("-fx-background-color: #9A6619");
+        btnLeHoiVanHoa.setStyle("-fx-background-color: #9A6619");
+        btnSuKienLichSu.setStyle("-fx-background-color: #9A6619");
+        btnNhanVatLichSu.setStyle("-fx-background-color: #9A6619");
+
     }
 
     @Override

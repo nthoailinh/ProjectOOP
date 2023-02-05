@@ -1,23 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="767.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/18.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="767.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Controller">
    <children>
       <VBox prefHeight="768.0" prefWidth="244.0" style="-fx-background-color: #9A6619;">
          <Pane prefHeight="51.0" prefWidth="244.0" />
@@ -160,7 +149,15 @@
                         <Insets left="32.0" />
                      </padding>
                      <children>
-                        <Label text="Nguyen Thi Hoai Linh 20205231" />
+                        <ImageView fitHeight="170.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/profile-pic-Minh.png" />
+                           </image>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </ImageView>
+                        <Label text="Trần Công Minh 20200413" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -168,7 +165,15 @@
                         <Insets left="32.0" />
                      </padding>
                      <children>
-                        <Label text="Nguyen Nhat Anh 20200029" />
+                        <ImageView fitHeight="170.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/profile-pic-Kien.png" />
+                           </image>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </ImageView>
+                        <Label alignment="CENTER" prefHeight="24.0" prefWidth="180.0" text="Nguyễn Trung Kiên 20205090" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
@@ -176,30 +181,54 @@
                         <Insets left="32.0" />
                      </padding>
                      <children>
-                        <Label text="Tran Cong Minh 20200413" />
+                        <ImageView fitHeight="170.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/profile-pic-NAnh.png" />
+                           </image>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </ImageView>
+                        <Label text="Nguyễn Nhật Anh 20200029" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="205.0" prefWidth="295.0" GridPane.rowIndex="1">
                      <children>
                         <ImageView fitHeight="170.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@images/Kien.png" />
+                              <Image url="@images/profile-pic-Linh.png" />
                            </image>
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
                         </ImageView>
-                        <Label prefHeight="24.0" prefWidth="158.0" text="Nguyen Trung Kien 20205090" />
+                        <Label alignment="CENTER" prefHeight="24.0" prefWidth="188.0" text="Nguyễn Thị Hoài Linh 20205231" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <ImageView fitHeight="170.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@images/profile-pic-Tuan.png" />
+                        </image>
+                        <VBox.margin>
+                           <Insets />
+                        </VBox.margin>
+                     </ImageView>
                      <children>
-                        <Label text="Phan Minh Anh Tuan 20205227" />
+                        <Label text="Phan Minh Anh Tuấn 20205227" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
                      <children>
-                        <Label text="Dam Ngoc Khanh 20205207" />
+                        <ImageView fitHeight="170.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/profile-pic-Khanh.png" />
+                           </image>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </ImageView>
+                        <Label text="Đàm Ngọc Khánh 20205207" />
                      </children>
                   </VBox>
                </children>
@@ -211,26 +240,26 @@
                         <Image url="@images/lsvn.png" />
                      </image>
                   </ImageView>
-                  <Label alignment="CENTER" prefHeight="18.0" prefWidth="731.0" text="LỊCH SỬ VIỆT NAM" textFill="#ec9006">
+                  <Label alignment="CENTER" prefHeight="18.0" prefWidth="731.0" text="LỊCH SỬ VIỆT NAM" textFill="#9a6619">
                      <font>
-                        <Font name="System Bold" size="18.0" />
+                        <Font name="SF Pro Display Bold" size="35.0" />
                      </font>
                   </Label>
                   <HBox prefHeight="41.0" prefWidth="780.0">
                      <children>
-                        <Label alignment="CENTER" prefHeight="46.0" prefWidth="374.0" text="Mã Lớp: 135288" textFill="#ec9006">
+                        <Label alignment="CENTER" prefHeight="46.0" prefWidth="374.0" text="Mã lớp: 135288" textFill="#9a6619">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER" prefHeight="46.0" prefWidth="359.0" text="Mã HP: IT3103" textFill="#ec9006">
+                        <Label alignment="CENTER" prefHeight="46.0" prefWidth="359.0" text="Mã học phần: IT3103" textFill="#9a6619">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
                      </children>
                   </HBox>
-                  <Label prefHeight="20.0" prefWidth="738.0" text="Nhóm 5:">
+                  <Label alignment="CENTER" prefHeight="23.0" prefWidth="296.0" text="Nhóm 5" textAlignment="CENTER" textFill="#9a6619">
                      <font>
                         <Font size="18.0" />
                      </font>
