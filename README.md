@@ -1,4 +1,4 @@
-# Phần mềm thông tin Lịch sử Việt Nam
+# Vietnam History Information Software
 ## Prerequisites
 - Java 8 or higher
 - Apache Maven
@@ -22,4 +22,4 @@ cd ProjectOOP
 The application uses data stored in the data directory in `JSON` format. These files can be updated to add or modify data used in the application.
 
 ## Architecture diagrams
-UML diagrams for the application's architecture can be found in the astah_uml directory in the format of .asta files, which can be opened with Astah Community. The diagram for the services can also be found in img_report directory in the format of .png file.
+UML diagrams for the application's architecture can be found in the image directory in the format of .png files.
