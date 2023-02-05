@@ -1,27 +1,22 @@
 package controller;
 
-import com.google.gson.reflect.TypeToken;
 import com.google.gson.Gson;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import models.Dynasty;
-import models.Event;
-import models.Figure;
-import models.Place;
+import services.GsonHandler;
+import services.IJsonHandler;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.lang.reflect.Type;
-import java.util.List;
 
 public abstract class EntityController<T> {
 
-    private final Gson gson = new Gson();
+    private final IJsonHandler gson;
     protected final ObservableList<T> entities;
     private final TextField inputField;
     private final Button searchButton;
@@ -34,7 +29,8 @@ public abstract class EntityController<T> {
         this.detailButton = detailButton;
         this.listView = listView;
         Type type = getTypeForListCell();
-        this.entities = FXCollections.observableList(gson.fromJson(new FileReader(entityPath), type));
+        gson = new GsonHandler();
+        this.entities = FXCollections.observableList(gson.fromJson(entityPath, type));
     }
 
     public void initialize() {

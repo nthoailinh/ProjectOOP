@@ -5,7 +5,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import models.Figure;
-import models.Place;
 
 import java.io.FileNotFoundException;
 import java.lang.reflect.Type;
@@ -23,8 +22,7 @@ public class FigureController extends EntityController<Figure> {
     }
 
     protected Type getTypeForListCell() {
-        Type type = new TypeToken<List<Figure>>() {
+        return new TypeToken<List<Figure>>() {
         }.getType();
-        return type;
     }
 }

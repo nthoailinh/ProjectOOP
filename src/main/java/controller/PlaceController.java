@@ -22,8 +22,7 @@ public class PlaceController extends EntityController<Place> {
     }
 
     protected Type getTypeForListCell() {
-        Type type = new TypeToken<List<Place>>() {
+        return new TypeToken<List<Place>>() {
         }.getType();
-        return type;
     }
 }

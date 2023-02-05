@@ -1,8 +1,6 @@
 package controller;
 
-import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -13,16 +11,17 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import models.*;
+import services.GsonHandler;
+import services.IJsonHandler;
 import views.Home;
 
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
 public class DetailController {
 
-    static Gson gson = new Gson();
+    private final IJsonHandler gson;
     @FXML
     private Button btnBack;
     @FXML
@@ -34,7 +33,7 @@ public class DetailController {
     private List<Place> places;
 
     public DetailController() {
-
+        gson = new GsonHandler();
     }
 
     public void initialize() {
@@ -49,18 +48,17 @@ public class DetailController {
         });
     }
 
-    public Scene showDetailScene(Node button, Object selectedObject) throws FileNotFoundException {
-        Gson gson = new Gson();
+    public void showDetailScene(Node button, Object selectedObject) throws FileNotFoundException {
         try {
-            this.places = gson.fromJson(new FileReader("data/Place.json"), new TypeToken<List<Place>>() {
+            this.places = gson.fromJson("data/Place.json", new TypeToken<List<Place>>() {
             }.getType());
-            this.dynasties = gson.fromJson(new FileReader("data/Dynasty.json"), new TypeToken<List<Dynasty>>() {
+            this.dynasties = gson.fromJson("data/Dynasty.json", new TypeToken<List<Dynasty>>() {
             }.getType());
-            this.events = gson.fromJson(new FileReader("data/Event.json"), new TypeToken<List<Event>>() {
+            this.events = gson.fromJson("data/Event.json", new TypeToken<List<Event>>() {
             }.getType());
-            this.figures = gson.fromJson(new FileReader("data/Figure.json"), new TypeToken<List<Figure>>() {
+            this.figures = gson.fromJson("data/Figure.json", new TypeToken<List<Figure>>() {
             }.getType());
-            this.festivals = gson.fromJson(new FileReader("data/Festival.json"), new TypeToken<List<Festival>>() {
+            this.festivals = gson.fromJson("data/Festival.json", new TypeToken<List<Festival>>() {
             }.getType());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -272,7 +270,6 @@ public class DetailController {
             }
         }
 
-        return currentScene;
     }
 
 }
