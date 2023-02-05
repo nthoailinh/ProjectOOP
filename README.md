@@ -14,8 +14,8 @@ git clone git@github.com:pmatuan/ProjectOOP.git
 cd ProjectOOP
 ```
 3. Open the project with IntellJ IDEA or other IDE.
-4. Run all files in `crawlers` package. 
-5. Run all files in `connector` package.
+4. Run all files `*Crawler.java` in `crawlers` package to get raw data to files in `/data/*.json`. 
+5. Run all files in `connectors` package to connect the between entities.
 6. Run project via `Home.java` to view the UI.
 
 ## Data sources
