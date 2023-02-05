@@ -1,20 +1,20 @@
 package controller;
 
 import java.util.ArrayList;
+
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 
 public class SceneManager {
+    private static final ArrayList<Scene> stack = new ArrayList<>();
     private static Stage stage = null;
-    private static ArrayList<Scene> stack = new ArrayList<>();
 
     public static void setStage(Stage stage) {
         if (SceneManager.stage == null) {
             SceneManager.stage = stage;
-        } else {
-//            System.out.println("Stage has already been set");
         }
     }
+
     public static void addScene(String sceneKey, Scene scene) {
         if (sceneKey == null || sceneKey.isEmpty()) {
             sceneKey = String.valueOf(System.currentTimeMillis());
@@ -49,20 +49,20 @@ public class SceneManager {
     public static void printAllScenes() {
         System.out.println("All Scenes in Stack: ");
         for (Scene scene : stack) {
-            System.out.println(scene.getUserData() + " và " +scene.toString() + "\n");
+            System.out.println(scene.getUserData() + " và " + scene + "\n");
         }
     }
 
-    public static void backScene(){
+    public static void backScene() {
         if (stack.size() > 1) {
             stage.setScene(stack.get(stack.size() - 1));
             stack.remove(stack.size() - 1);
         }
     }
 
-    public static void removeAllEx1(){
-        for (int i = stack.size() - 1; i > 0; i--) {
-            stack.remove(i);
+    public static void removeAllEx1() {
+        if (stack.size() > 1) {
+            stack.subList(1, stack.size()).clear();
         }
     }
 }

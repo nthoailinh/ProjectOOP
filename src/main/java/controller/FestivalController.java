@@ -22,8 +22,7 @@ public class FestivalController extends EntityController<Festival> {
     }
 
     protected Type getTypeForListCell() {
-        Type type = new TypeToken<List<Festival>>() {
+        return new TypeToken<List<Festival>>() {
         }.getType();
-        return type;
     }
 }
