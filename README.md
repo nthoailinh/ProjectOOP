@@ -1,4 +1,4 @@
-# Nội dung chi tiết
+# Phần mềm thông tin Lịch sử Việt Nam
 
 ### Địa điểm
 

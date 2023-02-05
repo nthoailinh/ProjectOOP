@@ -69,9 +69,9 @@ public abstract class EntityController<T> {
     private void setSearchButton() {
         searchButton.setOnMouseClicked(event -> {
             ObservableList<T> searchResults = FXCollections.observableArrayList();
-            String inputName = inputField.getText();
+            String inputName = inputField.getText().toLowerCase();;
             for (T entity : entities) {
-                if (getTextForListCell(entity).contains(inputName)) {
+                if (getTextForListCell(entity).toLowerCase().contains(inputName)) {
                     searchResults.add(entity);
                 }
             }
